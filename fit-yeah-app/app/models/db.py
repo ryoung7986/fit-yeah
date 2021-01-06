@@ -2,17 +2,18 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from sqlalchemy import Table, create_engine
-from sqlalchemy.orm import relationship, sessionmaker
+from sqlalchemy.orm import relationship, sessionmaker, scoped_session
 from sqlalchemy.ext.declarative import declarative_base
 import os
 
 engine = create_engine(os.environ.get('DATABASE_URL'))
 
-Session = sessionmaker(bind=engine)
+Session = scoped_session(sessionmaker(bind=engine))
 session = Session()
 
 db = SQLAlchemy()
 Base = declarative_base()
+# Base.query = session.query_property()
 
 followers_table = Table('users_followers', Base.metadata,
                         db.Column('follower_id',
@@ -22,14 +23,14 @@ followers_table = Table('users_followers', Base.metadata,
                                   db.Integer,
                                   db.ForeignKey('users.id')))
 
-awards_table = Table('users_awards',
-                     Base.metadata,
+awards_table = Table('users_awards', Base.metadata,
                      db.Column('user_id', db.ForeignKey('users.id')),
                      db.Column('award_id', db.ForeignKey('awards.id')))
 
 
 class User(Base, UserMixin):
     __tablename__ = 'users'
+    query = Session.query_property()
 
     id = db.Column(db.Integer, primary_key=True, unique=True)
     first_name = db.Column(db.String, nullable=False)
@@ -40,12 +41,12 @@ class User(Base, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
     following = relationship('User', secondary=followers_table,
                              primaryjoin=(followers_table.c.follower_id == id),
-                             secondaryjoin=followers_table.c.following_id)
+                             secondaryjoin=followers_table.c.following_id == id)
     followers = relationship('User', secondary=followers_table,
                              primaryjoin=(
                                  followers_table.c.following_id == id),
-                             secondaryjoin=followers_table.c.follower_id)
-    awards = relationship('Award', secondary='awards_table',
+                             secondaryjoin=followers_table.c.follower_id == id)
+    awards = relationship('Award', secondary=awards_table,
                           back_populates="user")
 
     posts = db.relationship('User_Post')
@@ -87,7 +88,7 @@ class Award(Base):
     point_value = db.Column(db.Integer, nullable=False)
 
     user = db.relationship('User',
-                           secondary='awards_table',
+                           secondary=awards_table,
                            back_populates='awards')
 
     def to_dict(self):
@@ -161,6 +162,8 @@ class Workout_Plan(Base):
     sat = db.Column(db.Integer, db.ForeignKey('workouts.id'))
     sun = db.Column(db.Integer, db.ForeignKey('workouts.id'))
 
+    owner = db.relationship('User', back_populates='workout_plan')
+
     def to_dict(self):
         return {
             "id": self.id,
@@ -172,7 +175,6 @@ class Workout_Plan(Base):
             "fri": self.fri,
             "sat": self.sat,
             "sun": self.sun,
-            "owner": self.owner,
         }
 
 
@@ -227,7 +229,7 @@ class User_Post(Base):
     def to_dict(self):
         return {
             "id": self.id,
-            "ownerId": self.owner_id,
+            "owner_id": self.user_id,
             "description": self.description,
             "img_url": self.img_url,
             "video_url": self.video_url,
