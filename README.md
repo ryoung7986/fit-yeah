@@ -50,10 +50,10 @@
 - GET/POST/PATCH/DELETE "api/users/:id/posts"
 - GET/POST/PATCH/DELETE "api/users/:id/plan"
 - GET/POST/DELETE "api/users/:id/stats"
-- GET/POST/DELETE "api/users/:id/followers/:userId"
-- GET/POST/DELETE "api/users/:id/followers/:followerId"
-- GET "api/users/:id/followers/:followerId/posts"
-- GET/POST/DELETE "api/users/:id/awards"
+- GET "api/users/:id/followers"
+- POST/DELETE "api/users/:id/followers/:otherId"
+- GET "api/users/:id/followers/posts"
+- GET "api/users/:id/awards"
 
 ## Possible Dependencies
     - iframe facebook embedded posts for widgets sidebar
@@ -61,3 +61,6 @@
 
 # Application Architecture and Technologies Used:
 React / JS / CSS / Flask / Python / SQLAlchemy / AWS
+
+
+** creat posts component
