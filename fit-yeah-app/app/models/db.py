@@ -73,13 +73,24 @@ class User(Base, UserMixin):
             "username": self.username,
             "email": self.email,
             "points_earned": self.points_earned,
-            "followers": self.followers,
-            "following": self.following,
+        }
+
+    def to_dict_full(self):
+        return {
+            "id": self.id,
+            "first_name": self.first_name,
+            "last_name": self.last_name,
+            "username": self.username,
+            "email": self.email,
+            "points_earned": self.points_earned,
+            "followers": [leader.to_dict() for leader in self.followers],
+            "following": [leader.to_dict() for leader in self.following],
         }
 
 
 class Award(Base):
     __tablename__ = 'awards'
+    query = Session.query_property()
 
     id = db.Column(db.Integer, primary_key=True, unique=True)
     title = db.Column(db.String, nullable=False)
@@ -104,6 +115,7 @@ class Award(Base):
 
 class Exercise(Base):
     __tablename__ = 'exercises'
+    query = Session.query_property()
 
     id = db.Column(db.Integer, primary_key=True, unique=True)
     title = db.Column(db.String, nullable=False)
@@ -127,6 +139,7 @@ class Exercise(Base):
 
 class Workout(Base):
     __tablename__ = 'workouts'
+    query = Session.query_property()
 
     id = db.Column(db.Integer, primary_key=True, unique=True)
     user_id = db.Column(db.Integer, db.ForeignKey(User.id), nullable=False)
@@ -145,12 +158,23 @@ class Workout(Base):
             "subtitle": self.subtitle,
             "description": self.description,
             "likes": self.likes,
+        }
+
+    def to_dict_full(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "title": self.title,
+            "subtitle": self.subtitle,
+            "description": self.description,
+            "likes": self.likes,
             "owner": self.owner,
         }
 
 
 class Workout_Plan(Base):
     __tablename__ = 'workout_plans'
+    query = Session.query_property()
 
     id = db.Column(db.Integer, primary_key=True, unique=True)
     user_id = db.Column(db.Integer, db.ForeignKey(User.id))
@@ -180,6 +204,7 @@ class Workout_Plan(Base):
 
 class User_Stat(Base):
     __tablename__ = 'users_stats'
+    query = Session.query_property()
 
     id = db.Column(db.Integer, primary_key=True, unique=True)
     user_id = db.Column(db.Integer, db.ForeignKey(User.id), nullable=False)
@@ -207,12 +232,12 @@ class User_Stat(Base):
             "duration": self.duration_min,
             "distance": self.distance_mi,
             "createdAt": self.createdAt,
-            "updatedAt": self.updatedAt,
         }
 
 
 class User_Post(Base):
     __tablename__ = 'users_posts'
+    query = Session.query_property()
 
     id = db.Column(db.Integer, primary_key=True, unique=True)
     user_id = db.Column(db.Integer, db.ForeignKey(User.id), nullable=False)
@@ -227,6 +252,17 @@ class User_Post(Base):
     user = db.relationship('User', back_populates='posts')
 
     def to_dict(self):
+        return {
+            "id": self.id,
+            "owner_id": self.user_id,
+            "description": self.description,
+            "img_url": self.img_url,
+            "video_url": self.video_url,
+            "createdAt": self.createdAt,
+            "updatedAt": self.updatedAt,
+        }
+
+    def to_dict_full(self):
         return {
             "id": self.id,
             "owner_id": self.user_id,

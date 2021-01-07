@@ -7,6 +7,7 @@ from .workouts import seed_workouts, undo_workouts
 from .workout_plans import seed_workout_plans, undo_workout_plans
 from .users_posts import seed_users_posts, undo_users_posts
 
+
 # Creates a seed group to hold our commands
 # So we can type `flask seed --help`
 seed_commands = AppGroup('seed')

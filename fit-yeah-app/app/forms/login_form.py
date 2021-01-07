@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField
 from wtforms.validators import DataRequired, Email, ValidationError
-from app.models import db
+from app.models import db, User
 
 
 def user_exists(form, field):
