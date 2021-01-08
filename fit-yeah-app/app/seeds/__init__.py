@@ -6,6 +6,7 @@ from .users_stats import seed_users_stats, undo_users_stats
 from .workouts import seed_workouts, undo_workouts
 from .workout_plans import seed_workout_plans, undo_workout_plans
 from .users_posts import seed_users_posts, undo_users_posts
+from .comments import seed_comments, undo_comments
 
 
 # Creates a seed group to hold our commands
@@ -24,6 +25,7 @@ def seed():
     seed_workouts()
     seed_workout_plans()
     seed_users_posts()
+    seed_comments()
 
 # Creates the `flask seed undo` command
 
@@ -37,3 +39,4 @@ def undo():
     undo_workouts()
     undo_workout_plans()
     undo_users_posts()
+    undo_comments()

@@ -24,8 +24,28 @@ followers_table = Table('users_followers', Base.metadata,
                                   db.ForeignKey('users.id')))
 
 awards_table = Table('users_awards', Base.metadata,
-                     db.Column('user_id', db.ForeignKey('users.id')),
-                     db.Column('award_id', db.ForeignKey('awards.id')))
+                     db.Column('user_id',
+                               db.Integer,
+                               db.ForeignKey('users.id')),
+                     db.Column('award_id',
+                               db.Integer,
+                               db.ForeignKey('awards.id')))
+
+c_likes = Table('comment_likes', Base.metadata,
+                db.Column('user_id',
+                          db.Integer,
+                          db.ForeignKey('users.id')),
+                db.Column('comment_id',
+                          db.Integer,
+                          db.ForeignKey('comments.id')))
+
+p_likes = Table('post_likes', Base.metadata,
+                db.Column('user_id',
+                          db.Integer,
+                          db.ForeignKey('users.id')),
+                db.Column('post_id',
+                          db.Integer,
+                          db.ForeignKey('users_posts.id')))
 
 
 class User(Base, UserMixin):
@@ -47,12 +67,11 @@ class User(Base, UserMixin):
                                  followers_table.c.following_id == id),
                              secondaryjoin=followers_table.c.follower_id == id)
     awards = relationship('Award', secondary=awards_table,
-                          back_populates="user")
-
-    posts = db.relationship('User_Post')
-    workouts = db.relationship('Workout', back_populates='owner')
-    workout_plan = db.relationship('Workout_Plan', back_populates='owner')
-    users_stats = db.relationship('User_Stat', back_populates='user')
+                          backref="user")
+    comment_likes = relationship('Comment', secondary=c_likes,
+                                 backref="liked_by")
+    post_likes = relationship('User_Post', secondary=p_likes,
+                              backref="liked_by")
 
     @ property
     def password(self):
@@ -98,10 +117,6 @@ class Award(Base):
     description = db.Column(db.String, nullable=False)
     point_value = db.Column(db.Integer, nullable=False)
 
-    user = db.relationship('User',
-                           secondary=awards_table,
-                           back_populates='awards')
-
     def to_dict(self):
         return {
             "id": self.id,
@@ -123,8 +138,6 @@ class Exercise(Base):
     difficulty = db.Column(db.String, nullable=False)
     description = db.Column(db.String, nullable=False)
     video_url = db.Column(db.String)
-
-    users_stats = db.relationship('User_Stat', back_populates='exercise')
 
     def to_dict(self):
         return {
@@ -148,7 +161,7 @@ class Workout(Base):
     description = db.Column(db.String)
     likes = db.Column(db.Integer)
 
-    owner = db.relationship('User', back_populates='workouts')
+    owner = db.relationship('User', backref='workouts')
 
     def to_dict(self):
         return {
@@ -186,7 +199,7 @@ class Workout_Plan(Base):
     sat = db.Column(db.Integer, db.ForeignKey('workouts.id'))
     sun = db.Column(db.Integer, db.ForeignKey('workouts.id'))
 
-    owner = db.relationship('User', back_populates='workout_plan')
+    user = db.relationship('User', backref='workout_plan')
 
     def to_dict(self):
         return {
@@ -207,7 +220,9 @@ class User_Stat(Base):
     query = Session.query_property()
 
     id = db.Column(db.Integer, primary_key=True, unique=True)
-    user_id = db.Column(db.Integer, db.ForeignKey(User.id), nullable=False)
+    user_id = db.Column(db.Integer,
+                        db.ForeignKey(User.id),
+                        nullable=False)
     exercise_id = db.Column(db.Integer,
                             db.ForeignKey('exercises.id'),
                             nullable=False)
@@ -218,8 +233,8 @@ class User_Stat(Base):
     distance_mi = db.Column(db.Integer)
     createdAt = db.Column(db.DateTime, server_default=db.func.now())
 
-    user = db.relationship('User', back_populates="users_stats")
-    exercise = db.relationship('Exercise', back_populates="users_stats")
+    user = db.relationship('User', backref='stats')
+    exercise = db.relationship('Exercise', backref="users_stats")
 
     def to_dict(self):
         return {
@@ -249,7 +264,7 @@ class User_Post(Base):
                           server_default=db.func.now(),
                           server_onupdate=db.func.now())
 
-    user = db.relationship('User', back_populates='posts')
+    user = db.relationship('User', backref='posts')
 
     def to_dict(self):
         return {
@@ -272,6 +287,27 @@ class User_Post(Base):
             "createdAt": self.createdAt,
             "updatedAt": self.updatedAt,
             "user": self.user,
+        }
+
+
+class Comment(Base):
+    __tablename__ = "comments"
+
+    id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.String(1000), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    post_id = db.Column(db.Integer, db.ForeignKey('users_posts.id'))
+
+    user = db.relationship('User', backref='comments')
+    post = db.relationship('User_Post', backref='comments')
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'content': self.content,
+            'user_id': self.user_id,
+            'post_id': self.post_id,
+            'liked_by': [user.to_dict() for user in self.liked_by]
         }
 
 
