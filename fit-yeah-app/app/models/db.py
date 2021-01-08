@@ -292,16 +292,22 @@ class User_Post(Base):
 
 class Comment(Base):
     __tablename__ = "comments"
+    query = Session.query_property()
 
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(1000), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     post_id = db.Column(db.Integer, db.ForeignKey('users_posts.id'))
 
-    user = db.relationship('User', backref='comments')
-    post = db.relationship('User_Post', backref='comments')
-
     def to_dict(self):
+        return {
+            'id': self.id,
+            'content': self.content,
+            'user_id': self.user_id,
+            'post_id': self.post_id,
+        }
+
+    def to_dict_full(self):
         return {
             'id': self.id,
             'content': self.content,

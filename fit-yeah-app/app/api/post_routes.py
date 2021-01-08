@@ -7,6 +7,13 @@ from .auth_routes import validation_errors_to_error_messages
 post_routes = Blueprint('posts', __name__)
 
 
+# fetch all posts
+@post_routes.route('/')
+def all_posts():
+    posts = [post.to_dict() for post in User_Post.query.all()]
+    return {"posts": posts}
+
+
 # fetch all posts by users current user is following
 @post_routes.route('/<int:id>')
 # @login_required
@@ -25,6 +32,7 @@ def new_post():
     form = PostForm()
     # form['csrf_token'].data = request.cookie['csrf_token']
     if form.validate_on_submit():
+        print(form.data)
         post = User_Post(
             user_id=form.data['user_id'],
             description=form.data['description'],
