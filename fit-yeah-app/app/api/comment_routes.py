@@ -4,7 +4,6 @@ from app.forms import CommentForm
 from app.models import db, User, Workout, Workout_Plan, \
     User_Post, User_Stat, Comment
 from .auth_routes import validation_errors_to_error_messages
-# import json
 
 comment_routes = Blueprint('comments', __name__)
 
