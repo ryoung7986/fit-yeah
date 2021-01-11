@@ -1,0 +1,74 @@
+.makePost {
+  display: flex;
+  margin-top: 30px;
+  flex-direction: column;
+  background-color:#7e8d85;
+  border-radius: 15px;
+  box-shadow: 0px 5px 8px -2px rgba(0, 0, 0, 0.75);
+  width: 100%;
+}
+
+.makePost__top {
+  display: flex;
+  border-bottom: 1px solid #b3bfb8;
+  padding-bottom: 15px;
+  padding: 15px;
+}
+
+.makePost__top > form {
+  flex: 1;
+  display: flex;
+}
+
+.makePost__top > form > input {
+  outline-width: 0;
+  width: 50%;
+  border: none;
+  padding: 5px 20px;
+  margin: 0 10px;
+  border-radius: 999px;
+  background-color: #b3bfb8;
+  flex: 1;
+}
+
+.makePost__top > form > button {
+  display: none;
+}
+
+.makePost__bottom {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 5px 20px;
+}
+
+.makePost__option {
+  display: flex;
+  /* padding: 10px; */
+  padding: 0 20px 0 20px;
+}
+
+.makePost__option > h3{
+  color:#f0f7f4;
+  margin-left: 10px;
+}
+
+.makePost__option > .MuiSvgIcon-root {
+  color:#f0f7f4;
+}
+
+.makePost__option:hover {
+  background-color: #f0f7f4;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.makePost__option:hover > h3 {
+  color: #7e8d85;
+  background-color: #f0f7f4;
+}
+
+.makePost__option:hover > .MuiSvgIcon-root{
+  color: #7e8d85;
+  background-color: #f0f7f4;
+}

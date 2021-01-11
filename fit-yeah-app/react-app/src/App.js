@@ -2,12 +2,16 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import LoginForm from "./components/auth/LoginForm";
 import SignUpForm from "./components/auth/SignUpForm";
-import NavBar from "./components/NavBar";
+import NavBar from "./components/navbar/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import User from "./components/User";
 import UploadForm from './components/UploadForm'
+import Sidebar from "./components/sidebar/Sidebar";
+import Feed from './components/feed/Feed';
 import { authenticate } from "./services/auth";
+
+import './App.css';
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -29,28 +33,41 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBar setAuthenticated={setAuthenticated} />
       <Switch>
         <Route path="/login" exact={true}>
           <LoginForm
             authenticated={authenticated}
-            setAuthenticated={setAuthenticated}
-          />
+            setAuthenticated={setAuthenticated} />
         </Route>
         <Route path="/sign-up" exact={true}>
           <SignUpForm authenticated={authenticated} setAuthenticated={setAuthenticated} />
         </Route>
-        <Route path="/upload" exact={true}>
+
+        <ProtectedRoute path="/" exact={true} authenticated={authenticated}>
+          <div className="app">
+            <NavBar setAuthenticated={setAuthenticated} />
+            <div className="app__body">
+              <div className="body__sidebar">
+                <Sidebar />
+              </div>
+              <div className="body__feed">
+                <Feed />
+              </div>
+              <div className="body__right">
+                <h3>What goes here?</h3>
+              </div>
+            </div>
+          </div>
+        </ProtectedRoute>
+
+        <ProtectedRoute path="/upload" exact={true} authenticated={authenticated}>
           <UploadForm />
-        </Route>
+        </ProtectedRoute>
         <ProtectedRoute path="/users" exact={true} authenticated={authenticated}>
           <UsersList />
         </ProtectedRoute>
         <ProtectedRoute path="/users/:userId" exact={true} authenticated={authenticated}>
           <User />
-        </ProtectedRoute>
-        <ProtectedRoute path="/" exact={true} authenticated={authenticated}>
-          <h1>My Home Page</h1>
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>

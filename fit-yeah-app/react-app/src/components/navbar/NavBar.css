@@ -1,0 +1,93 @@
+.navbar {
+  display: flex;
+  padding: 15px 20px;
+  justify-content: space-between;
+  position: sticky;
+  background-color:#7e8d85;
+  z-index: 100;
+  top: 0;
+  box-shadow: 0px 5px 8px -2px rgba(0, 0, 0, 0.75);
+}
+
+.navbar__left {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.navbar__left img {
+  height: 60px;
+}
+
+.navbar__input {
+  display: flex;
+  align-items: center;
+  background-color: #b3bfb8;
+  padding: 10px;
+  margin-left: 10px;
+  border-radius: 999px;
+  width: 100%;
+}
+
+.navbar__input > input {
+  border: none;
+  background-color: transparent;
+  outline-width: 0;
+}
+
+.navbar__middle {
+  display: flex;
+  justify-content: center;
+  flex: 1;
+}
+
+.navbar__option {
+  display: flex;
+  align-items: center;
+  padding: 0 50px;
+  cursor: pointer;
+}
+
+.navbar__option > a {
+  color: #f0f7f4;
+}
+
+.navbar__option:hover {
+  background-color: #f0f7f4;
+  border-radius: 10px;
+  align-items: center;
+  padding: 0 50px;
+  border-bottom: none;
+}
+
+.navbar__option:hover > a {
+  color: #7e8d85;
+}
+
+.navbar__option--active {
+  border-bottom: 4px solid #7e8d85;
+}
+
+.navbar__option--active > .MuiSvgIcon-root {
+  color: #7e8d85;
+}
+
+.navbar__option--active:hover > .MuiSvgIcon-root {
+  color: #7e8d85;
+}
+
+.navbar__info {
+  display: flex;
+  align-items: center;
+  padding: 0 50px;
+}
+
+.navbar__info:hover {
+  cursor: pointer;
+}
+
+.navbar__info > h4 {
+  display: flex;
+  margin-left: 10px;
+  color: #f0f7f4;
+  font-size: larger;
+}

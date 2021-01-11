@@ -1,1 +1,21 @@
-/* TODO Add site wide styles */
+* {
+  margin: 0;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+}
+
+body {
+  margin: 0;
+  background-color: #f0dbbc;
+}
+
+.inactive {
+  color: #fff;
+  text-decoration: none;
+}
+
+.active {
+  color: #F0F7F4;
+  text-decoration: none;
+  border-bottom: 5px solid #F0F7F4;
+}
