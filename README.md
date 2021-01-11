@@ -6,7 +6,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
+  <a href="https://github.com/ryoung7986/fit-yeah">
     <img src="https://fit-yeah.s3.amazonaws.com/FY-Logo-3.png" alt="Logo" width="80" height="80">
   </a>
 
