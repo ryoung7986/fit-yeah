@@ -1,7 +1,4 @@
 
-[![LinkedIn][linkedin-shield]](https://www.linkedin.com/in/ryan-young-b67a7aab/)
-
-
 
 <!-- PROJECT LOGO -->
 <br />
