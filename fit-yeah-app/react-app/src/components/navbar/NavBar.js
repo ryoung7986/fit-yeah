@@ -32,7 +32,7 @@ const NavBar = ({ setAuthenticated }) => {
               </NavLink>
             </div>
             <div className="navbar__option" activeClassName="navbar__option--active">
-              <NavLink to="/following" exact={true}>
+              <NavLink to="/followers" exact={true}>
                 <PeopleAltIcon fontSize="large" />
               </NavLink>
             </div>
@@ -55,7 +55,7 @@ const NavBar = ({ setAuthenticated }) => {
           <div className="navbar__right">
             <div className="navbar__info">
               <Avatar fontSize="large" />
-              <UserDropdown userName="user name" />
+              <UserDropdown setAuthenticated={setAuthenticated} userName="user name" />
             </div>
           </div>
         </div>}

@@ -3,18 +3,27 @@ import { Redirect } from "react-router-dom";
 import { login } from "../../services/auth";
 import Button from '@material-ui/core/Button';
 
+import { useSelector, useDispatch } from 'react-redux';
+import { loginUser, selectUser } from './userSlice';
+
 import './LoginForm.css'
+
 
 const LoginForm = ({ authenticated, setAuthenticated }) => {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const dispatch = useDispatch();
+
   const onLogin = async (e) => {
     e.preventDefault();
+
     const user = await login(email, password);
+    console.log(user)
     if (!user.errors) {
       setAuthenticated(true);
+      dispatch(loginUser({ user: user }));
     } else {
       setErrors(user.errors);
     }

@@ -1,14 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
-function UsersList() {
+import { useSelector, useDispatch } from 'react-redux';
+import { selectUser } from './userSlice';
+
+function FollowersList() {
   const [users, setUsers] = useState([]);
+
+  const stateUser = useSelector(selectUser);
+  const userId = stateUser
+
+  console.log(stateUser);
 
   useEffect(() => {
     async function fetchData() {
       const response = await fetch("/api/users/");
       const responseData = await response.json();
       setUsers(responseData.users);
+      console.log('users', responseData.users)
     }
     fetchData();
   }, []);
@@ -29,4 +38,4 @@ function UsersList() {
   );
 }
 
-export default UsersList;
+export default FollowersList;

@@ -4,8 +4,8 @@ import LoginForm from "./components/auth/LoginForm";
 import SignUpForm from "./components/auth/SignUpForm";
 import NavBar from "./components/navbar/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
-import UsersList from "./components/UsersList";
-import User from "./components/User";
+import FollowersList from "./components/auth/FollowersList";
+import User from "./components/auth/User";
 import UploadForm from './components/UploadForm'
 import Sidebar from "./components/sidebar/Sidebar";
 import Feed from './components/feed/Feed';
@@ -63,8 +63,13 @@ function App() {
         <ProtectedRoute path="/upload" exact={true} authenticated={authenticated}>
           <UploadForm />
         </ProtectedRoute>
-        <ProtectedRoute path="/users" exact={true} authenticated={authenticated}>
-          <UsersList />
+        <ProtectedRoute path="/followers" exact={true} authenticated={authenticated}>
+          <div className="app">
+            <NavBar setAuthenticated={setAuthenticated} />
+            <div className="app__body">
+              <FollowersList />
+            </div>
+          </div>
         </ProtectedRoute>
         <ProtectedRoute path="/users/:userId" exact={true} authenticated={authenticated}>
           <User />
