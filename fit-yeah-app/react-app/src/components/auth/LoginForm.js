@@ -3,8 +3,8 @@ import { Redirect } from "react-router-dom";
 import { login } from "../../services/auth";
 import Button from '@material-ui/core/Button';
 
-import { useSelector, useDispatch } from 'react-redux';
-import { loginUser, selectUser } from './userSlice';
+import { useDispatch } from 'react-redux';
+import { addUser } from '../user/userSlice';
 
 import './LoginForm.css'
 
@@ -20,10 +20,10 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
     e.preventDefault();
 
     const user = await login(email, password);
-    console.log(user)
     if (!user.errors) {
+      localStorage.setItem('user', JSON.stringify(user))
       setAuthenticated(true);
-      dispatch(loginUser({ user: user }));
+      dispatch(addUser({ user: user }));
     } else {
       setErrors(user.errors);
     }

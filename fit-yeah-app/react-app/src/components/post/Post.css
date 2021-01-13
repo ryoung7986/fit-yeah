@@ -46,7 +46,8 @@
 }
 
 .post__media > img {
-  width: 100%;
+  /* width: 100%; */
+  max-height: 500px;
 }
 
 .post__options {

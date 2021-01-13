@@ -5,6 +5,9 @@ from app.models import User
 
 
 class PostForm(FlaskForm):
+    class Meta:
+        csrf = False
+
     user_id = IntegerField('user_id', validators=[DataRequired()])
     description = StringField('description', validators=[DataRequired()])
     img_url = StringField('img_url')
