@@ -37,7 +37,7 @@ const NavBar = ({ setAuthenticated }) => {
               </NavLink>
             </div>
             <div className="navbar__option" activeClassName="navbar__option--active">
-              <NavLink to="/user-stats" exact={true}>
+              <NavLink to="/my-stats" exact={true}>
                 <AssessmentOutlinedIcon fontSize="large" />
               </NavLink>
             </div>
@@ -47,7 +47,7 @@ const NavBar = ({ setAuthenticated }) => {
               </NavLink>
             </div>
             <div className="navbar__option" activeClassName="navbar__option--active">
-              <NavLink to="/your-workout-plan" exact={true}>
+              <NavLink to="/my-workout-plan" exact={true}>
                 <EventAvailableIcon fontSize="large" />
               </NavLink>
             </div>

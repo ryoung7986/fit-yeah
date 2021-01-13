@@ -1,31 +1,47 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../user/userSlice';
 import { Avatar } from '@material-ui/core';
 import VideocamIcon from '@material-ui/icons/Videocam';
 import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
 import './MakePost.css';
 
 function MakePost() {
-  const [input, setInput] = useState('')
+  const [description, setDescription] = useState('');
+  const form = useRef(null);
+  const user = useSelector(selectUser);
+  const userId = user.user.id
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setInput('')
+    let formData = new FormData();
+    formData.append('description', description);
+    formData.append('user_id', userId)
+    for (let value of formData.values()) {
+      console.log(value)
+    }
+    const response = await fetch('api/posts/new', {
+      method: 'POST',
+      body: formData
+    })
+    setDescription('')
+    return await response.json()
   }
+
 
   return (
     <div className='makePost'>
       <div className="makePost__top">
         <Avatar />
-        <form>
+        <form ref={form} onSubmit={handleSubmit}>
           <input
             type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
             className="makePost__input"
-            placeholder="What's on your mind, User?" />
+            placeholder={`What's on your mind, ${user.user.first_name}?`} />
           <button
-            type="submit"
-            onClick={handleSubmit}>
+            type="submit">
             Hidden Submit
           </button>
         </form>

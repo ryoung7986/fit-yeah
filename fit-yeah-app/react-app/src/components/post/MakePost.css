@@ -72,3 +72,7 @@
   color: #7e8d85;
   background-color: #f0f7f4;
 }
+
+.makePost__input--hidden {
+  display: none;
+}

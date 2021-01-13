@@ -27,7 +27,7 @@ def user(id):
 # @login_required
 def user_following(id):
     user = User.query.get(id)
-    following = [leader.id for leader in user.following]
+    following = [leader.to_dict() for leader in user.following]
     return {"following": following}
 
 
@@ -36,7 +36,7 @@ def user_following(id):
 # @login_required
 def user_followers(id):
     user = User.query.get(id)
-    followers = [follower.id for follower in user.followers]
+    followers = [follower.to_dict() for follower in user.followers]
     return {"followers": followers}
 
 
