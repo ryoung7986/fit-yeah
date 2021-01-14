@@ -6,15 +6,8 @@ from sqlalchemy.orm import relationship, sessionmaker, scoped_session
 from sqlalchemy.ext.declarative import declarative_base
 import os
 
-engine = create_engine(os.environ.get('DATABASE_URL'),
-                       pool_size=50, max_overflow=0)
-
-Session = scoped_session(sessionmaker(bind=engine))
-session = Session()
-
 db = SQLAlchemy()
 Base = declarative_base()
-# Base.query = session.query_property()
 
 followers_table = Table('users_followers', Base.metadata,
                         db.Column('follower_id',
@@ -51,7 +44,7 @@ p_likes = Table('post_likes', Base.metadata,
 
 class User(Base, UserMixin):
     __tablename__ = 'users'
-    query = Session.query_property()
+    query = db.session.query_property()
 
     id = db.Column(db.Integer, primary_key=True, unique=True)
     first_name = db.Column(db.String, nullable=False)
@@ -103,14 +96,16 @@ class User(Base, UserMixin):
             "username": self.username,
             "email": self.email,
             "points_earned": self.points_earned,
-            "followers": [leader.to_dict() for leader in self.followers],
+            "followers": [follower.to_dict() for follower in self.followers],
             "following": [leader.to_dict() for leader in self.following],
+            # "post_likes": [post.to_dict() for post in User_Post
+            #                if post in self.post_likes]
         }
 
 
 class Award(Base):
     __tablename__ = 'awards'
-    query = Session.query_property()
+    query = db.session.query_property()
 
     id = db.Column(db.Integer, primary_key=True, unique=True)
     title = db.Column(db.String, nullable=False)
@@ -131,7 +126,7 @@ class Award(Base):
 
 class Exercise(Base):
     __tablename__ = 'exercises'
-    query = Session.query_property()
+    query = db.session.query_property()
 
     id = db.Column(db.Integer, primary_key=True, unique=True)
     title = db.Column(db.String, nullable=False)
@@ -153,7 +148,7 @@ class Exercise(Base):
 
 class Workout(Base):
     __tablename__ = 'workouts'
-    query = Session.query_property()
+    query = db.session.query_property()
 
     id = db.Column(db.Integer, primary_key=True, unique=True)
     user_id = db.Column(db.Integer, db.ForeignKey(User.id), nullable=False)
@@ -188,7 +183,7 @@ class Workout(Base):
 
 class Workout_Plan(Base):
     __tablename__ = 'workout_plans'
-    query = Session.query_property()
+    query = db.session.query_property()
 
     id = db.Column(db.Integer, primary_key=True, unique=True)
     user_id = db.Column(db.Integer, db.ForeignKey(User.id))
@@ -218,7 +213,7 @@ class Workout_Plan(Base):
 
 class User_Stat(Base):
     __tablename__ = 'users_stats'
-    query = Session.query_property()
+    query = db.session.query_property()
 
     id = db.Column(db.Integer, primary_key=True, unique=True)
     user_id = db.Column(db.Integer,
@@ -253,7 +248,7 @@ class User_Stat(Base):
 
 class User_Post(Base):
     __tablename__ = 'users_posts'
-    query = Session.query_property()
+    query = db.session.query_property()
 
     id = db.Column(db.Integer, primary_key=True, unique=True)
     user_id = db.Column(db.Integer, db.ForeignKey(User.id), nullable=False)
@@ -287,13 +282,14 @@ class User_Post(Base):
             "video_url": self.video_url,
             "createdAt": self.createdAt,
             "updatedAt": self.updatedAt,
-            "user": self.user,
+            "user": self.user.to_dict(),
+            'liked_by': [user.to_dict_full() for user in self.liked_by]
         }
 
 
 class Comment(Base):
     __tablename__ = "comments"
-    query = Session.query_property()
+    query = db.session.query_property()
 
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(1000), nullable=False)
@@ -318,4 +314,4 @@ class Comment(Base):
         }
 
 
-Base.metadata.create_all(engine)
+# Base.metadata.create_all(engine)

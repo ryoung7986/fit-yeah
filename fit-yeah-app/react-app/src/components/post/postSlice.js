@@ -8,18 +8,6 @@ export const getPosts = createAsyncThunk(
   }
 )
 
-// export const makePost = createAsyncThunk(
-//   'posts/makePost',
-//   async (id) => {
-//     const res = await fetch('api/posts/new', {
-//       method: 'POST',
-
-//     }
-//     )
-//     const resData = await res.json
-//   }
-// )
-
 const postSlice = createSlice({
   name: 'posts',
   initialState: {

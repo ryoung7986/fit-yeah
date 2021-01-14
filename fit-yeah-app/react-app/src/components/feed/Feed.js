@@ -37,6 +37,7 @@ function Feed() {
             `${getPostUser(post.owner_id)}`}
           content={post.description}
           timestamp={post.createdAt}
+          postId={post.id}
         />
       </div>
     )

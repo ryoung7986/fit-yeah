@@ -2,9 +2,27 @@ import React from 'react';
 import { Avatar } from '@material-ui/core';
 import ThumbUpOutlinedIcon from '@material-ui/icons/ThumbUpOutlined';
 import ChatBubbleOutlineOutlinedIcon from '@material-ui/icons/ChatBubbleOutlineOutlined';
+import { selectUser } from '../user/userSlice';
+import { useSelector } from 'react-redux';
+
 import './Post.css';
 
-function Post({ profilePic, media, username, timestamp, content }) {
+function Post({ profilePic, media, username, timestamp, content, postId }) {
+  const user = useSelector(selectUser)
+  const userId = user.user.id
+
+  const submitLike = () => {
+    (async () => {
+      await fetch(`/api/users/${userId}/${postId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userId, postId })
+      })
+    })()
+  }
+
   return (
     <div className='post'>
       <div className='post__top'>
@@ -21,8 +39,12 @@ function Post({ profilePic, media, username, timestamp, content }) {
         {media &&
           <img src={media} alt='' />}
       </div>
+      <div className="post__likes">
+        <p>Num Likes</p>
+        <p>post comments</p>
+      </div>
       <div className="post__options">
-        <div className="post__option">
+        <div onClick={submitLike} className="post__option">
           <ThumbUpOutlinedIcon />
           <h3>Like</h3>
         </div>

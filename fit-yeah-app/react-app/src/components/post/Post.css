@@ -87,3 +87,15 @@
 .post__option > h3 {
   padding-left: 15px;
 }
+
+.post__likes {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #b3bfb8;
+}
+
+.post__likes > p {
+  margin: 5px 20px;
+  color: #f0f7f4;
+  font-weight: 400;
+}

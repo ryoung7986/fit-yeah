@@ -1,7 +1,9 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from flask_login import login_required
-# from app.forms import FollowForm
-from app.models import db, User, Workout, Workout_Plan, User_Post, User_Stat
+from app.models import db, User, Workout, Workout_Plan, \
+    User_Post, User_Stat
+from sqlalchemy import update
+import json
 
 user_routes = Blueprint('users', __name__)
 
@@ -20,6 +22,20 @@ def users():
 def user(id):
     user = User.query.get(id)
     return user.to_dict()
+
+
+# add post like to user
+@user_routes.route('/<int:id>/<int:postId>', methods=['PATCH'])
+def post_like(id, postId):
+    data = json.loads(request.data)
+    user = User.query.get(data['userId'])
+    post = User_Post.query.get(data['postId'])
+    post.liked_by.append(user)
+    db.session.add(post)
+    db.session.commit()
+    # current_db_sessions = db.session.object_session(post)
+    # current_db_sessions.add(post)
+    return post.to_dict_full()
 
 
 # fetch user following

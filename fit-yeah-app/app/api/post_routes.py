@@ -1,8 +1,10 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
 from app.forms import PostForm
-from app.models import db, User, Workout, Workout_Plan, User_Post, User_Stat
+from app.models import db, User, Workout, Workout_Plan, \
+    User_Post, User_Stat
 from .auth_routes import validation_errors_to_error_messages
+import json
 
 post_routes = Blueprint('posts', __name__)
 
