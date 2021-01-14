@@ -6,7 +6,8 @@ from sqlalchemy.orm import relationship, sessionmaker, scoped_session
 from sqlalchemy.ext.declarative import declarative_base
 import os
 
-engine = create_engine(os.environ.get('DATABASE_URL'))
+engine = create_engine(os.environ.get('DATABASE_URL'),
+                       pool_size=50, max_overflow=0)
 
 Session = scoped_session(sessionmaker(bind=engine))
 session = Session()

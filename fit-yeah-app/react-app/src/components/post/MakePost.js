@@ -1,6 +1,7 @@
-import React, { useState, useRef } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState, useRef, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { selectUser } from '../user/userSlice';
+import { getPosts } from '../post/postSlice';
 import { Avatar } from '@material-ui/core';
 import VideocamIcon from '@material-ui/icons/Videocam';
 import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
@@ -8,9 +9,11 @@ import './MakePost.css';
 
 function MakePost() {
   const [description, setDescription] = useState('');
+  const [trigger, setTrigger] = useState(0);
   const form = useRef(null);
   const user = useSelector(selectUser);
   const userId = user.user.id
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,8 +28,13 @@ function MakePost() {
       body: formData
     })
     setDescription('')
+    setTrigger(trigger => trigger + 1)
     return await response.json()
   }
+
+  useEffect(() => {
+    dispatch(getPosts(userId))
+  }, [trigger])
 
 
   return (
