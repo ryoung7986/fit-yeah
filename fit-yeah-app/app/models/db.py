@@ -7,9 +7,9 @@ from sqlalchemy.ext.declarative import declarative_base
 import os
 
 db = SQLAlchemy()
-Base = declarative_base()
+# Base = declarative_base()
 
-followers_table = Table('users_followers', Base.metadata,
+followers_table = Table('users_followers', db.Model.metadata,
                         db.Column('follower_id',
                                   db.Integer,
                                   db.ForeignKey('users.id')),
@@ -17,7 +17,7 @@ followers_table = Table('users_followers', Base.metadata,
                                   db.Integer,
                                   db.ForeignKey('users.id')))
 
-awards_table = Table('users_awards', Base.metadata,
+awards_table = Table('users_awards', db.Model.metadata,
                      db.Column('user_id',
                                db.Integer,
                                db.ForeignKey('users.id')),
@@ -25,7 +25,7 @@ awards_table = Table('users_awards', Base.metadata,
                                db.Integer,
                                db.ForeignKey('awards.id')))
 
-c_likes = Table('comment_likes', Base.metadata,
+c_likes = Table('comment_likes', db.Model.metadata,
                 db.Column('user_id',
                           db.Integer,
                           db.ForeignKey('users.id')),
@@ -33,7 +33,7 @@ c_likes = Table('comment_likes', Base.metadata,
                           db.Integer,
                           db.ForeignKey('comments.id')))
 
-p_likes = Table('post_likes', Base.metadata,
+p_likes = Table('post_likes', db.Model.metadata,
                 db.Column('user_id',
                           db.Integer,
                           db.ForeignKey('users.id')),
@@ -42,7 +42,7 @@ p_likes = Table('post_likes', Base.metadata,
                           db.ForeignKey('users_posts.id')))
 
 
-class User(Base, UserMixin):
+class User(db.Model, UserMixin):
     __tablename__ = 'users'
     query = db.session.query_property()
 
@@ -103,7 +103,7 @@ class User(Base, UserMixin):
         }
 
 
-class Award(Base):
+class Award(db.Model):
     __tablename__ = 'awards'
     query = db.session.query_property()
 
@@ -124,7 +124,7 @@ class Award(Base):
         }
 
 
-class Exercise(Base):
+class Exercise(db.Model):
     __tablename__ = 'exercises'
     query = db.session.query_property()
 
@@ -146,7 +146,7 @@ class Exercise(Base):
         }
 
 
-class Workout(Base):
+class Workout(db.Model):
     __tablename__ = 'workouts'
     query = db.session.query_property()
 
@@ -181,7 +181,7 @@ class Workout(Base):
         }
 
 
-class Workout_Plan(Base):
+class Workout_Plan(db.Model):
     __tablename__ = 'workout_plans'
     query = db.session.query_property()
 
@@ -211,7 +211,7 @@ class Workout_Plan(Base):
         }
 
 
-class User_Stat(Base):
+class User_Stat(db.Model):
     __tablename__ = 'users_stats'
     query = db.session.query_property()
 
@@ -246,7 +246,7 @@ class User_Stat(Base):
         }
 
 
-class User_Post(Base):
+class User_Post(db.Model):
     __tablename__ = 'users_posts'
     query = db.session.query_property()
 
@@ -287,7 +287,7 @@ class User_Post(Base):
         }
 
 
-class Comment(Base):
+class Comment(db.Model):
     __tablename__ = "comments"
     query = db.session.query_property()
 
@@ -314,4 +314,4 @@ class Comment(Base):
         }
 
 
-# Base.metadata.create_all(engine)
+# db.Base.metadata.create_all(engine)

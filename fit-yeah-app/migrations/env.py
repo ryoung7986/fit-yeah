@@ -27,6 +27,7 @@ logger = logging.getLogger('alembic.env')
 target_metadata = [User.metadata, Award.metadata, Exercise.metadata,
                    User_Post.metadata, User_Stat.metadata,
                    Workout_Plan.metadata, Workout.metadata, Comment.metadata]
+# target_metadata = Base.metadata
 config.set_main_option(
     'sqlalchemy.url', os.environ.get('DATABASE_URL'))
 # target_metadata = current_app.extensions['migrate'].db.metadata
