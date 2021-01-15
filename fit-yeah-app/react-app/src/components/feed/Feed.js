@@ -30,7 +30,8 @@ function Feed() {
     return (
       <div key={post.id}>
         <Post
-          profilePic='https://scontent-lga3-2.xx.fbcdn.net/v/t31.0-8/10562589_10106877577980484_4161768625193891982_o.jpg?_nc_cat=106&ccb=2&_nc_sid=09cbfe&_nc_ohc=KG5BHhrJWJkAX8OLYr0&_nc_ht=scontent-lga3-2.xx&oh=20a5a2038ff737f47b63ff2f52c536ad&oe=60202ADA'
+          profilePic={stateUser.user.avatar_url ?
+            stateUser.user.avatar_url : null}
           media={post.img_url}
           username={userId === post.owner_id ?
             `${stateUser.user.first_name} ${stateUser.user.last_name}` :

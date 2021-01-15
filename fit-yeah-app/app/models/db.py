@@ -51,6 +51,7 @@ class User(db.Model, UserMixin):
     last_name = db.Column(db.String, nullable=False)
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
+    avatar_url = db.Column(db.String)
     points_earned = db.Column(db.Integer)
     hashed_password = db.Column(db.String(255), nullable=False)
     following = relationship('User', secondary=followers_table,
@@ -98,8 +99,6 @@ class User(db.Model, UserMixin):
             "points_earned": self.points_earned,
             "followers": [follower.to_dict() for follower in self.followers],
             "following": [leader.to_dict() for leader in self.following],
-            # "post_likes": [post.to_dict() for post in User_Post
-            #                if post in self.post_likes]
         }
 
 

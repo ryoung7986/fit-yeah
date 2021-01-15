@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 
 import './Post.css';
 
-function Post({ profilePic, media, username, timestamp, content, postId }) {
+function Post({ profilePic, media, username, timestamp, content, postId, numLikes, numComments }) {
   const user = useSelector(selectUser)
   const userId = user.user.id
 
@@ -40,8 +40,8 @@ function Post({ profilePic, media, username, timestamp, content, postId }) {
           <img src={media} alt='' />}
       </div>
       <div className="post__likes">
-        <p>Num Likes</p>
-        <p>post comments</p>
+        <p>{numLikes ? numLikes : null}</p>
+        <p>{numComments ? numComments : null}</p>
       </div>
       <div className="post__options">
         <div onClick={submitLike} className="post__option">

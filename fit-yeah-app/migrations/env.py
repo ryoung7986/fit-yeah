@@ -1,6 +1,8 @@
 from __future__ import with_statement
 from flask import current_app
-from app.models import User, Award, Exercise, User_Post, \
+# from app.models import User, Award, Exercise, User_Post, \
+#     User_Stat, Workout_Plan, Workout, Comment
+from app.models import db, User, Award, Exercise, User_Post, \
     User_Stat, Workout_Plan, Workout, Comment
 
 import logging
@@ -24,10 +26,10 @@ logger = logging.getLogger('alembic.env')
 
 # add your model's MetaData object here
 # for 'autogenerate' support
-target_metadata = [User.metadata, Award.metadata, Exercise.metadata,
-                   User_Post.metadata, User_Stat.metadata,
-                   Workout_Plan.metadata, Workout.metadata, Comment.metadata]
-# target_metadata = Base.metadata
+# target_metadata = [User.metadata, Award.metadata, Exercise.metadata,
+#                    User_Post.metadata, User_Stat.metadata,
+#                    Workout_Plan.metadata, Workout.metadata, Comment.metadata]
+target_metadata = db.metadata
 config.set_main_option(
     'sqlalchemy.url', os.environ.get('DATABASE_URL'))
 # target_metadata = current_app.extensions['migrate'].db.metadata
