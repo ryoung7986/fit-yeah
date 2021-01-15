@@ -1,9 +1,10 @@
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-from sqlalchemy import Table, create_engine
+from sqlalchemy import Table, create_engine, text
 from sqlalchemy.orm import relationship, sessionmaker, scoped_session
 from sqlalchemy.ext.declarative import declarative_base
+import json
 import os
 
 db = SQLAlchemy()
@@ -119,7 +120,7 @@ class Award(db.Model):
             "badge_url": self.badge_url,
             "description": self.description,
             "point_value": self.point_value,
-            "user": self.user,
+            "user": self.user.to_dict(),
         }
 
 
@@ -176,7 +177,7 @@ class Workout(db.Model):
             "subtitle": self.subtitle,
             "description": self.description,
             "likes": self.likes,
-            "owner": self.owner,
+            "owner": self.owner.to_dict(),
         }
 
 

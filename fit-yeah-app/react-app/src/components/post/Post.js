@@ -4,12 +4,14 @@ import ThumbUpOutlinedIcon from '@material-ui/icons/ThumbUpOutlined';
 import ChatBubbleOutlineOutlinedIcon from '@material-ui/icons/ChatBubbleOutlineOutlined';
 import { selectUser } from '../user/userSlice';
 import { useSelector } from 'react-redux';
+import { useState, useEffect } from 'react';
 
 import './Post.css';
 
-function Post({ profilePic, media, username, timestamp, content, postId, numLikes, numComments }) {
-  const user = useSelector(selectUser)
-  const userId = user.user.id
+function Post({ profilePic, media, username, timestamp, content, postId, numComments }) {
+  const [likes, setLikes] = useState(0);
+  const user = useSelector(selectUser);
+  const userId = user.user.id;
 
   const submitLike = () => {
     (async () => {
@@ -21,7 +23,20 @@ function Post({ profilePic, media, username, timestamp, content, postId, numLike
         body: JSON.stringify({ userId, postId })
       })
     })()
+    getLikes(postId)
   }
+
+  const getLikes = () => {
+    (async () => {
+      const response = await fetch(`/api/posts/${postId}/likes`);
+      const responseData = await response.json();
+      setLikes(responseData);
+    })()
+  }
+
+  useEffect(() => {
+    getLikes()
+  }, [])
 
   return (
     <div className='post'>
@@ -40,7 +55,7 @@ function Post({ profilePic, media, username, timestamp, content, postId, numLike
           <img src={media} alt='' />}
       </div>
       <div className="post__likes">
-        <p>{numLikes ? numLikes : null}</p>
+        <p>{`${likes} Likes`}</p>
         <p>{numComments ? numComments : null}</p>
       </div>
       <div className="post__options">

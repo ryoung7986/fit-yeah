@@ -33,8 +33,6 @@ def post_like(id, postId):
     post.liked_by.append(user)
     db.session.add(post)
     db.session.commit()
-    # current_db_sessions = db.session.object_session(post)
-    # current_db_sessions.add(post)
     return post.to_dict_full()
 
 
