@@ -8,7 +8,6 @@ import json
 import os
 
 db = SQLAlchemy()
-# Base = declarative_base()
 
 followers_table = Table('users_followers', db.Model.metadata,
                         db.Column('follower_id',
@@ -42,6 +41,14 @@ p_likes = Table('post_likes', db.Model.metadata,
                           db.Integer,
                           db.ForeignKey('users_posts.id')))
 
+workout_exercises = Table('workout_exercises', db.Model.metadata,
+                          db.Column('exercise_id',
+                                    db.Integer,
+                                    db.ForeignKey('exercises.id')),
+                          db.Column('workout_id',
+                                    db.Integer,
+                                    db.ForeignKey('workouts.id')))
+
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -59,14 +66,19 @@ class User(db.Model, UserMixin):
     miles_run = db.Column(db.Integer)
     hashed_password = db.Column(db.String(255), nullable=False)
     following = relationship('User', secondary=followers_table,
-                             primaryjoin=(followers_table.c.follower_id == id),
-                             secondaryjoin=followers_table.c.following_id == id)
+                             primaryjoin=(
+                                 followers_table.c.follower_id == id),
+                             secondaryjoin=(
+                                 followers_table.c.following_id == id),
+                             backref="users_following")
     followers = relationship('User', secondary=followers_table,
                              primaryjoin=(
                                  followers_table.c.following_id == id),
-                             secondaryjoin=followers_table.c.follower_id == id)
+                             secondaryjoin=(
+                                 followers_table.c.follower_id == id),
+                             backref="users_followers")
     awards = relationship('Award', secondary=awards_table,
-                          backref="user")
+                          backref="user_reward")
     comment_likes = relationship('Comment', secondary=c_likes,
                                  backref="liked_by")
     post_likes = relationship('User_Post', secondary=p_likes,
@@ -106,6 +118,8 @@ class User(db.Model, UserMixin):
             "bio": self.bio,
             "followers": [follower.to_dict() for follower in self.followers],
             "following": [leader.to_dict() for leader in self.following],
+            "awards": [award.to_dict() for award in self.awards],
+            "posts": [post.to_dict() for post in self.posts],
         }
 
 
@@ -118,6 +132,8 @@ class Award(db.Model):
     badge_url = db.Column(db.String, nullable=False)
     description = db.Column(db.String, nullable=False)
     point_value = db.Column(db.Integer, nullable=False)
+
+    user = relationship('User', secondary=awards_table, backref="award_user")
 
     def to_dict(self):
         return {
@@ -140,6 +156,8 @@ class Exercise(db.Model):
     difficulty = db.Column(db.String, nullable=False)
     description = db.Column(db.String, nullable=False)
     video_url = db.Column(db.String)
+
+    workouts = relationship('Workout', secondary=workout_exercises)
 
     def to_dict(self):
         return {
@@ -165,6 +183,9 @@ class Workout(db.Model):
 
     owner = db.relationship('User', backref='workouts')
 
+    exercises = relationship('Exercise',
+                             secondary=workout_exercises)
+
     def to_dict(self):
         return {
             "id": self.id,
@@ -184,6 +205,7 @@ class Workout(db.Model):
             "description": self.description,
             "likes": self.likes,
             "owner": self.owner.to_dict(),
+            # "exercises": [exercise.to_dict() for exercise in self.exercises]
         }
 
 
@@ -205,6 +227,7 @@ class Workout_Plan(db.Model):
 
     def to_dict(self):
         return {
+            "user": self.user.to_dict(),
             "id": self.id,
             "user_id": self.user_id,
             "mon": self.mon,
@@ -289,7 +312,7 @@ class User_Post(db.Model):
             "createdAt": self.createdAt,
             "updatedAt": self.updatedAt,
             "user": self.user.to_dict(),
-            'liked_by': [user.to_dict_full() for user in self.liked_by]
+            'liked_by': [user.to_dict() for user in self.liked_by]
         }
 
 
