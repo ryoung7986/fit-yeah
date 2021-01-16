@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Avatar } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
 import './ProfileComponent.css'
 
 function ProfileComponent({ user }) {
+
   return (
     <div className="profile">
       <div className="profile__avatar">

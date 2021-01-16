@@ -53,7 +53,10 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     avatar_url = db.Column(db.String)
+    bio = db.Column(db.String)
     points_earned = db.Column(db.Integer)
+    completed_workouts = db.Column(db.Integer)
+    miles_run = db.Column(db.Integer)
     hashed_password = db.Column(db.String(255), nullable=False)
     following = relationship('User', secondary=followers_table,
                              primaryjoin=(followers_table.c.follower_id == id),
@@ -88,6 +91,7 @@ class User(db.Model, UserMixin):
             "username": self.username,
             "email": self.email,
             "points_earned": self.points_earned,
+            "bio": self.bio,
         }
 
     def to_dict_full(self):
@@ -97,7 +101,9 @@ class User(db.Model, UserMixin):
             "last_name": self.last_name,
             "username": self.username,
             "email": self.email,
+            "avatar_url": self.avatar_url,
             "points_earned": self.points_earned,
+            "bio": self.bio,
             "followers": [follower.to_dict() for follower in self.followers],
             "following": [leader.to_dict() for leader in self.following],
         }

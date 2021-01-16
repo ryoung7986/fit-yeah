@@ -7,13 +7,16 @@ import './SignUpForm.css';
 const SignUpForm = ({ authenticated, setAuthenticated }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
 
   const onSignUp = async (e) => {
     e.preventDefault();
+    console.log(email)
     if (password === repeatPassword) {
-      const user = await signUp(username, email, password);
+      const user = await signUp(username, firstName, lastName, email, password);
       if (!user.errors) {
         setAuthenticated(true);
       }
@@ -22,6 +25,14 @@ const SignUpForm = ({ authenticated, setAuthenticated }) => {
 
   const updateUsername = (e) => {
     setUsername(e.target.value);
+  };
+
+  const updateFirstName = (e) => {
+    setFirstName(e.target.value);
+  };
+
+  const updateLastName = (e) => {
+    setLastName(e.target.value);
   };
 
   const updateEmail = (e) => {
@@ -47,7 +58,27 @@ const SignUpForm = ({ authenticated, setAuthenticated }) => {
       </div>
       <form onSubmit={onSignUp} className="signup__form">
         <div>
-          <label>User Name</label>
+          <label>First Name</label>
+          <input
+            className="signup__form--input"
+            type="text"
+            name="first_name"
+            onChange={updateFirstName}
+            value={firstName}
+          ></input>
+        </div>
+        <div>
+          <label>Last Name</label>
+          <input
+            className="signup__form--input"
+            type="text"
+            name="last_name"
+            onChange={updateLastName}
+            value={lastName}
+          ></input>
+        </div>
+        <div>
+          <label>Desired User Name</label>
           <input
             className="signup__form--input"
             type="text"
