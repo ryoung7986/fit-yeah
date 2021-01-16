@@ -13,7 +13,6 @@
   align-items: center;
   padding: 15px;
   margin-bottom: 15px;
-  border-bottom: 1px solid #b3bfb8;
 }
 
 .post__top--info {
@@ -91,7 +90,6 @@
 .post__likes {
   display: flex;
   justify-content: space-between;
-  border-top: 1px solid #b3bfb8;
 }
 
 .post__likes > p {

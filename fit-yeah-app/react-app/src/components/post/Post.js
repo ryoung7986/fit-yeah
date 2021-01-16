@@ -3,27 +3,31 @@ import { Avatar } from '@material-ui/core';
 import ThumbUpOutlinedIcon from '@material-ui/icons/ThumbUpOutlined';
 import ChatBubbleOutlineOutlinedIcon from '@material-ui/icons/ChatBubbleOutlineOutlined';
 import { selectUser } from '../user/userSlice';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
+import MakeComment from '../comment/MakeComment';
+import Comment from '../comment/Comment';
+import { selectComments } from '../comment/commentSlice';
 
 import './Post.css';
 
-function Post({ profilePic, media, username, timestamp, content, postId, numComments }) {
+function Post({ profilePic, media, username, timestamp, content, postId, postComments }) {
   const [likes, setLikes] = useState(0);
+  const [render, setRender] = useState(0);
   const user = useSelector(selectUser);
   const userId = user.user.id;
 
-  const submitLike = () => {
-    (async () => {
-      await fetch(`/api/users/${userId}/${postId}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ userId, postId })
-      })
-    })()
-    getLikes(postId)
+  const submitLike = async (e) => {
+    e.preventDefault();
+    const response = await fetch(`/api/users/${userId}/${postId}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ userId, postId })
+    })
+    setRender(render => render + 1)
+    return await response.json()
   }
 
   const getLikes = () => {
@@ -34,9 +38,18 @@ function Post({ profilePic, media, username, timestamp, content, postId, numComm
     })()
   }
 
+  const renderPostComments = postComments.map((comment) => {
+    return (
+      <Comment
+        userId={comment.user_id}
+        content={comment.content}
+      />
+    )
+  })
+
   useEffect(() => {
     getLikes()
-  }, [])
+  }, [render])
 
   return (
     <div className='post'>
@@ -56,7 +69,7 @@ function Post({ profilePic, media, username, timestamp, content, postId, numComm
       </div>
       <div className="post__likes">
         <p>{`${likes} Likes`}</p>
-        <p>{numComments ? numComments : null}</p>
+        {/* <p>{numComments ? numComments : null}</p> */}
       </div>
       <div className="post__options">
         <div onClick={submitLike} className="post__option">
@@ -67,6 +80,12 @@ function Post({ profilePic, media, username, timestamp, content, postId, numComm
           <ChatBubbleOutlineOutlinedIcon />
           <h3>Comment</h3>
         </div>
+      </div>
+      <div className="post__comments">
+        <MakeComment postId={postId} />
+      </div>
+      <div>
+        {renderPostComments}
       </div>
     </div>
   )

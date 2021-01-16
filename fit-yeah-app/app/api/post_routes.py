@@ -38,7 +38,7 @@ def post_owner(id):
     return user.to_dict()
 
 
-# fetch all likes for post by id
+# fetch num likes for post by id
 @post_routes.route('/<int:id>/likes')
 def post_likes(id):
     post = User_Post.query.get(id)

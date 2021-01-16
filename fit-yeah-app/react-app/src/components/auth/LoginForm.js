@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, NavLink } from "react-router-dom";
 import { login } from "../../services/auth";
 import Button from '@material-ui/core/Button';
 
@@ -79,7 +79,16 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
           Login
         </Button>
       </form>
-    </div >
+      <div className="signup__button">
+        <NavLink to='/sign-up' exact={true} className="signup__navlink">
+          <Button
+            variant="outlined"
+            className="signup__button">
+            Sign Up
+          </Button>
+        </NavLink>
+      </div>
+    </div>
   );
 };
 

@@ -1,0 +1,26 @@
+.comment {
+  display: flex;
+  padding: 10px 0 0 10px;
+  border-top: 1px solid #b3bfb8;
+  margin-top: 10px;
+}
+
+.comment__details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-radius: 10px;
+  margin: 0 10px 10px 10px;
+  height: auto;
+  width:fit-content;
+  padding: 0 30px 0 10px;
+}
+
+.comment__details > h4 {
+  color: #f0f7f4;
+  font-weight: 400;
+}
+
+.comment__details > h5 {
+  color: #f0f7f4;
+}

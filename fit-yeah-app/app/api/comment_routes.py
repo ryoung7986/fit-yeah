@@ -12,25 +12,26 @@ comment_routes = Blueprint('comments', __name__)
 @comment_routes.route('/<int:id>')
 def all_comments(id):
     comments = Comment.query.filter(Comment.post_id == id)
-    return {"comments": [comment.to_dict() for comment in comments]}
+    return {'comments': [comment.to_dict() for comment in comments]}
 
 
 # create a comment
-@comment_routes.route('/<int:id>/new', methods=["POST"])
+@comment_routes.route('/new', methods=["POST"])
 # @login_required
-def new_comment(id):
+def new_comment():
     form = CommentForm()
-    post = User_Post.query.get(id)
+    print('FORM DATA STUFFS')
+    print(form.data['post_id'])
     if form.validate_on_submit():
-        if id:
-            comment = Comment(
-                post_id=id,
-                user_id=form.data['user_id'],
-                content=form.data['content']
-            )
-            db.session.add(comment)
-            db.session.commit()
-            return comment.to_dict()
+        print(form.data['content'])
+        comment = Comment(
+            post_id=form.data['post_id'],
+            user_id=form.data['user_id'],
+            content=form.data['content']
+        )
+        db.session.add(comment)
+        db.session.commit()
+        return comment.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}
 
     # # Like a comment

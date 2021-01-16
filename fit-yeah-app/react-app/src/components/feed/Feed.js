@@ -4,6 +4,7 @@ import Post from '../post/Post';
 import { getPosts, selectPosts } from '../post/postSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUser, selectFollowing } from '../user/userSlice';
+import { getComments, selectComments } from '../comment/commentSlice';
 
 import './Feed.css';
 
@@ -11,12 +12,18 @@ function Feed() {
   const dispatch = useDispatch();
   const stateUser = useSelector(selectUser);
   const posts = useSelector(selectPosts);
-  const userId = stateUser.user.id
+  const comments = useSelector(selectComments);
   const followingUsers = useSelector(selectFollowing)
 
   useEffect(() => {
-    dispatch(getPosts(userId))
+    dispatch(getPosts(stateUser.user.id))
   }, [])
+
+  useEffect(() => {
+    posts.map(post => dispatch(getComments(post.id)))
+  }, [posts])
+
+
 
   const getPostUser = (postUserId) => {
     for (let value of followingUsers) {
@@ -27,18 +34,24 @@ function Feed() {
   }
 
   const usersPosts = posts.map((post) => {
+    const postComments = Array.from(new Set(comments.post_comments.map(
+      comment => comment.id)))
+      .map((id) => comments.post_comments.find(comment => id === comment.id))
+      .filter((comment) => comment.post_id === post.id).reverse()
+
     return (
       <div key={post.id}>
         <Post
           profilePic={stateUser.user.avatar_url ?
             stateUser.user.avatar_url : null}
           media={post.img_url}
-          username={userId === post.owner_id ?
+          username={stateUser.user.id === post.owner_id ?
             `${stateUser.user.first_name} ${stateUser.user.last_name}` :
             `${getPostUser(post.owner_id)}`}
           content={post.description}
           timestamp={post.createdAt}
           postId={post.id}
+          postComments={postComments}
         />
       </div>
     )

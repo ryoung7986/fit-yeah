@@ -12,6 +12,7 @@ import Feed from './components/feed/Feed';
 import MyInfoBar from "./components/profile/MyInfoBar";
 import WorkoutsList from "./components/workouts/WorkoutsList";
 import UserStats from "./components/stats/UserStats";
+import ProfileComponent from './components/profile/ProfileComponent';
 
 import { authenticate } from "./services/auth";
 import { useDispatch } from 'react-redux';
@@ -105,15 +106,17 @@ function App() {
           <div className="app">
             <NavBar setAuthenticated={setAuthenticated} />
             <div className="app__body">
-              <div className="body__sidebar">
-                <Sidebar />
+              <div className="body__left">
+                <div className="body__userInfo">
+                  <MyInfoBar />
+                </div>
+                <div className="body__sidebar">
+                  <Sidebar />
+                </div>
               </div>
               <div className="body__feed">
-                <h1>User info (name, points, avatar</h1>
+                <ProfileComponent user={user} />
                 <Feed />
-              </div>
-              <div className="body__right">
-                <MyInfoBar />
               </div>
             </div>
           </div>
