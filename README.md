@@ -3,12 +3,11 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/ryoung7986/fit-yeah">
-    <img src="https://fit-yeah.s3.amazonaws.com/FY-Logo-3.png" alt="Logo" width="80" height="80">
-  </a>
-
+<a href="https://github.com/ryoung7986/fit-yeah">
+  <img src="planning/FY-Logo-3.png" alt="Logo" width="120" height="auto">
+</a>
   <h3 align="center">Fit-Yeah Fitness App</h3>
-
+  
   <p align="center">
     A social-media fitness application inspired by Facebook
     <br />
