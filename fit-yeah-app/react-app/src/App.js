@@ -13,6 +13,7 @@ import MyInfoBar from "./components/profile/MyInfoBar";
 import WorkoutsList from "./components/workouts/WorkoutsList";
 import UserStats from "./components/stats/UserStats";
 import ProfileComponent from './components/profile/ProfileComponent';
+import CreateWorkout from "./components/workouts/CreateWorkout";
 
 import { authenticate } from "./services/auth";
 import { useDispatch } from 'react-redux';
@@ -200,6 +201,23 @@ function App() {
               </div>
               <div className="body__feed">
                 <UserStats />
+              </div>
+              <div className="body__right">
+                <h1>Follower leaderboard?</h1>
+              </div>
+            </div>
+          </div>
+        </ProtectedRoute>
+
+        <ProtectedRoute path="/create-a-workout" exact={true} authenticated={authenticated}>
+          <div className="app">
+            <NavBar setAuthenticated={setAuthenticated} />
+            <div className="app__body">
+              <div className="body__sidebar">
+                <Sidebar />
+              </div>
+              <div className="body__feed">
+                <CreateWorkout />
               </div>
               <div className="body__right">
                 <h1>Follower leaderboard?</h1>

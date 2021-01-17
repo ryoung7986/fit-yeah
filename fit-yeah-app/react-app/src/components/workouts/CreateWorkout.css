@@ -1,0 +1,25 @@
+.create-workout {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-top: 30px;
+}
+
+.create-workout__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.create-workout__form--div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.create-workout__form--div > input {
+  margin-left: 20px;
+}
+
+.workout-dropdown {
+  display: flex;
+}

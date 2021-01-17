@@ -1,0 +1,17 @@
+.dd-wrapper {
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.dd-wrapper:hover {
+  cursor: pointer;
+}
+
+.dd-header {
+  display: flex;
+  padding: 30px;
+}
+
+.dd-header__title {
+  margin-right: 30px;
+}

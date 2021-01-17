@@ -205,7 +205,7 @@ class Workout(db.Model):
             "description": self.description,
             "likes": self.likes,
             "owner": self.owner.to_dict(),
-            # "exercises": [exercise.to_dict() for exercise in self.exercises]
+            "exercises": [exercise.to_dict() for exercise in self.exercises]
         }
 
 

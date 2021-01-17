@@ -5,6 +5,7 @@ import PersonOutlineOutlinedIcon from '@material-ui/icons/PersonOutlineOutlined'
 import FitnessCenterOutlinedIcon from '@material-ui/icons/FitnessCenterOutlined';
 import TrendingUpOutlinedIcon from '@material-ui/icons/TrendingUpOutlined';
 import EqualizerIcon from '@material-ui/icons/Equalizer';
+import WhatshotIcon from '@material-ui/icons/Whatshot';
 import './Sidebar.css';
 
 function Sidebar() {
@@ -21,6 +22,9 @@ function Sidebar() {
       </NavLink>
       <NavLink to='/my-stats' exact={true} className='navlink'>
         <SidebarOption Icon={EqualizerIcon} title='Your Stats' />
+      </NavLink>
+      <NavLink to='/create-a-workout' exact={true} className='navlink'>
+        <SidebarOption Icon={WhatshotIcon} title='Create-A-Workout' />
       </NavLink>
     </div>
   )

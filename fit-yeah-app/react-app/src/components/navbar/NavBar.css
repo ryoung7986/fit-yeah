@@ -3,7 +3,7 @@
   padding: 15px 20px;
   justify-content: space-between;
   position: sticky;
-  background-color:#7e8d85;
+  background-color:#107D7E;
   z-index: 100;
   top: 0;
   box-shadow: 0px 5px 8px -2px rgba(0, 0, 0, 0.75);
@@ -60,19 +60,19 @@
 }
 
 .navbar__option:hover > a {
-  color: #7e8d85;
+  color: #107D7E;
 }
 
 .navbar__option--active {
-  border-bottom: 4px solid #7e8d85;
+  border-bottom: 4px solid #107D7E;
 }
 
 .navbar__option--active > .MuiSvgIcon-root {
-  color: #7e8d85;
+  color: #107D7E;
 }
 
 .navbar__option--active:hover > .MuiSvgIcon-root {
-  color: #7e8d85;
+  color: #107D7E;
 }
 
 .navbar__info {

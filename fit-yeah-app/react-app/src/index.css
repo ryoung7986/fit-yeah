@@ -6,7 +6,7 @@
 
 body {
   margin: 0;
-  background-color: #f0dbbc;
+  background-color: #F2E2D2;
 }
 
 .inactive {
@@ -15,7 +15,7 @@ body {
 }
 
 .active {
-  color: #F0F7F4;
+  color: #f0f7f4;
   text-decoration: none;
-  border-bottom: 5px solid #F0F7F4;
+  border-bottom: 5px solid #f0f7f4;
 }
