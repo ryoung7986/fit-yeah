@@ -1,7 +1,7 @@
 .profile {
   display: flex;
   width: 100%;
-  margin-top: 15px;
+  margin-top: 30px;
   margin-bottom: 15px;
   border-radius: 15px;
   background-color: #107D7E;
@@ -11,14 +11,12 @@
 .modal {
   display: flex;
   justify-content: center;
-  /* align-items: center; */
   color: #f0f7f4;
 }
 
 .modal_button {
   display: flex;
   justify-content: center;
-  /* align-items: center; */
 }
 
 .profile__left {
@@ -44,6 +42,11 @@
 
 .profile__userinfo {
   display: flex;
+}
+
+.profile__userbio {
+  margin-right: 15px;
+  color:  #f0f7f4;
 }
 
 .profile__middle {

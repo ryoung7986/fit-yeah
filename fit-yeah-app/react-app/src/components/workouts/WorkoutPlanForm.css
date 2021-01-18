@@ -1,0 +1,38 @@
+.workoutPlan {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  border-radius: 15px;
+  background-color: #107D7E;
+  box-shadow: 0px 5px 8px -2px rgba(0, 0, 0, 0.75);
+}
+
+.title {
+  margin: 15px 0 30px 0;
+}
+
+.workoutPlan__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.title > h2 {
+  color: #f0f7f4;
+}
+
+.input__container {
+  margin-bottom: 30px;
+}
+
+.input {
+  display: flex;
+  justify-content: space-between;
+}
+
+.input > label {
+  margin-right: 30px;
+}
+
+.input > label {
+  color: #f0f7f4;
+}

@@ -12,7 +12,7 @@ workout_routes = Blueprint('workouts', __name__)
 @workout_routes.route('/')
 def workouts():
     workouts = Workout.query.all()
-    return {"workouts": [workout.to_dict() for workout in workouts]}
+    return {"workouts": [workout.to_dict_full() for workout in workouts]}
 
 
 # fetch all workouts created by user

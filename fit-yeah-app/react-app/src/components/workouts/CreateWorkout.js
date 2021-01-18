@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux';
 import './CreateWorkout.css'
 
 function CreateWorkout() {
-  const [userId, setUserId] = useState("");
   const [title, setTitle] = useState("");
   const [subtitle, setSubtitle] = useState("");
   const [description, setDescription] = useState("");
@@ -14,10 +13,7 @@ function CreateWorkout() {
   const [step, setStep] = useState(0);
 
   const user = useSelector(selectUser)
-
-  useEffect(() => {
-    setUserId(user.user.id)
-  }, [user])
+  const userId = user.id
 
   const onSubmit = async (e) => {
     e.preventDefault();

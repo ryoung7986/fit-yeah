@@ -123,6 +123,7 @@ class User(db.Model, UserMixin):
             "awards": [award.to_dict() for award in self.awards],
             "posts": [post.to_dict() for post in self.posts],
             "stats": [stat.to_dict() for stat in self.stats],
+            "workout_plan": [workout.to_dict() for workout in self.workout_plan]
         }
 
 

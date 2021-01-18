@@ -7,7 +7,7 @@ function UploadForm() {
   const [image, setImage] = useState(null);
   const [userAvatarUrl, setUserAvatarUrl] = useState('');
   const user = useSelector(selectUser);
-  const userId = user.user.id
+  const userId = user.id
 
   useEffect(() => {
     imgUrl(userId, userAvatarUrl)

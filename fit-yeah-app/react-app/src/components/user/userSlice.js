@@ -19,11 +19,6 @@ export const userSlice = createSlice({
     addUser: (state, action) => {
       state.user = action.payload.user;
     },
-    // updateUserBio: (state, action) => {
-    //   console.log("HELOLOOO")
-    //   console.log(action.payload)
-    //   state.user.user.bio = action.payload.user.bio;
-    // },
     addFollowers: (state, action) => {
       state.followers = action.payload.followers;
     },
@@ -49,8 +44,6 @@ export const {
   addUser,
   addFollowers,
   addFollowing,
-  addUserPosts,
-  addAllPosts
 } = userSlice.actions;
 
 
