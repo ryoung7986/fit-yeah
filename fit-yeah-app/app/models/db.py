@@ -62,6 +62,7 @@ class User(db.Model, UserMixin):
     avatar_url = db.Column(db.String)
     bio = db.Column(db.String)
     points_earned = db.Column(db.Integer)
+    rank = db.Column(db.String)
     completed_workouts = db.Column(db.Integer)
     miles_run = db.Column(db.Integer)
     hashed_password = db.Column(db.String(255), nullable=False)
@@ -103,6 +104,7 @@ class User(db.Model, UserMixin):
             "username": self.username,
             "email": self.email,
             "points_earned": self.points_earned,
+            "rank": self.rank,
             "bio": self.bio,
         }
 
@@ -120,6 +122,7 @@ class User(db.Model, UserMixin):
             "following": [leader.to_dict() for leader in self.following],
             "awards": [award.to_dict() for award in self.awards],
             "posts": [post.to_dict() for post in self.posts],
+            "stats": [stat.to_dict() for stat in self.stats],
         }
 
 
@@ -153,7 +156,7 @@ class Exercise(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
     title = db.Column(db.String, nullable=False)
     muscle_group = db.Column(db.String, nullable=False)
-    difficulty = db.Column(db.String, nullable=False)
+    difficulty = db.Column(db.Integer, nullable=False)
     description = db.Column(db.String, nullable=False)
     video_url = db.Column(db.String)
 

@@ -63,6 +63,39 @@ def user_stats(id):
     return {"stats": stat}
 
 
+# post user profile picture
+@user_routes.route('/upload-avatar/<int:userId>', methods=['POST'])
+def upload_avatar(userId):
+    data = json.loads(request.data)
+    imgUrl = data['imgUrl']
+    user = User.query.get(userId)
+    user.avatar_url = imgUrl
+    db.session.add(user)
+    db.session.commit()
+    return user.to_dict_full()
+
+
+# post user bio
+@user_routes.route('upload-bio/<int:userId>', methods=['POST'])
+def upload_bio(userId):
+    data = json.loads(request.data)
+    bio = data['bio']
+    user = User.query.get(userId)
+    user.bio = bio
+    db.session.add(user)
+    db.session.commit()
+    return {"user": user.to_dict()}
+
+
+# fetch user bio
+@user_routes.route('/<int:id>/bio')
+# @login_required
+def user_bio(id):
+    user = User.query.get(id)
+    dictUser = user.to_dict_full()
+    return {'bio': dictUser['bio']}
+
+
 # @user_routes.route('/<int:id>', methods=["POST"])
 # @login_required
 # def new_follow(id):

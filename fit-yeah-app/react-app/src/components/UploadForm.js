@@ -1,12 +1,32 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { selectUser } from './user/userSlice';
 
 
 function UploadForm() {
-  const [image, setImage] = useState(null)
+  const [image, setImage] = useState(null);
+  const [userAvatarUrl, setUserAvatarUrl] = useState('');
+  const user = useSelector(selectUser);
+  const userId = user.user.id
 
   useEffect(() => {
-    console.log(image)
-  }, [image])
+    imgUrl(userId, userAvatarUrl)
+    console.log(userAvatarUrl)
+  }, [userAvatarUrl])
+
+  const imgUrl = (userId) => {
+    (async () => {
+      const imgUrl = userAvatarUrl
+      const response = await fetch(`/api/users/upload-avatar/${userId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ imgUrl })
+      })
+      const responseData = await response.json();
+    })()
+  }
 
   const uploadImg = async (data) => {
     console.log('Uploading image...');
@@ -21,7 +41,10 @@ function UploadForm() {
       method: 'POST',
       body: formData
     })
-    return response.json()
+    const responseData = await response.json();
+    console.log(responseData.img_url)
+    setUserAvatarUrl(responseData.img_url);
+    return responseData;
   }
 
   const imgSubmit = (e) => {
@@ -34,12 +57,12 @@ function UploadForm() {
   }
 
   return (
-    <div>
+    <div className="modal">
       <form
         // enctype="multipart/form-data"
         onSubmit={imgSubmit}>
         <h3>
-          File Upload using React!
+          Upload image
         </h3>
         <div>
           <input

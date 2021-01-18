@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import MakePost from '../post/MakePost';
 import Post from '../post/Post';
 import { getPosts, selectPosts } from '../post/postSlice';
-import { useDispatch, useSelector } from 'react-redux';
 import { selectUser, selectFollowing } from '../user/userSlice';
 import { getComments, selectComments } from '../comment/commentSlice';
 

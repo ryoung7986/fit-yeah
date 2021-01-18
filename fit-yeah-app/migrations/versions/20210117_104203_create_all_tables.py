@@ -1,8 +1,8 @@
 """create-all-tables
 
-Revision ID: c5adff778052
+Revision ID: e9e4f4929537
 Revises: 
-Create Date: 2021-01-16 17:09:32.866876
+Create Date: 2021-01-17 10:42:03.945987
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'c5adff778052'
+revision = 'e9e4f4929537'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -31,7 +31,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(), nullable=False),
     sa.Column('muscle_group', sa.String(), nullable=False),
-    sa.Column('difficulty', sa.String(), nullable=False),
+    sa.Column('difficulty', sa.Integer(), nullable=False),
     sa.Column('description', sa.String(), nullable=False),
     sa.Column('video_url', sa.String(), nullable=True),
     sa.PrimaryKeyConstraint('id'),
@@ -46,6 +46,7 @@ def upgrade():
     sa.Column('avatar_url', sa.String(), nullable=True),
     sa.Column('bio', sa.String(), nullable=True),
     sa.Column('points_earned', sa.Integer(), nullable=True),
+    sa.Column('rank', sa.String(), nullable=True),
     sa.Column('completed_workouts', sa.Integer(), nullable=True),
     sa.Column('miles_run', sa.Integer(), nullable=True),
     sa.Column('hashed_password', sa.String(length=255), nullable=False),

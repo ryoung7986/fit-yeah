@@ -6,6 +6,7 @@ import json
 import boto3
 from botocore.exceptions import ClientError
 import logging
+import uuid
 import os
 
 aws_routes = Blueprint('aws', __name__)
@@ -23,10 +24,10 @@ BUCKET_NAME = os.environ.get('BUCKET_NAME')
 def upload_file(data=None, BUCKET_NAME=BUCKET_NAME, object_name=None):
     data = request.files['image']
     if object_name is None:
-        object_name = secure_filename(data.filename)
+        object_name = uuid.uuid4().hex
     try:
         response = s3.upload_fileobj(data, BUCKET_NAME, object_name)
     except ClientError as e:
         logging.error(e)
         return False
-    return True
+    return {'img_url': f'https://fit-yeah.s3.amazonaws.com/{object_name}'}

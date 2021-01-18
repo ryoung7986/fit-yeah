@@ -6,7 +6,7 @@ def seed_exercises():
 
     pushups = Exercise(title="Push Ups",
                        muscle_group="Chest, Shoulders, Triceps, Abs",
-                       difficulty="Easy",
+                       difficulty="1",
                        description='''1. Start in a high plank position
                                 To get into a plank, place hands firmly on the
                                 floor, directly under shoulders. Ground toes
@@ -41,7 +41,7 @@ def seed_exercises():
 
     mountainClimbers = Exercise(title="Mountain Climbers",
                                 muscle_group="Abs / Back",
-                                difficulty="moderate",
+                                difficulty="1",
                                 description='''The plank (also called a front
                                 hold, hover, or abdominal bridge) is an
                                 isometric core strength exercise that involves
@@ -51,7 +51,7 @@ def seed_exercises():
 
     pullups = Exercise(title="Pull-ups",
                        muscle_group="Shoulders / Back",
-                       difficulty="Moderate",
+                       difficulty="3",
                        description='''Hold a pull-up bar with an overhand grip,
                                     hands shoulder-width apart. Brace your
                                     core, then pull yourself up until your
@@ -61,7 +61,7 @@ def seed_exercises():
 
     planks = Exercise(title="Planks",
                       muscle_group="Abs, Back",
-                      difficulty="Hard",
+                      difficulty="1",
                       description='''Plant hands directly under shoulders
                                     (slightly wider than shoulder width) like
                                     you’re about to do a push-up.
@@ -81,27 +81,27 @@ def seed_exercises():
 
     jumpingJacks = Exercise(title="Jumping Jacks",
                             muscle_group="Who knows?",
-                            difficulty="Really easy",
+                            difficulty="1",
                             description="Just flail around. Vigorously.",
                             video_url="http://www.fillmurray.com/200/300")
 
     squatJumps = Exercise(title="Squat Jumps",
                           muscle_group="GLUTES",
-                          difficulty="Moderate",
+                          difficulty="2",
                           description='''Bend over, and then don't bend
                                         over. Then do that again.''',
                           video_url="http://www.fillmurray.com/200/300")
 
     situps = Exercise(title="Situps",
                       muscle_group="Abs",
-                      difficulty="Moderate",
+                      difficulty="2",
                       description='''Sit on the ground, lean back,
                                     then sit. up.''',
                       video_url="http://www.fillmurray.com/200/300")
 
     crunches = Exercise(title="Crunches",
                         muscle_group="Abs",
-                        difficulty="Moderate",
+                        difficulty="2",
                         description='''They're like situps,
                                     but this time, CRUNCH IT.''',
                         video_url="http://www.fillmurray.com/200/300")
@@ -109,7 +109,7 @@ def seed_exercises():
     lunges = Exercise(title="Lunges",
                       muscle_group='''Quads / Hammies / Gluteous Maximus /
                                     The back-area / abs.''',
-                      difficulty="Moderate",
+                      difficulty="2",
                       description='''Lunge to the right, keeping the left leg
                       straight, shifting the hips over the right foot. Make
                       sure to send the hips back to engage the glutes. At the
@@ -120,26 +120,26 @@ def seed_exercises():
 
     benchPress = Exercise(title="Bench Press",
                           muscle_group="Chest / Triceps",
-                          difficulty="Moderate",
+                          difficulty="3",
                           description="Lift things up and put them down.",
                           video_url="http://www.fillmurray.com/200/300")
 
     latPulldowns = Exercise(title="Lat Pulldowns",
                             muscle_group="Lats",
-                            difficulty="Easy",
+                            difficulty="2",
                             description="Pull it down and let it go.",
                             video_url="http://www.fillmurray.com/200/300")
 
     dumbBellPress = Exercise(title="Dumbbell Press",
                              muscle_group="Chest / Triceps",
-                             difficulty="Moderate",
+                             difficulty="3",
                              description='''Like bench press, but with
                                         dumbbells.''',
                              video_url="http://www.fillmurray.com/200/300")
 
     legExtensions = Exercise(title="Leg Extensions",
                              muscle_group="Quads",
-                             difficulty="Moderate",
+                             difficulty="2",
                              description='''The leg press is a compound weight
                              training exercise in which the individual pushes
                              a weight or resistance away from them using their
@@ -149,13 +149,13 @@ def seed_exercises():
 
     bicepCurls = Exercise(title="Bicep Curls",
                           muscle_group="Biceps",
-                          difficulty="Moderate",
+                          difficulty="2",
                           description="Those guns should be illegal.",
                           video_url="http://www.fillmurray.com/200/300")
 
     tricepsPushdowns = Exercise(title="Triceps Pushdowns",
                                 muscle_group="Triceps",
-                                difficulty="Moderate",
+                                difficulty="2",
                                 description='''A pushdown is a strength
                                 training exercise used for strengthening the
                                 triceps muscles. The exercise is completed by
@@ -167,7 +167,7 @@ def seed_exercises():
 
     tricepsDip = Exercise(title="Tricep Dips",
                           muscle_group="Triceps",
-                          difficulty="Hard",
+                          difficulty="4",
                           description='''hold your entire body weight up with
                           your arms extended and feet hovering over the floor,
                           ankles crossed. Lower your body until your elbows
@@ -177,19 +177,19 @@ def seed_exercises():
 
     bentOverRow = Exercise(title="Bent Over Row",
                            muscle_group="Shoulders",
-                           difficulty="Moderate",
+                           difficulty="2",
                            description="Bend over and row.",
                            video_url="http://www.fillmurray.com/200/300")
 
     squats = Exercise(title="Squats",
                       muscle_group="Moderate",
-                      difficulty="Moderate",
+                      difficulty="3",
                       description="Bend over.",
                       video_url="http://www.fillmurray.com/200/300")
 
     cleanJerk = Exercise(title="Clean and Jerk",
                          muscle_group="All of them.",
-                         difficulty="Hard",
+                         difficulty="5",
                          description='''Do you yell at the gym a lot? Do you
                          want to? If you answered 'yes' to either of those
                          questions, then this is the exercise for you!''',
@@ -197,20 +197,20 @@ def seed_exercises():
 
     latRaise = Exercise(title="Lat Raise",
                         muscle_group="Lats",
-                        difficulty="Moderate",
+                        difficulty="3",
                         description='''Who the hell even knows?''',
                         video_url="http://www.fillmurray.com/200/300")
 
     jogging = Exercise(title="Running",
                        muscle_group="Cardio",
-                       difficulty="Easy",
+                       difficulty="1",
                        description='''One foot in front of the other,
                                     really fast.''',
                        video_url="http://www.fillmurray.com/200/300")
 
     cycling = Exercise(title="Bicycling",
                        muscle_group="Cardio",
-                       difficulty="Easy",
+                       difficulty="1",
                        description='''An excuse to wear really, really
                                     tight shorts.''',
                        video_url="http://www.fillmurray.com/200/300")
