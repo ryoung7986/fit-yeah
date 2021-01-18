@@ -58,3 +58,9 @@ def create_workout():
         db.session.add(workout)
         db.session.commit()
         return workout.to_dict()
+
+
+# create workout plan
+@workout_routes.route('/workout-plan/new')
+def new_workout_plan():
+    print(request.data)

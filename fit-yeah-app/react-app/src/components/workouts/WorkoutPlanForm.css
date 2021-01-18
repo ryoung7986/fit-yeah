@@ -16,6 +16,11 @@
   flex-direction: column;
 }
 
+.workoutPlan__form > .MuiButton-root {
+  color: #f0f7f4;
+  margin-bottom: 15px;
+}
+
 .title > h2 {
   color: #f0f7f4;
 }
