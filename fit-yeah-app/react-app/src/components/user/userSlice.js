@@ -50,5 +50,6 @@ export const {
 export const selectUser = state => state.user.user;
 export const selectUserBio = state => state.user.user.bio;
 export const selectFollowing = state => state.user.following;
+export const selectUserWorkoutPlan = state => state.user.user.workout_plan
 
 export default userSlice.reducer;

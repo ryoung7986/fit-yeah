@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux';
-import { selectUser, selectUserBio, addUser, updateUserBio } from '../user/userSlice';
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
+import { updateUserBio } from '../user/userSlice';
 import Button from '@material-ui/core/Button';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import UploadForm from '../UploadForm';
@@ -8,14 +8,12 @@ import Modal from 'react-modal';
 
 import './ProfileComponent.css'
 
-function ProfileComponent(props) {
+function ProfileComponent({ user }) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [bioIsOpen, setBioIsOpen] = useState(false);
   const [bio, setBio] = useState('');
-  const [trigger, setTrigger] = useState(0);
-  const user = useSelector(selectUser);
   const userId = user.id;
-  const userBio = useSelector(selectUserBio);
+  const userBio = user.bio;
   const dispatch = useDispatch();
 
   const updateBio = (e) => {

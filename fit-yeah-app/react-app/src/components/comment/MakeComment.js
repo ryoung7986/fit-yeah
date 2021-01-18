@@ -34,7 +34,7 @@ function MakeComment({ postId }) {
 
   useEffect(() => {
     dispatch(getComments(postId))
-  }, [trigger])
+  }, [trigger, postId, dispatch])
 
   return (
     <div className='makeComment'>

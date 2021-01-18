@@ -1,25 +1,22 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectUser } from '../user/userSlice';
+import { useDispatch } from 'react-redux';
 import { getPosts } from '../post/postSlice';
 import { Avatar } from '@material-ui/core';
 import VideocamIcon from '@material-ui/icons/Videocam';
 import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
 import './MakePost.css';
 
-function MakePost() {
+function MakePost({ user }) {
   const [description, setDescription] = useState('');
   const [trigger, setTrigger] = useState(0);
   const form = useRef(null);
-  const user = useSelector(selectUser);
-  const userId = user.id
   const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     let formData = new FormData();
     formData.append('description', description);
-    formData.append('user_id', userId)
+    formData.append('user_id', user.id)
     for (let value of formData.values()) {
       console.log(value)
     }
@@ -33,8 +30,8 @@ function MakePost() {
   }
 
   useEffect(() => {
-    dispatch(getPosts(userId))
-  }, [trigger])
+    dispatch(getPosts(user.id))
+  }, [trigger, dispatch, user.id])
 
 
   return (

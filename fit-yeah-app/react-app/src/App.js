@@ -17,8 +17,8 @@ import CreateWorkout from "./components/workouts/CreateWorkout";
 import WorkoutPlanForm from './components/workouts/WorkoutPlanForm';
 
 import { authenticate } from "./services/auth";
-import { useDispatch } from 'react-redux';
-import { addUser, addFollowing, addFollowers } from './components/user/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { addUser, addFollowing, addFollowers, selectUser } from './components/user/userSlice';
 import { addExercises } from './components/exercises/exerciseSlice';
 import { addWorkouts } from './components/workouts/WorkoutSlice';
 
@@ -29,22 +29,24 @@ function App() {
   const [loaded, setLoaded] = useState(false);
   const [followers, setFollowers] = useState([]);
   const [following, setFollowing] = useState([]);
-  const [workouts, setWorkouts] = useState([]);
   const [exercises, setExercises] = useState({});
-  const [user, setUser] = useState(null)
+  const [workouts, setWorkouts] = useState([]);
+  const [user, setUser] = useState(null);
+  const [trigger, setTrigger] = useState(0);
+  // const stateUser = useSelector(selectUser);
   const dispatch = useDispatch();
+
 
   useEffect(() => {
     (async () => {
       const user = await authenticate();
       if (!user.errors) {
-        setAuthenticated(true);
-        dispatch(addUser({ user: user }));
-        setUser(user);
+        await dispatch(addUser({ user: user }));
+        await setUser(user);
+        await setAuthenticated(true);
       }
-      setLoaded(true);
     })();
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     user &&
@@ -53,7 +55,7 @@ function App() {
         const responseData = await response.json()
         await setExercises(responseData.exercises)
       })()
-  }, [user]);
+  }, [user, dispatch]);
 
   useEffect(() => {
     user &&
@@ -62,7 +64,7 @@ function App() {
         const responseData = await response.json()
         await setWorkouts(responseData.workouts)
       })()
-  }, [user]);
+  }, [user, dispatch]);
 
   useEffect(() => {
     user &&
@@ -71,7 +73,7 @@ function App() {
         const responseData = await response.json();
         await setFollowers(responseData.followers);
       })()
-  }, [user]);
+  }, [user, dispatch]);
 
   useEffect(() => {
     user &&
@@ -80,25 +82,30 @@ function App() {
         const responseData = await response.json();
         await setFollowing(responseData.following);
       })()
+  }, [user, dispatch]);
+
+  useEffect(() => {
+    setLoaded(true)
   }, [user]);
 
   useEffect(() => {
     dispatch(addFollowers({ followers: followers }))
-  }, [followers])
+  }, [followers, dispatch])
 
   useEffect(() => {
     dispatch(addFollowing({ following: following }))
-  }, [following])
+  }, [following, dispatch])
 
   useEffect(() => {
     dispatch(addExercises({ exercises: exercises }))
-  }, [exercises])
+  }, [exercises, dispatch])
 
   useEffect(() => {
     dispatch(addWorkouts({ workouts: workouts }))
-  }, [workouts])
+  }, [workouts, dispatch])
 
-  if (!loaded) {
+
+  if (!loaded && user == null) {
     return null;
   }
 
@@ -116,18 +123,15 @@ function App() {
             setAuthenticated={setAuthenticated} />
         </Route>
 
-        <ProtectedRoute path="/" exact={true} authenticated={authenticated}>
+        <ProtectedRoute path="/" exact={true} authenticated={authenticated} >
           <div className="app">
             <NavBar setAuthenticated={setAuthenticated} />
             <div className="app__body">
               <div className="body__sidebar">
-                <Sidebar />
+                <Sidebar user={user} />
               </div>
               <div className="body__feed">
-                <Feed />
-              </div>
-              <div className="body__right">
-                <h3>What goes here?</h3>
+                <Feed user={user} />
               </div>
             </div>
           </div>
@@ -139,16 +143,16 @@ function App() {
             <div className="app__body">
               <div className="body__left">
                 <div className="body__sidebar">
-                  <Sidebar />
+                  <Sidebar user={user} />
                 </div>
               </div>
               <div className="body__feed">
                 <ProfileComponent user={user} />
-                <Feed />
+                <Feed user={user} />
               </div>
               <div className="body__right">
                 <div className="body__userInfo">
-                  <MyInfoBar />
+                  <MyInfoBar user={user} />
                 </div>
               </div>
             </div>
@@ -160,14 +164,14 @@ function App() {
             <NavBar setAuthenticated={setAuthenticated} />
             <div className="app__body">
               <div className="body__sidebar">
-                <Sidebar />
+                <Sidebar user={user} />
               </div>
               <div className="body__feed">
                 <h1>Leaderboard</h1>
               </div>
-              <div className="body__right">
+              {/* <div className="body__right">
                 <h1>Your current rank</h1>
-              </div>
+              </div> */}
             </div>
           </div>
         </ProtectedRoute>
@@ -177,11 +181,11 @@ function App() {
             <NavBar setAuthenticated={setAuthenticated} />
             <div className="app__body">
               <div className="body__sidebar">
-                <Sidebar />
+                <Sidebar user={user} />
               </div>
               <div className="body__feed">
-                <FollowersList />
-                <FollowingList />
+                <FollowersList user={user} />
+                <FollowingList user={user} />
               </div>
               <div className="body__right">
                 <h1>Follower leaderboard?</h1>
@@ -195,10 +199,10 @@ function App() {
             <NavBar setAuthenticated={setAuthenticated} />
             <div className="app__body">
               <div className="body__sidebar">
-                <Sidebar />
+                <Sidebar user={user} />
               </div>
               <div className="body__feed">
-                <WorkoutsList />
+                <WorkoutsList user={user} />
               </div>
               <div className="body__right">
                 <h1>Follower leaderboard?</h1>
@@ -212,10 +216,10 @@ function App() {
             <NavBar setAuthenticated={setAuthenticated} />
             <div className="app__body">
               <div className="body__sidebar">
-                <Sidebar />
+                <Sidebar user={user} />
               </div>
               <div className="body__feed">
-                <UserStats />
+                <UserStats user={user} />
               </div>
               <div className="body__right">
                 <h1>Follower leaderboard?</h1>
@@ -229,10 +233,10 @@ function App() {
             <NavBar setAuthenticated={setAuthenticated} />
             <div className="app__body">
               <div className="body__sidebar">
-                <Sidebar />
+                <Sidebar user={user} />
               </div>
               <div className="body__feed">
-                <UserStats />
+                <UserStats user={user} />
               </div>
               <div className="body__right">
                 <h1>Follower leaderboard?</h1>
@@ -246,10 +250,10 @@ function App() {
             <NavBar setAuthenticated={setAuthenticated} />
             <div className="app__body">
               <div className="body__sidebar">
-                <Sidebar />
+                <Sidebar user={user} />
               </div>
               <div className="body__feed">
-                <WorkoutPlanForm />
+                <WorkoutPlanForm user={user} />
               </div>
               <div className="body__right">
                 <h1>Follower leaderboard?</h1>
@@ -263,10 +267,10 @@ function App() {
             <NavBar setAuthenticated={setAuthenticated} />
             <div className="app__body">
               <div className="body__sidebar">
-                <Sidebar />
+                <Sidebar user={user} />
               </div>
               <div className="body__feed">
-                <CreateWorkout />
+                <CreateWorkout user={user} />
               </div>
               <div className="body__right">
                 <h1>Follower leaderboard?</h1>
@@ -276,7 +280,7 @@ function App() {
         </ProtectedRoute>
 
         <ProtectedRoute path="/upload" exact={true} authenticated={authenticated}>
-          <UploadForm />
+          <UploadForm user={user} />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>

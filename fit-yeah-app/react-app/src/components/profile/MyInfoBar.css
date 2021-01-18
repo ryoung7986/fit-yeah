@@ -1,0 +1,30 @@
+.infobar {
+  display: flex;
+  flex-direction: column;
+}
+
+.infobar__header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  color:  #f0f7f4;
+}
+
+.workout__plan--option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 10px 20px 15px;
+  color:  #f0f7f4;
+}
+
+.workout__plan--option:hover {
+  cursor: pointer;
+  color: black;
+  background-color: #f0f7f4;
+  border-radius: 10px;
+}
+
+.workout__plan--option > h3 {
+  margin-right: 20px;
+}

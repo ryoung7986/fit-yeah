@@ -1,29 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import MakePost from '../post/MakePost';
 import Post from '../post/Post';
 import { getPosts, selectPosts } from '../post/postSlice';
-import { selectUser, selectFollowing } from '../user/userSlice';
+import { selectFollowing } from '../user/userSlice';
 import { getComments, selectComments } from '../comment/commentSlice';
 
 import './Feed.css';
 
-function Feed() {
+function Feed({ user }) {
   const dispatch = useDispatch();
-  const user = useSelector(selectUser);
   const posts = useSelector(selectPosts);
   const comments = useSelector(selectComments);
   const followingUsers = useSelector(selectFollowing)
 
   useEffect(() => {
     dispatch(getPosts(user.id))
-  }, [])
+  }, [dispatch, user.id])
 
   useEffect(() => {
     posts.map(post => dispatch(getComments(post.id)))
-  }, [posts])
-
-
+  }, [posts, dispatch])
 
   const getPostUser = (postUserId) => {
     for (let value of followingUsers) {
@@ -59,7 +56,7 @@ function Feed() {
 
   return (
     <div className="feed">
-      <MakePost />
+      <MakePost user={user} first_name={user} />
       <div className="feed__post">
         {posts && usersPosts}
       </div>

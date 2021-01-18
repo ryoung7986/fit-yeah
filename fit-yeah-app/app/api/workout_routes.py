@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
-from app.forms import WorkoutForm
+from app.forms import WorkoutForm, WorkoutPlanForm
 from app.models import (db, User, Workout, Workout_Plan, User_Post,
                         User_Stat, Exercise)
 import json
@@ -13,6 +13,13 @@ workout_routes = Blueprint('workouts', __name__)
 def workouts():
     workouts = Workout.query.all()
     return {"workouts": [workout.to_dict_full() for workout in workouts]}
+
+
+# fetch workout by id
+@workout_routes.route('/workout/<int:id>')
+def workout_by_id(id):
+    workout = Workout.query.get(id)
+    return workout.to_dict_full()
 
 
 # fetch all workouts created by user
@@ -61,6 +68,27 @@ def create_workout():
 
 
 # create workout plan
-@workout_routes.route('/workout-plan/new')
+@workout_routes.route('/workout-plan/new', methods=['POST'])
 def new_workout_plan():
-    print(request.data)
+    form = WorkoutPlanForm()
+    if form.validate_on_submit():
+        workoutPlan = Workout_Plan(
+            user_id=form.data['user_id'],
+            mon=form.data['mon'],
+            tue=form.data['tue'],
+            wed=form.data['wed'],
+            thurs=form.data['thurs'],
+            fri=form.data['fri'],
+            sat=form.data['sat'],
+            sun=form.data['sun'],
+        )
+        db.session.add(workoutPlan)
+        db.session.commit()
+        return workoutPlan.to_dict()
+
+
+# fetch workout plan
+@workout_routes.route('/workout-plan/<int:id>')
+def fetch_workout_plan(id):
+    workoutPlan = Workout_Plan.query.get(id)
+    return {"workout_plan": workoutPlan.to_dict()}

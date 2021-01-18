@@ -231,6 +231,17 @@ class Workout_Plan(db.Model):
 
     def to_dict(self):
         return {
+            "mon": self.mon,
+            "tue": self.tue,
+            "wed": self.wed,
+            "thurs": self.thurs,
+            "fri": self.fri,
+            "sat": self.sat,
+            "sun": self.sun,
+        }
+
+    def to_dict_full(self):
+        return {
             "user": self.user.to_dict(),
             "id": self.id,
             "user_id": self.user_id,

@@ -6,28 +6,29 @@ import Button from '@material-ui/core/Button';
 import './WorkoutPlanForm.css';
 
 function WorkoutPlanForm() {
-  const [mon, setMon] = useState(0);
-  const [tues, setTues] = useState(0);
-  const [wed, setWed] = useState(0);
-  const [thurs, setThurs] = useState(0);
-  const [fri, setFri] = useState(0);
-  const [sat, setSat] = useState(0);
-  const [sun, setSun] = useState(0);
+  const [mon, setMon] = useState(null);
+  const [tue, setTue] = useState(null);
+  const [wed, setWed] = useState(null);
+  const [thurs, setThurs] = useState(null);
+  const [fri, setFri] = useState(null);
+  const [sat, setSat] = useState(null);
+  const [sun, setSun] = useState(null);
   const workouts = useSelector(selectWorkouts);
   const user = useSelector(selectUser);
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const userId = user.id
+    const user_id = user.id
+    console.log(user_id)
     const response = await fetch('/api/workouts/workout-plan/new', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        userId,
+        user_id,
         mon,
-        tues,
+        tue,
         thurs,
         fri,
         sat,
@@ -48,7 +49,7 @@ function WorkoutPlanForm() {
 
   return (
     <div className="workoutPlan">
-      <form className="workoutPlan__form" onSubmit={onsubmit}>
+      <form className="workoutPlan__form" onSubmit={onSubmit}>
         <div className="title">
           <h2>Create your plan:</h2>
         </div>
@@ -62,7 +63,7 @@ function WorkoutPlanForm() {
           </div>
           <div className="input">
             <label for="tuesday">Tuesday</label>
-            <select value={tues} onChange={(e) => setTues(e.target.value)}>
+            <select value={tue} onChange={(e) => setTue(e.target.value)}>
               <option>Skip</option>
               {workoutMap}
             </select>
@@ -104,6 +105,7 @@ function WorkoutPlanForm() {
           </div>
         </div>
         <Button
+          type="submit"
           variant="outlined">
           Submit Your Workout Plan!
         </Button>
