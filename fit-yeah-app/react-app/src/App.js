@@ -108,9 +108,6 @@ function App() {
             <NavBar setAuthenticated={setAuthenticated} />
             <div className="app__body">
               <div className="body__left">
-                <div className="body__userInfo">
-                  <MyInfoBar />
-                </div>
                 <div className="body__sidebar">
                   <Sidebar />
                 </div>
@@ -118,6 +115,11 @@ function App() {
               <div className="body__feed">
                 <ProfileComponent user={user} />
                 <Feed />
+              </div>
+              <div className="body__right">
+                <div className="body__userInfo">
+                  <MyInfoBar />
+                </div>
               </div>
             </div>
           </div>

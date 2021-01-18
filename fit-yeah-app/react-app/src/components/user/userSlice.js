@@ -54,7 +54,7 @@ export const {
 } = userSlice.actions;
 
 
-export const selectUser = state => state.user;
+export const selectUser = state => state.user.user;
 export const selectUserBio = state => state.user.user.bio;
 export const selectFollowing = state => state.user.following;
 

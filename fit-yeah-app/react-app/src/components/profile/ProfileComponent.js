@@ -13,8 +13,7 @@ function ProfileComponent(props) {
   const [bioIsOpen, setBioIsOpen] = useState(false);
   const [bio, setBio] = useState('');
   const [trigger, setTrigger] = useState(0);
-  const stateUser = useSelector(selectUser);
-  const user = stateUser.user;
+  const user = useSelector(selectUser);
   const userId = user.id;
   const userBio = useSelector(selectUserBio);
   const dispatch = useDispatch();

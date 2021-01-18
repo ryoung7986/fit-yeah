@@ -10,13 +10,13 @@ import './Feed.css';
 
 function Feed() {
   const dispatch = useDispatch();
-  const stateUser = useSelector(selectUser);
+  const user = useSelector(selectUser);
   const posts = useSelector(selectPosts);
   const comments = useSelector(selectComments);
   const followingUsers = useSelector(selectFollowing)
 
   useEffect(() => {
-    dispatch(getPosts(stateUser.user.id))
+    dispatch(getPosts(user.id))
   }, [])
 
   useEffect(() => {
@@ -42,11 +42,11 @@ function Feed() {
     return (
       <div key={post.id}>
         <Post
-          profilePic={stateUser.user.avatar_url ?
-            stateUser.user.avatar_url : null}
+          profilePic={user.avatar_url ?
+            user.avatar_url : null}
           media={post.img_url}
-          username={stateUser.user.id === post.owner_id ?
-            `${stateUser.user.first_name} ${stateUser.user.last_name}` :
+          username={user.id === post.owner_id ?
+            `${user.first_name} ${user.last_name}` :
             `${getPostUser(post.owner_id)}`}
           content={post.description}
           timestamp={post.createdAt}

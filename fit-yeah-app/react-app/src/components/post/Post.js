@@ -15,7 +15,7 @@ function Post({ profilePic, media, username, timestamp, content, postId, postCom
   const [likes, setLikes] = useState(0);
   const [render, setRender] = useState(0);
   const user = useSelector(selectUser);
-  const userId = user.user.id;
+  const userId = user.id;
 
   const submitLike = async (e) => {
     e.preventDefault();

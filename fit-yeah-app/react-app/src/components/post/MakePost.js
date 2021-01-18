@@ -12,7 +12,7 @@ function MakePost() {
   const [trigger, setTrigger] = useState(0);
   const form = useRef(null);
   const user = useSelector(selectUser);
-  const userId = user.user.id
+  const userId = user.id
   const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
@@ -47,7 +47,7 @@ function MakePost() {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             className="makePost__input"
-            placeholder={`What's on your mind, ${user.user.first_name}?`} />
+            placeholder={`What's on your mind, ${user.first_name}?`} />
           <button
             type="submit">
             Hidden Submit

@@ -11,7 +11,7 @@ function MakeComment({ postId }) {
   const commentForm = useRef(null);
   const user = useSelector(selectUser);
   const comments = useSelector(selectComments);
-  const userId = user.user.id;
+  const userId = user.id;
   const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
