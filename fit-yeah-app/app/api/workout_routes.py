@@ -44,10 +44,11 @@ def append_exercises():
     data = json.loads(request.data)
     workout = Workout.query.get(data['workout_id'])
     exercise = Exercise.query.get(data['exercise_id'])
+    workouts = Workout.query.all()
     workout.exercises.append(exercise)
     db.session.add(workout)
     db.session.commit()
-    return workout.to_dict_full()
+    return {"workouts": [workout.to_dict_full() for workout in workouts]}
 
 
 # create workout

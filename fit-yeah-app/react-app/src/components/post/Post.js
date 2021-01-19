@@ -14,6 +14,7 @@ import './Post.css';
 function Post({ profilePic, media, username, timestamp, content, postId, postComments }) {
   const [likes, setLikes] = useState(0);
   const [render, setRender] = useState(0);
+  const [makeComment, setMakeComment] = useState(false);
   const user = useSelector(selectUser);
   const userId = user.id;
 
@@ -36,6 +37,14 @@ function Post({ profilePic, media, username, timestamp, content, postId, postCom
       const responseData = await response.json();
       setLikes(responseData);
     })()
+  }
+
+  const handleComment = () => {
+    if (makeComment === false) {
+      setMakeComment(true)
+    } else {
+      setMakeComment(false)
+    }
   }
 
   const renderPostComments = postComments.map((comment) => {
@@ -76,14 +85,16 @@ function Post({ profilePic, media, username, timestamp, content, postId, postCom
           <ThumbUpOutlinedIcon />
           <h3>Like</h3>
         </div>
-        <div className="post__option">
+        <div className="post__option" onClick={handleComment}>
           <ChatBubbleOutlineOutlinedIcon />
           <h3>Comment</h3>
         </div>
       </div>
-      <div className="post__comments">
-        <MakeComment postId={postId} />
-      </div>
+      {makeComment && (
+        <div className="post__comments">
+          <MakeComment postId={postId} />
+        </div>
+      )}
       <div>
         {renderPostComments}
       </div>

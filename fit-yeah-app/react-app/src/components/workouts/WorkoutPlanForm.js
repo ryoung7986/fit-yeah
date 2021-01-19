@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { selectWorkouts } from './WorkoutSlice';
+import { selectWorkouts } from './workoutSlice';
 import { selectUser } from '../user/userSlice';
 import Button from '@material-ui/core/Button';
 import './WorkoutPlanForm.css';

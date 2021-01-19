@@ -4,12 +4,15 @@ import { useSelector } from 'react-redux';
 import { selectUser } from './userSlice';
 import { useDispatch } from 'react-redux';
 import { addFollowing } from './userSlice';
+import UserCard from './UserCard';
+
+import './FollowingList.css';
 
 function FollowingList() {
   const dispatch = useDispatch();
   const [following, setFollowing] = useState([]);
   const stateUser = useSelector(selectUser);
-  const userId = stateUser.user.id
+  const userId = stateUser.id
 
   useEffect(() => {
     async function fetchData() {
@@ -27,17 +30,21 @@ function FollowingList() {
 
   const userComponents = following.map((user) => {
     return (
-      <li key={user.id}>
-        <NavLink to={`/users/${user.id}`}>{user.username}</NavLink>
-      </li>
+      <div key={user.id}>
+        <NavLink to={`/user/${user.id}`} className="leaderboard__users">
+          <UserCard user={user} />
+        </NavLink>
+      </div>
     );
   });
 
   return (
-    <>
-      <h1>Following: </h1>
+    <div className="followingList">
+      <div className="followingList__header">
+        <h1>Following: </h1>
+      </div>
       <ul>{userComponents}</ul>
-    </>
+    </div>
   );
 }
 

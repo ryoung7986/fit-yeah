@@ -84,7 +84,7 @@ def upload_bio(userId):
     user.bio = bio
     db.session.add(user)
     db.session.commit()
-    return {"user": user.to_dict()}
+    return {"user": user.to_dict_full()}
 
 
 # fetch user bio

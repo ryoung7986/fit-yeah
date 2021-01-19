@@ -19,7 +19,7 @@ function Comment({ userId, content }) {
 
   return (
     <div className="comment">
-      <Avatar />
+      <Avatar src={user.avatar_url} />
       <div className="comment__top">
         <div className="comment__details">
           <h5>{`${user.first_name} ${user.last_name}`}</h5>

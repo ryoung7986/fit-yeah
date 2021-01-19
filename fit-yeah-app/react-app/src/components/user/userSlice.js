@@ -37,6 +37,9 @@ export const userSlice = createSlice({
     addUser: (state, action) => {
       state.user = action.payload.user;
     },
+    addUserAvatarUrl: (state, action) => {
+      state.user.avatar_url = action.payload;
+    },
     addFollowers: (state, action) => {
       state.followers = action.payload.followers;
     },
@@ -58,6 +61,7 @@ export const {
   addUser,
   addFollowers,
   addFollowing,
+  addUserAvatarUrl,
 } = userSlice.actions;
 
 
@@ -66,5 +70,6 @@ export const selectUserBio = state => state.user.user.bio;
 export const selectFollowing = state => state.user.following;
 export const selectUserWorkoutPlan = state => state.user.user.workout_plan
 export const selectAllUsers = state => state.user.users
+export const selectUserAvatarUrl = state => state.user.user.avatar_url
 
 export default userSlice.reducer;

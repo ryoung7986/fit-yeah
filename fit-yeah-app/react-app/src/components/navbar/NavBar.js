@@ -1,5 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../user/userSlice';
 import SearchIcon from '@material-ui/icons/Search';
 import HomeIcon from '@material-ui/icons/Home';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
@@ -7,14 +9,16 @@ import FitnessCenterIcon from '@material-ui/icons/FitnessCenter';
 import EventAvailableIcon from '@material-ui/icons/EventAvailable';
 import AssessmentOutlinedIcon from '@material-ui/icons/AssessmentOutlined';
 import { Avatar } from '@material-ui/core';
-
-import './NavBar.css';
 import UserDropdown from './UserDropdown';
 
+import './NavBar.css';
+
 const NavBar = ({ setAuthenticated }) => {
+  const user = useSelector(selectUser);
+
   return (
     <>
-      { setAuthenticated &&
+      { setAuthenticated && user &&
         <div className="navbar">
           <div className="navbar__left">
             <img
@@ -54,8 +58,8 @@ const NavBar = ({ setAuthenticated }) => {
           </div>
           <div className="navbar__right">
             <div className="navbar__info">
-              <Avatar fontSize="large" />
-              <UserDropdown setAuthenticated={setAuthenticated} userName="user name" />
+              <Avatar src={user.avatar_url} fontSize="large" />
+              <UserDropdown setAuthenticated={setAuthenticated} className="userDropdown" userName={user.first_name} />
             </div>
           </div>
         </div>}

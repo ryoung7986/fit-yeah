@@ -37,7 +37,7 @@ function MakePost({ user }) {
   return (
     <div className='makePost'>
       <div className="makePost__top">
-        <Avatar />
+        <Avatar src={user.avatar_url} />
         <form ref={form} onSubmit={handleSubmit}>
           <input
             type="text"

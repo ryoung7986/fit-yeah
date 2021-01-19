@@ -32,7 +32,7 @@ function CreateWorkout() {
     })
     const responseData = await response.json()
     setWorkoutId(responseData.id)
-    setStep(step => step + 1)
+    setStep(1)
   };
 
   const updateTitle = (e) => {
@@ -100,10 +100,15 @@ function CreateWorkout() {
           </form>
         </div>
       )}
-      {step !== 0 && (
+      {step === 1 && (
         <div className="workout-dropdown">
-          <h1>Add Exercises</h1>workoutId
-          <WorkoutDropdown title="select exercise" items={exercises} workoutId={workoutId} />
+          <h1>Add Exercises</h1>
+          <WorkoutDropdown title="select exercise" items={exercises} workoutId={workoutId} setStep={setStep} />
+        </div>
+      )}
+      {step === 2 && (
+        <div className="thankyou">
+          <h1>Workout created! Add it to your workout plan!</h1>
         </div>
       )}
     </>

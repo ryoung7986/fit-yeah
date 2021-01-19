@@ -39,7 +39,7 @@ function MakeComment({ postId }) {
   return (
     <div className='makeComment'>
       <div className="makeComment__top">
-        <Avatar />
+        <Avatar src={user.avatar_url} />
         <form ref={commentForm} onSubmit={handleSubmit}>
           <input
             type="text"

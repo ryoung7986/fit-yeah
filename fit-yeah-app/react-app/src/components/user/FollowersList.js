@@ -9,7 +9,7 @@ function FollowersList() {
   const dispatch = useDispatch();
   const [followers, setFollowers] = useState([]);
   const stateUser = useSelector(selectUser);
-  const userId = stateUser.user.id
+  const userId = stateUser.id
 
 
 

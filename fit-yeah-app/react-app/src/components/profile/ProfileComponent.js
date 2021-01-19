@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { addUser, selectUser } from '../user/userSlice';
 import Button from '@material-ui/core/Button';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import UploadForm from '../UploadForm';
@@ -7,12 +8,14 @@ import Modal from 'react-modal';
 
 import './ProfileComponent.css'
 
-function ProfileComponent({ user }) {
+function ProfileComponent() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [bioIsOpen, setBioIsOpen] = useState(false);
   const [bio, setBio] = useState('');
+  const user = useSelector(selectUser);
   const userId = user.id;
   const userBio = user.bio;
+  const dispatch = useDispatch();
 
   const updateBio = (e) => {
     setBio(e.target.value)
@@ -27,7 +30,8 @@ function ProfileComponent({ user }) {
       },
       body: JSON.stringify({ bio })
     })
-    return await response.json()
+    const responseData = await response.json();
+    dispatch(addUser(responseData))
   }
 
   return (

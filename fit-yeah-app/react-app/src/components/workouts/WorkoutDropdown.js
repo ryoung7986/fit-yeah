@@ -1,9 +1,21 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectUser } from '../user/userSlice';
+import { getPosts } from '../post/postSlice';
+import { addWorkouts } from './workoutSlice';
 import './WorkoutDropdown.css';
 
-function WorkoutDropdown({ title, items, workoutId }) {
+function WorkoutDropdown({ title, items, workoutId, setStep }) {
   const [open, setOpen] = useState(false);
   const [selection, setSelection] = useState([]);
+  const [render, setRender] = useState(false);
+  const history = useHistory();
+  const user = useSelector(selectUser);
+  const dispatch = useDispatch();
+
+  console.log(user);
+
   const toggle = () => setOpen(!open);
 
   function handleOnClick(item) {
@@ -19,8 +31,8 @@ function WorkoutDropdown({ title, items, workoutId }) {
   }
 
   useEffect(() => {
-    console.log(selection)
-  }, [selection])
+    dispatch(getPosts(user.id))
+  }, [render])
 
   function isItemInSelection(item) {
     if (selection.some(current => current.id === item.id)) {
@@ -45,7 +57,10 @@ function WorkoutDropdown({ title, items, workoutId }) {
         })
       })
       const responseData = await response.json()
-      console.log(responseData)
+      dispatch(addWorkouts(responseData))
+      setRender(true)
+      setStep(2)
+      return responseData;
     })
   }
 

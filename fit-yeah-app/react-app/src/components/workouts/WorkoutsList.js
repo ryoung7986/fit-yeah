@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { selectWorkouts } from '../workouts/WorkoutSlice';
+import { selectWorkouts } from './workoutSlice';
 import Workout from './Workout';
 import './WorkoutsList.css'
 
@@ -9,7 +9,7 @@ function WorkoutsList() {
 
   return (
     <div>
-      {workouts.map((workout) => (
+      {workouts.slice().reverse().map((workout) => (
         <Workout workout={workout} />
       ))}
     </div>

@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { selectUser } from './user/userSlice';
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
+import { selectUserAvatarUrl, selectUser, addUserAvatarUrl } from './user/userSlice';
 
 
 function UploadForm() {
   const [image, setImage] = useState(null);
   const [userAvatarUrl, setUserAvatarUrl] = useState('');
   const user = useSelector(selectUser);
+  const userAvatar = useSelector(selectUserAvatarUrl);
   const userId = user.id
+  const dispatch = useDispatch();
+
+  console.log(userAvatar)
 
   useEffect(() => {
     imgUrl(userId, userAvatarUrl)
@@ -25,6 +29,8 @@ function UploadForm() {
         body: JSON.stringify({ imgUrl })
       })
       const responseData = await response.json();
+      const url = responseData.avatar_url
+      dispatch(addUserAvatarUrl(url))
     })()
   }
 
@@ -33,16 +39,12 @@ function UploadForm() {
     let formData = new FormData();
     formData.append('image', data);
     formData.append('test', 'stringvaluetest');
-    // for (let value of formData.values()) {
-    //   console.log(value)
-    // }
-    console.log(formData.get('image'))
     const response = await fetch('/api/aws/upload', {
       method: 'POST',
       body: formData
     })
     const responseData = await response.json();
-    console.log(responseData.img_url)
+    console.log("image upload successful")
     setUserAvatarUrl(responseData.img_url);
     return responseData;
   }

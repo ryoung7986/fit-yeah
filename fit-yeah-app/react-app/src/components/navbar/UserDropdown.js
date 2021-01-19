@@ -14,9 +14,14 @@ import { logout } from "../../services/auth";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
+    color: '#f0f7f4'
+  },
+  button: {
+    color: '#f0f7f4'
   },
   paper: {
     marginRight: theme.spacing(2),
+    color: '#f0f7f4'
   },
 }));
 
@@ -57,6 +62,7 @@ function UserDropdown({ userName, setAuthenticated }) {
   return (
     <div className={classes.root}>
       <Button
+        className={classes.button}
         ref={anchorRef}
         aria-controls={open ? 'menu-list-grow' : undefined}
         aria-haspopup="true"
