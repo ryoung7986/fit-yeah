@@ -15,10 +15,12 @@ import UserStats from "./components/stats/UserStats";
 import ProfileComponent from './components/profile/ProfileComponent';
 import CreateWorkout from "./components/workouts/CreateWorkout";
 import WorkoutPlanForm from './components/workouts/WorkoutPlanForm';
+import Leaderboard from "./components/leaderboard/Leaderboard";
+import User from "./components/leaderboard/User";
 
 import { authenticate } from "./services/auth";
 import { useDispatch, useSelector } from 'react-redux';
-import { addUser, addFollowing, addFollowers, selectUser } from './components/user/userSlice';
+import { addUser, addFollowing, addFollowers, addAllUsersToState } from './components/user/userSlice';
 import { addExercises } from './components/exercises/exerciseSlice';
 import { addWorkouts } from './components/workouts/WorkoutSlice';
 
@@ -83,6 +85,10 @@ function App() {
         await setFollowing(responseData.following);
       })()
   }, [user, dispatch]);
+
+  useEffect(() => {
+    dispatch(addAllUsersToState())
+  }, [dispatch])
 
   useEffect(() => {
     setLoaded(true)
@@ -167,7 +173,24 @@ function App() {
                 <Sidebar user={user} />
               </div>
               <div className="body__feed">
-                <h1>Leaderboard</h1>
+                <Leaderboard user={user} />
+              </div>
+              {/* <div className="body__right">
+                <h1>Your current rank</h1>
+              </div> */}
+            </div>
+          </div>
+        </ProtectedRoute>
+
+        <ProtectedRoute path="/user/:id" exact={true} authenticated={authenticated}>
+          <div className="app">
+            <NavBar setAuthenticated={setAuthenticated} />
+            <div className="app__body">
+              <div className="body__sidebar">
+                <Sidebar user={user} />
+              </div>
+              <div className="body__feed">
+                <User />
               </div>
               {/* <div className="body__right">
                 <h1>Your current rank</h1>

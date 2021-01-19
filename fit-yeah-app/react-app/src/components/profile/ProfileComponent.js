@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { updateUserBio } from '../user/userSlice';
 import Button from '@material-ui/core/Button';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import UploadForm from '../UploadForm';
@@ -14,7 +13,6 @@ function ProfileComponent({ user }) {
   const [bio, setBio] = useState('');
   const userId = user.id;
   const userBio = user.bio;
-  const dispatch = useDispatch();
 
   const updateBio = (e) => {
     setBio(e.target.value)
@@ -29,7 +27,6 @@ function ProfileComponent({ user }) {
       },
       body: JSON.stringify({ bio })
     })
-    dispatch(updateUserBio(userId));
     return await response.json()
   }
 

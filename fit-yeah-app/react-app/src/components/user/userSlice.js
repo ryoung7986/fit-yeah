@@ -1,10 +1,27 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-export const updateUserBio = createAsyncThunk(
-  'user/updateUserBio',
-  async (id) => {
-    return fetch(`/api/users/${id}`)
-      .then((res) => res.json())
+export const addAllUsersToState = createAsyncThunk(
+  'user/addAllUsersToState',
+  async () => {
+    const response = await fetch(`/api/users`)
+    return await response.json()
+  }
+)
+
+export const followUser = createAsyncThunk(
+  'user/followUser',
+  async (userId, id) => {
+    const response = await fetch(`/api/users/follow`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        userId,
+        id
+      })
+    })
+    return await response.json()
   }
 )
 
@@ -12,6 +29,7 @@ export const userSlice = createSlice({
   name: 'user',
   initialState: {
     user: null,
+    users: {},
     followers: null,
     following: null,
   },
@@ -27,16 +45,12 @@ export const userSlice = createSlice({
     },
   },
   extraReducers: {
-    [updateUserBio.pending]: (state, action) => {
-      state.status = 'updating bio...'
+    [addAllUsersToState.fulfilled]: (state, { payload }) => {
+      state.users = payload.users;
     },
-    [updateUserBio.fulfilled]: (state, { payload }) => {
-      state.user.bio = payload.bio;
-      state.status = 'successfully updated bio'
-    },
-    [updateUserBio.rejected]: (state, action) => {
-      state.status = 'failed updating bio'
-    },
+    [followUser.fulfilled]: (state, { payload }) => {
+      state.user = payload.user
+    }
   }
 });
 
@@ -51,5 +65,6 @@ export const selectUser = state => state.user.user;
 export const selectUserBio = state => state.user.user.bio;
 export const selectFollowing = state => state.user.following;
 export const selectUserWorkoutPlan = state => state.user.user.workout_plan
+export const selectAllUsers = state => state.user.users
 
 export default userSlice.reducer;

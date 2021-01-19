@@ -96,26 +96,23 @@ def user_bio(id):
     return {'bio': dictUser['bio']}
 
 
-# @user_routes.route('/<int:id>', methods=["POST"])
-# @login_required
-# def new_follow(id):
-#     form = FollowForm()
-#     follower = User.query.get(form.data['follower_id'])
-#     leader = User.query.get(id)
-#     # if form.validate_on_submit():
-#     if follower in leader.followers:
-#         leader.followers.remove(follower)
-#         db.session.commit()
-#         # follow = db.session.query('followers').filter(
-#         #     followers.c.follower_id == follower.id).filter(
-#         #         followers.c.leader_id == leader.id)
-#         return leader.to_dict_full()
-#     else:
-#         leader.followers.append(follower)
-#         db.session.commit()
-#         # follow = Followers.query.filter(Followers.leader_id == id).filter(
-#         #     Followers.follower_id == follower.id).first()
-#         # follow.set_color_ = 'red'
-#         return leader.to_dict_full()
-#         # return follower.to_dict()
-#     return {'errors': validation_errors_to_error_messages(form.errors)}
+# follow user
+@user_routes.route('/follow/<int:userId>/<int:id>', methods=['PATCH'])
+def follow_user(userId, id):
+    user = User.query.get(userId)
+    userToFollow = User.query.get(id)
+    user.following.append(userToFollow)
+    db.session.add(user)
+    db.session.commit()
+    return user.to_dict_full()
+
+
+# unfollow user
+@user_routes.route('/unfollow/<int:userId>/<int:id>', methods=['PATCH'])
+def unfollow_user(userId, id):
+    user = User.query.get(userId)
+    userToUnfollow = User.query.get(id)
+    user.following.remove(userToUnfollow)
+    db.session.add(user)
+    db.session.commit()
+    return user.to_dict_full()
