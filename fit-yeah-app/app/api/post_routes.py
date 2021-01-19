@@ -26,7 +26,8 @@ def user_posts(id):
                        if post.user_id in following]
     user_posts = [post.to_dict() for post in User_Post.query.all()
                   if post.user_id == id]
-    posts = following_posts + user_posts
+    prePosts = following_posts + user_posts
+    posts = sorted(prePosts, key=lambda post: post['id'])
     return {"posts": posts}
 
 

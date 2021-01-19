@@ -14,6 +14,10 @@ function Feed({ user }) {
   const comments = useSelector(selectComments);
   const followingUsers = useSelector(selectFollowing)
 
+  const postOrder = posts.slice().sort((a, b) => {
+    return (a.id > b.id) ? -1 : 1
+  })
+
   useEffect(() => {
     dispatch(getPosts(user.id))
   }, [dispatch, user.id])
@@ -25,7 +29,7 @@ function Feed({ user }) {
   const getPostUser = (postUserId) => {
     for (let value of followingUsers) {
       if (value.id === postUserId) {
-        return `${value.first_name} ${value.last_name}`
+        return value
       }
     }
   }
@@ -39,12 +43,11 @@ function Feed({ user }) {
     return (
       <div key={post.id}>
         <Post
+          postUser={user.id === post.owner_id ?
+            user : getPostUser(post.owner_id)}
           profilePic={user.avatar_url ?
             user.avatar_url : null}
           media={post.img_url}
-          username={user.id === post.owner_id ?
-            `${user.first_name} ${user.last_name}` :
-            `${getPostUser(post.owner_id)}`}
           content={post.description}
           timestamp={post.createdAt}
           postId={post.id}
@@ -58,7 +61,7 @@ function Feed({ user }) {
     <div className="feed">
       <MakePost user={user} first_name={user} />
       <div className="feed__post">
-        {posts && usersPosts}
+        {postOrder && usersPosts}
       </div>
     </div >
   )

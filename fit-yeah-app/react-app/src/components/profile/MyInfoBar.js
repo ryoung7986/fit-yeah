@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { selectWorkouts } from '../workouts/workoutSlice';
+import { selectUserWorkoutPlan } from '../user/userSlice';
 import { NavLink } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
@@ -8,7 +9,8 @@ import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import './MyInfoBar.css'
 
 function MyInfoBar({ user }) {
-  const workoutPlan = user.workout_plan[0];
+  // const workoutPlan = user.workout_plan[0];
+  const workoutPlan = useSelector(selectUserWorkoutPlan);
   const workouts = useSelector(selectWorkouts);
 
   const mon = workoutPlan && workouts.filter((workout) => {
@@ -78,7 +80,7 @@ function MyInfoBar({ user }) {
             {fri[0] ? fri[0].title : <p>Day off</p>}
           </div>
           <div className="workout__plan--option">
-            <h3>Saturday</h3>
+            <h3>Saturday:</h3>
             {sat[0] ? sat[0].title : <p>Day off</p>}
           </div>
           <div className="workout__plan--option">

@@ -41,7 +41,7 @@ def post_like(id, postId):
 # @login_required
 def user_following(id):
     user = User.query.get(id)
-    following = [leader.to_dict() for leader in user.following]
+    following = [leader.to_dict_full() for leader in user.following]
     return {"following": following}
 
 
@@ -50,7 +50,7 @@ def user_following(id):
 # @login_required
 def user_followers(id):
     user = User.query.get(id)
-    followers = [follower.to_dict() for follower in user.followers]
+    followers = [follower.to_dict_full() for follower in user.followers]
     return {"followers": followers}
 
 

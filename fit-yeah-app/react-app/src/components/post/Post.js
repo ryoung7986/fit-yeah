@@ -11,7 +11,7 @@ import { selectComments } from '../comment/commentSlice';
 
 import './Post.css';
 
-function Post({ profilePic, media, username, timestamp, content, postId, postComments }) {
+function Post({ profilePic, media, timestamp, content, postId, postComments, postUser }) {
   const [likes, setLikes] = useState(0);
   const [render, setRender] = useState(0);
   const [makeComment, setMakeComment] = useState(false);
@@ -63,9 +63,9 @@ function Post({ profilePic, media, username, timestamp, content, postId, postCom
   return (
     <div className='post'>
       <div className='post__top'>
-        <Avatar src={profilePic} className='post__avatar' />
+        <Avatar src={postUser && `${postUser.avatar_url}`} className='post__avatar' />
         <div className="post__top--info">
-          <h3>{username}</h3>
+          <h3>{postUser && `${postUser.first_name} ${postUser.last_name}`}</h3>
           <p>{timestamp}</p>
         </div>
       </div>

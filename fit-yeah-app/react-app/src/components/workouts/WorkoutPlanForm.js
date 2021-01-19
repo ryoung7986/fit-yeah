@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { selectWorkouts } from './workoutSlice';
-import { selectUser } from '../user/userSlice';
+import { selectUser, addWorkoutPlan, selectUserWorkoutPlan } from '../user/userSlice';
 import Button from '@material-ui/core/Button';
 import './WorkoutPlanForm.css';
 
@@ -14,7 +14,9 @@ function WorkoutPlanForm() {
   const [sat, setSat] = useState(null);
   const [sun, setSun] = useState(null);
   const workouts = useSelector(selectWorkouts);
+  const workoutPlan = useSelector(selectUserWorkoutPlan);
   const user = useSelector(selectUser);
+  const dispatch = useDispatch();
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -36,7 +38,7 @@ function WorkoutPlanForm() {
       })
     })
     const responseData = await response.json()
-    console.log(responseData)
+    dispatch(addWorkoutPlan(responseData))
   }
 
   const workoutMap = workouts.map((workout) => {
