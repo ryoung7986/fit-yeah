@@ -9,11 +9,9 @@ import './Leaderboard.css';
 function Leaderboard() {
   const allUsers = useSelector(selectAllUsers);
 
-  const users = allUsers.slice().sort((a, b) => {
+  const users = Array.from(allUsers).slice().sort((a, b) => {
     return (a.points_earned > b.points_earned) ? -1 : 1
   })
-
-  console.log(allUsers)
 
 
   return (
