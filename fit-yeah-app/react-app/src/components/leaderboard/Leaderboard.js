@@ -13,6 +13,9 @@ function Leaderboard() {
     return (a.points_earned > b.points_earned) ? -1 : 1
   })
 
+  console.log(allUsers)
+
+
   return (
     <div className="leaderboard">
       {users && users.map((user) => (
@@ -24,4 +27,4 @@ function Leaderboard() {
   )
 }
 
-export default Leaderboard
+export default Leaderboard;
