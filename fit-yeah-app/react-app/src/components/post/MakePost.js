@@ -4,9 +4,11 @@ import { getPosts } from '../post/postSlice';
 import { Avatar } from '@material-ui/core';
 import VideocamIcon from '@material-ui/icons/Videocam';
 import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
+import UploadImg from '../modal/UploadImg';
 import './MakePost.css';
 
 function MakePost({ user }) {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const [description, setDescription] = useState('');
   const [trigger, setTrigger] = useState(0);
   const form = useRef(null);
@@ -56,9 +58,10 @@ function MakePost({ user }) {
           <VideocamIcon />
           <h3>Add Video</h3>
         </div>
-        <div className="makePost__option">
+        <div className="makePost__option" onClick={() => setModalIsOpen(true)}>
           <AddPhotoAlternateIcon />
           <h3>Add Photo</h3>
+          <UploadImg setModalIsOpen={setModalIsOpen} />
         </div>
       </div>
     </div>

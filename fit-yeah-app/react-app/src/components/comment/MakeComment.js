@@ -7,7 +7,6 @@ import './MakeComment.css';
 
 function MakeComment({ postId }) {
   const [content, setContent] = useState('');
-  const [trigger, setTrigger] = useState(0);
   const commentForm = useRef(null);
   const user = useSelector(selectUser);
   const comments = useSelector(selectComments);
@@ -28,13 +27,10 @@ function MakeComment({ postId }) {
       body: formData
     })
     setContent('')
-    setTrigger(trigger => trigger + 1)
+    dispatch(getComments(postId))
     return await response.json()
   }
 
-  useEffect(() => {
-    dispatch(getComments(postId))
-  }, [trigger, postId, dispatch])
 
   return (
     <div className='makeComment'>

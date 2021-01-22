@@ -33,9 +33,7 @@ function App() {
   const [following, setFollowing] = useState([]);
   const [exercises, setExercises] = useState({});
   const [workouts, setWorkouts] = useState([]);
-  const [user, setUser] = useState(null);
-  const [trigger, setTrigger] = useState(0);
-  // const user = useSelector(selectUser);
+  const user = useSelector(selectUser);
   const dispatch = useDispatch();
 
 
@@ -43,7 +41,6 @@ function App() {
     (async () => {
       const user = await authenticate();
       dispatch(addUser({ user }));
-      setUser(user);
       console.log(user)
       if (!user.errors) {
         setAuthenticated(true);

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { Redirect, NavLink } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { signUp } from '../../services/auth';
+import { useDispatch } from 'react-redux';
+import { addUser } from '../user/userSlice';
 import Button from '@material-ui/core/Button';
 import './SignUpForm.css';
 
@@ -11,6 +13,7 @@ const SignUpForm = ({ authenticated, setAuthenticated }) => {
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
+  const dispatch = useDispatch();
 
   const onSignUp = async (e) => {
     e.preventDefault();
@@ -18,6 +21,7 @@ const SignUpForm = ({ authenticated, setAuthenticated }) => {
     if (password === repeatPassword) {
       const user = await signUp(username, firstName, lastName, email, password);
       if (!user.errors) {
+        dispatch(addUser({ user: user }));
         setAuthenticated(true);
       }
     }

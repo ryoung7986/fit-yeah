@@ -107,7 +107,7 @@ function ProfileComponent() {
             <div>
               <h5>{`Points Earned: ${user.points_earned}`}</h5>
             </div>
-          ) : null}
+          ) : <h5>Points earned: 0</h5>}
         </div>
         <div className="profile__userbio">
           {userBio ? (

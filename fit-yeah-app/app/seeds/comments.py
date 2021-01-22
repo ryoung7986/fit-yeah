@@ -3,7 +3,7 @@ from app.models import db, Comment
 
 
 def seed_comments():
-    comment1 = Comment(content='wow super cool post brodudeguy!',
+    comment1 = Comment(content='wow super cool post!',
                        user_id='1',
                        post_id='1')
 
