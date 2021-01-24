@@ -7,7 +7,6 @@ import { selectWorkouts } from '../workouts/workoutSlice';
 import { selectUserWorkoutPlan } from '../user/userSlice';
 import Button from '@material-ui/core/Button';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
-
 import './MyInfoBar.css'
 
 function MyInfoBar({ user }) {
@@ -63,8 +62,8 @@ function MyInfoBar({ user }) {
         <div className="workout__plan">
           <NavLink
             className={today === 'Monday' ?
-              'workout__plan--option active' :
-              'workout__plan--option disabled'}
+              'workout__plan--option activesauce' :
+              'workout__plan--option'}
             style={{ textDecoration: 'none' }}
             to={{
               pathname: '/my-stats',
@@ -78,8 +77,8 @@ function MyInfoBar({ user }) {
           </NavLink>
           <NavLink
             className={today === 'Tuesday' ?
-              'workout__plan--option active' :
-              'workout__plan--option disabled'}
+              'workout__plan--option activesauce' :
+              'workout__plan--option'}
             style={{ textDecoration: 'none' }}
             to={{
               pathname: '/my-stats',
@@ -93,8 +92,8 @@ function MyInfoBar({ user }) {
           </NavLink>
           <NavLink
             className={today === 'Wednesday' ?
-              'workout__plan--option active' :
-              'workout__plan--option disabled'}
+              'workout__plan--option activesauce' :
+              'workout__plan--option'}
             style={{ textDecoration: 'none' }}
             to={{
               pathname: '/my-stats',
@@ -108,8 +107,8 @@ function MyInfoBar({ user }) {
           </NavLink>
           <NavLink
             className={today === 'Thursday' ?
-              'workout__plan--option active' :
-              'workout__plan--option disabled'}
+              'workout__plan--option activesauce' :
+              'workout__plan--option'}
             style={{ textDecoration: 'none' }}
             to={{
               pathname: '/my-stats',
@@ -123,8 +122,8 @@ function MyInfoBar({ user }) {
           </NavLink>
           <NavLink
             className={today === 'Friday' ?
-              'workout__plan--option active' :
-              'workout__plan--option disabled'}
+              'workout__plan--option activesauce' :
+              'workout__plan--option'}
             style={{ textDecoration: 'none' }}
             to={{
               pathname: '/my-stats',
@@ -138,8 +137,8 @@ function MyInfoBar({ user }) {
           </NavLink>
           <NavLink
             className={today === 'Saturday' ?
-              'workout__plan--option active' :
-              'workout__plan--option disabled'}
+              'workout__plan--option activesauce' :
+              'workout__plan--option'}
             style={{ textDecoration: 'none' }}
             to={{
               pathname: '/my-stats',
@@ -153,8 +152,8 @@ function MyInfoBar({ user }) {
           </NavLink>
           <NavLink
             className={today === 'Sunday' ?
-              'workout__plan--option active' :
-              'workout__plan--option disabled'}
+              'workout__plan--option activesauce' :
+              'workout__plan--option'}
             style={{ textDecoration: 'none' }}
             to={{
               pathname: '/my-stats',

@@ -44,11 +44,11 @@ function ProfileComponent() {
           <div className="profile__avatar">
             {user.avatar_url ? (
               <div className="profile__avatar--div">
-                <img src={user.avatar_url} className="profile__avatar--image" />
+                <img src={user.avatar_url} alt='' className="profile__avatar--image" />
               </div>
             ) : (
                 <div className="profile__avatar--noimage">
-                  <img src='http://www.fillmurray.com/140/200' className="profile__avatar--image" />
+                  <img src='http://www.fillmurray.com/140/200' alt='' className="profile__avatar--image" />
                   <Button
                     variant="contained"
                     style={{ textTransform: 'none' }}

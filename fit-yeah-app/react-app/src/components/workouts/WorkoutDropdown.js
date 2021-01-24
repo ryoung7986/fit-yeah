@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectUser } from '../user/userSlice';
 import { getPosts } from '../post/postSlice';
@@ -10,7 +9,6 @@ function WorkoutDropdown({ title, items, workoutId, setStep }) {
   const [open, setOpen] = useState(false);
   const [selection, setSelection] = useState([]);
   const [render, setRender] = useState(false);
-  const history = useHistory();
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
 

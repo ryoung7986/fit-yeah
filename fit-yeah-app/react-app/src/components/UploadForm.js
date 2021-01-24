@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch, shallowEqual } from 'react-redux';
-import { selectUserAvatarUrl, selectUser, addUserAvatarUrl } from './user/userSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectUser, addUserAvatarUrl } from './user/userSlice';
 
 
 function UploadForm() {
   const [image, setImage] = useState(null);
   const [userAvatarUrl, setUserAvatarUrl] = useState('');
   const user = useSelector(selectUser);
-  const userAvatar = useSelector(selectUserAvatarUrl);
+  // const userAvatar = useSelector(selectUserAvatarUrl);
   const userId = user.id
   const dispatch = useDispatch();
 

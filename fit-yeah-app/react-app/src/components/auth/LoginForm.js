@@ -44,7 +44,7 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
   return (
     <div className="login">
       <div className="login__logo">
-        <img src="https://fit-yeah.s3.amazonaws.com/FY-Logo-3.png" />
+        <img src="https://fit-yeah.s3.amazonaws.com/FY-Logo-3.png" alt='' />
       </div>
       <form onSubmit={onLogin} className="login__form">
         <div>

@@ -47,11 +47,11 @@ function CreateWorkout() {
     setDescription(e.target.value);
   };
 
-  const dropdownOptions = async () => {
-    const response = await fetch('/api/exercises');
-    const responseData = await response.json();
-    setExercises(responseData.exercises)
-  }
+  // const dropdownOptions = async () => {
+  //   const response = await fetch('/api/exercises');
+  //   const responseData = await response.json();
+  //   setExercises(responseData.exercises)
+  // }
 
   useEffect(() => {
     (async () => {

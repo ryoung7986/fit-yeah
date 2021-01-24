@@ -3,16 +3,15 @@ import { Avatar } from '@material-ui/core';
 import ThumbUpOutlinedIcon from '@material-ui/icons/ThumbUpOutlined';
 import ChatBubbleOutlineOutlinedIcon from '@material-ui/icons/ChatBubbleOutlineOutlined';
 import { selectUser } from '../user/userSlice';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import MakeComment from '../comment/MakeComment';
 import Comment from '../comment/Comment';
 import ReactPlayer from 'react-player';
-import { selectComments } from '../comment/commentSlice';
 
 import './Post.css';
 
-function Post({ profilePic, image, video, timestamp, content, postId, postComments, postUser }) {
+function Post({ image, video, timestamp, content, postId, postComments, postUser }) {
   const [likes, setLikes] = useState(0);
   const [render, setRender] = useState(0);
   const [makeComment, setMakeComment] = useState(false);

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectWorkouts } from './workoutSlice';
-import { selectUser, addWorkoutPlan, selectUserWorkoutPlan } from '../user/userSlice';
+import { selectUser, addWorkoutPlan } from '../user/userSlice';
 import Button from '@material-ui/core/Button';
 import './WorkoutPlanForm.css';
 
@@ -14,7 +14,7 @@ function WorkoutPlanForm() {
   const [sat, setSat] = useState(null);
   const [sun, setSun] = useState(null);
   const workouts = useSelector(selectWorkouts);
-  const workoutPlan = useSelector(selectUserWorkoutPlan);
+  // const workoutPlan = useSelector(selectUserWorkoutPlan);
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
 

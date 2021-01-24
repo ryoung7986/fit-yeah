@@ -53,6 +53,11 @@ function MakePost({ user }) {
     dispatch(getPosts(user.id))
   }, [trigger, dispatch, user.id])
 
+  useEffect(() => {
+    setImgUploadDisplay(false);
+    setVideoUploadDisplay(false);
+  }, [imgUrl, videoUrl])
+
   const onModalClose = () => {
     setImgUrl(modalRef.current.imgUrl);
     setImgUploadDisplay(false);

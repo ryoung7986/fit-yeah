@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectAllUsers, selectUser, addUser } from '../user/userSlice';
@@ -19,7 +19,6 @@ function User() {
   const userId = user.id;
   const currUser = allUsersMap[0];
   const currUserId = parseInt(currUser.id);
-  // const [render, setRender] = useState(0);
   const dispatch = useDispatch();
   const followingIds = following.map((person) => {
     return person.id
@@ -61,11 +60,11 @@ function User() {
             <div className="profile__avatar">
               {currUser.avatar_url ? (
                 <div className="profile__avatar--div">
-                  <img src={currUser.avatar_url} className="profile__avatar--image" />
+                  <img src={currUser.avatar_url} alt='' className="profile__avatar--image" />
                 </div>
               ) : (
                   <div className="profile__avatar--noimage">
-                    <img src='http://www.fillmurray.com/140/200' className="profile__avatar--image" />
+                    <img src='http://www.fillmurray.com/140/200' alt='' className="profile__avatar--image" />
                   </div>
                 )}
             </div>

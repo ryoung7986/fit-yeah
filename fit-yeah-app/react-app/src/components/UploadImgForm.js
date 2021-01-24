@@ -1,11 +1,10 @@
 import React, { useState, forwardRef, useImperativeHandle } from 'react';
-import { useSelector, useDispatch, shallowEqual } from 'react-redux';
-import { selectUserAvatarUrl, selectUser, addUserAvatarUrl } from './user/userSlice';
 
 
 const UploadForm = forwardRef((props, ref) => {
   const [img, setImg] = useState(null);
   const [imgUrl, setImgUrl] = useState('');
+  const [uploaded, setUploaded] = useState(false);
 
   useImperativeHandle(ref, () => {
     return {
@@ -23,6 +22,7 @@ const UploadForm = forwardRef((props, ref) => {
     })
     const responseData = await response.json();
     console.log("image upload successful");
+    setUploaded(true);
     setImgUrl(responseData.img_url);
     return responseData;
   }
@@ -49,9 +49,12 @@ const UploadForm = forwardRef((props, ref) => {
             name="image"
             onChange={handleImgUpload}
           />
-          <button type="submit">
-            Upload!
-          </button>
+          {uploaded ?
+            <h1>Uploaded!</h1> :
+            <button type="submit">
+              Upload!
+            </button>
+          }
         </div>
       </form>
     </div>

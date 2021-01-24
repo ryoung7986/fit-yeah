@@ -3,7 +3,6 @@ import { Redirect } from 'react-router-dom';
 import { signUp } from '../../services/auth';
 import { useDispatch } from 'react-redux';
 import { addUser } from '../user/userSlice';
-import Button from '@material-ui/core/Button';
 import './SignUpForm.css';
 
 const SignUpForm = ({ authenticated, setAuthenticated }) => {
@@ -17,7 +16,6 @@ const SignUpForm = ({ authenticated, setAuthenticated }) => {
 
   const onSignUp = async (e) => {
     e.preventDefault();
-    console.log(email)
     if (password === repeatPassword) {
       const user = await signUp(username, firstName, lastName, email, password);
       if (!user.errors) {
@@ -58,7 +56,7 @@ const SignUpForm = ({ authenticated, setAuthenticated }) => {
   return (
     <div className="signup">
       <div className="signup__logo">
-        <img src="https://fit-yeah.s3.amazonaws.com/FY-Logo-3.png" />
+        <img src="https://fit-yeah.s3.amazonaws.com/FY-Logo-3.png" alt='' />
       </div>
       <form onSubmit={onSignUp} className="signup__form">
         <div>

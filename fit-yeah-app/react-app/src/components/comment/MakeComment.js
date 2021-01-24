@@ -1,7 +1,7 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectUser } from '../user/userSlice';
-import { selectComments, getComments } from '../comment/commentSlice';
+import { getComments } from '../comment/commentSlice';
 import { Avatar } from '@material-ui/core';
 import './MakeComment.css';
 
@@ -9,7 +9,7 @@ function MakeComment({ postId }) {
   const [content, setContent] = useState('');
   const commentForm = useRef(null);
   const user = useSelector(selectUser);
-  const comments = useSelector(selectComments);
+  // const comments = useSelector(selectComments);
   const userId = user.id;
   const dispatch = useDispatch();
 
