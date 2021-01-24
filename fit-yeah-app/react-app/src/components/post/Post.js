@@ -7,11 +7,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
 import MakeComment from '../comment/MakeComment';
 import Comment from '../comment/Comment';
+import ReactPlayer from 'react-player';
 import { selectComments } from '../comment/commentSlice';
 
 import './Post.css';
 
-function Post({ profilePic, media, timestamp, content, postId, postComments, postUser }) {
+function Post({ profilePic, image, video, timestamp, content, postId, postComments, postUser }) {
   const [likes, setLikes] = useState(0);
   const [render, setRender] = useState(0);
   const [makeComment, setMakeComment] = useState(false);
@@ -73,8 +74,12 @@ function Post({ profilePic, media, timestamp, content, postId, postComments, pos
         <p>{content}</p>
       </div>
       <div className="post__media">
-        {media &&
-          <img src={media} alt='' />}
+        {image &&
+          <img src={image} alt='' />}
+        {video &&
+          <div className="post__mediaPlayer">
+            <ReactPlayer controls url={video} />
+          </div>}
       </div>
       <div className="post__likes">
         <p>{`${likes} Likes`}</p>

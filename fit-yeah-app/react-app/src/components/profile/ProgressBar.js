@@ -59,7 +59,7 @@ function ProgressBar() {
           width: `${done}%`
         }}
       >
-        <p>{done}%</p>
+        <p>{Math.floor(done)}%</p>
       </div>
     </div>
   )

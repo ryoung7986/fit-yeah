@@ -1,42 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch, shallowEqual } from 'react-redux';
-import { selectUserAvatarUrl, selectUser, addUserAvatarUrl } from './user/userSlice';
+import React, { useState, forwardRef, useImperativeHandle } from 'react';
 
 
-function UploadForm() {
+const UploadVideoForm = forwardRef((props, ref) => {
   const [video, setVideo] = useState(null);
   const [videoUrl, setVideoUrl] = useState('');
-  const user = useSelector(selectUser);
-  const userId = user.id
-  const dispatch = useDispatch();
+  const [mimeType, setMimeType] = useState('');
 
-  const videoUrl = (userId) => {
-    (async () => {
-      const imgUrl = videoUrl
-      const response = await fetch(`/api/users/upload-avatar/${userId}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ imgUrl })
-      })
-      const responseData = await response.json();
-      const url = responseData.avatar_url
-      dispatch(addUserAvatarUrl(url))
-    })()
-  }
+  useImperativeHandle(ref, () => {
+    return {
+      videoUrl: videoUrl
+    }
+  });
 
   const uploadVideo = async (data) => {
-    console.log('Uploading image...');
+    console.log('Uploading video...');
+    console.log("MIMETYPE", mimeType);
     let formData = new FormData();
-    formData.append('image', data);
-    const response = await fetch('/api/aws/upload', {
+    formData.append('video', data);
+    formData.append('mimeType', mimeType);
+    const response = await fetch('/api/aws/upload/video', {
       method: 'POST',
       body: formData
     })
     const responseData = await response.json();
     console.log("video upload successful");
-    setVideoUrl(responseData.img_url);
+    setVideoUrl(responseData.video_url);
     return responseData;
   }
 
@@ -46,6 +34,7 @@ function UploadForm() {
   }
 
   const handleVideoUpload = (e) => {
+    setMimeType(e.target.files[0].name.slice(e.target.files[0].name.length - 3))
     setVideo(e.target.files[0])
   }
 
@@ -58,7 +47,7 @@ function UploadForm() {
         <div>
           <input
             type="file"
-            name="video"
+            name="image"
             onChange={handleVideoUpload}
           />
           <button type="submit">
@@ -68,6 +57,6 @@ function UploadForm() {
       </form>
     </div>
   )
-}
+})
 
-export default UploadForm
+export default UploadVideoForm

@@ -8,6 +8,7 @@ from botocore.exceptions import ClientError
 import logging
 import uuid
 import os
+import mimetypes
 
 aws_routes = Blueprint('aws', __name__)
 
@@ -23,6 +24,7 @@ BUCKET_NAME = os.environ.get('BUCKET_NAME')
 @aws_routes.route('/upload', methods=['POST'])
 def upload_file(data=None, BUCKET_NAME=BUCKET_NAME, object_name=None):
     data = request.files['image']
+
     if object_name is None:
         object_name = uuid.uuid4().hex
     try:
@@ -30,4 +32,23 @@ def upload_file(data=None, BUCKET_NAME=BUCKET_NAME, object_name=None):
     except ClientError as e:
         logging.error(e)
         return False
+
     return {'img_url': f'https://fit-yeah.s3.amazonaws.com/{object_name}'}
+
+
+@aws_routes.route('/upload/video', methods=['POST'])
+def upload_video(data=None, BUCKET_NAME=BUCKET_NAME, object_name=None):
+    mimeType = request.form['mimeType']
+    data = request.files['video']
+
+    if object_name is None:
+        object_name = uuid.uuid4().hex
+    try:
+        response = s3.upload_fileobj(data, BUCKET_NAME, object_name,
+                                     ExtraArgs={
+                                         'ContentType': f'video/{mimeType}'})
+    except ClientError as e:
+        logging.error(e)
+        return False
+
+    return {'video_url': f'https://fit-yeah.s3.amazonaws.com/{object_name}'}

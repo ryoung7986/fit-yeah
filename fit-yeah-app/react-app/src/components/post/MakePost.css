@@ -76,3 +76,11 @@
 .makePost__input--hidden {
   display: none;
 }
+
+.makePost__modal {
+  z-index: 100;
+}
+
+.makePost__imgAdded {
+  color: #f0f7f4;
+}

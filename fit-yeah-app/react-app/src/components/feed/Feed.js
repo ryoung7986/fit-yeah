@@ -47,7 +47,8 @@ function Feed({ user }) {
             user : getPostUser(post.owner_id)}
           profilePic={user.avatar_url ?
             user.avatar_url : null}
-          media={post.img_url}
+          image={post.img_url}
+          video={post.video_url}
           content={post.description}
           timestamp={post.createdAt}
           postId={post.id}
