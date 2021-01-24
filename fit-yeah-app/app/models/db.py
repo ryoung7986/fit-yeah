@@ -289,6 +289,21 @@ class User_Stat(db.Model):
             "createdAt": self.createdAt,
         }
 
+    def to_dict_full(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "exercise_id": self.exercise_id,
+            "sets": self.sets,
+            "reps": self.reps,
+            "weight": self.weight_lbs,
+            "duration": self.duration_min,
+            "distance": self.distance_mi,
+            "createdAt": self.createdAt,
+            "user": self.user.to_dict_full(),
+            "exercise": self.exercise.to_dict_full(),
+        }
+
 
 class User_Post(db.Model):
     __tablename__ = 'users_posts'

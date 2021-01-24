@@ -20,11 +20,24 @@
 
 .workout__plan--option:hover {
   cursor: pointer;
-  color: black;
   background-color: #f0f7f4;
+  color: #107D7E;
+  border-radius: 10px;
+}
+
+.workout__plan--option-active {
+  cursor: pointer;
+  background-color: #f0f7f4;
+  color: #107D7E;
   border-radius: 10px;
 }
 
 .workout__plan--option > h3 {
   margin-right: 20px;
+}
+
+.active {
+  background-color: #f0f7f4;
+  color: #107D7E;
+  border-radius: 10px;
 }

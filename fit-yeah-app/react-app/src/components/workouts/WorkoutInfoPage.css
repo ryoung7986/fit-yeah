@@ -1,0 +1,18 @@
+.workoutInfo__workout {
+  display:flex;
+  flex-direction: column;
+  background-color: #107D7E;
+  padding: 20px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  border-radius: 30px;
+  box-shadow: 0px 5px 8px -2px rgba(0, 0, 0, 0.75);
+}
+
+.workout__title {
+  color: #f0f7f4;
+}
+
+.workoutList {
+  margin-bottom: 20px;
+}

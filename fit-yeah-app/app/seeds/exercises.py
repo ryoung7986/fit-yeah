@@ -37,7 +37,7 @@ def seed_exercises():
                                 back up. Repeat for 10–20 reps or as many as
                                 you can do with good form.
                                 ''',
-                       video_url="http://www.fillmurray.com/200/300")
+                       video_url="https://www.youtube.com/watch?v=IODxDxX7oi4")
 
     mountainClimbers = Exercise(title="Mountain Climbers",
                                 muscle_group="Abs / Back",
@@ -47,7 +47,7 @@ def seed_exercises():
                                 isometric core strength exercise that involves
                                 maintaining a position similar to a push-up
                                 for the maximum possible time.''',
-                                video_url="http://www.fillmurray.com/200/300")
+                                video_url="https://www.youtube.com/watch?v=cnyTQDSE884")
 
     pullups = Exercise(title="Pull-ups",
                        muscle_group="Shoulders / Back",
@@ -57,7 +57,7 @@ def seed_exercises():
                                     core, then pull yourself up until your
                                     lower chest touches the bar. Lower until
                                     your arms are straight again.''',
-                       video_url="http://www.fillmurray.com/200/300")
+                       video_url="https://www.youtube.com/watch?v=3YvfRx31xDE")
 
     planks = Exercise(title="Planks",
                       muscle_group="Abs, Back",
@@ -77,34 +77,34 @@ def seed_exercises():
                                     get more comfortable with the move, hold
                                     your plank for as long as possible without
                                     compromising your form or breath.''',
-                      video_url="http://www.fillmurray.com/200/300")
+                      video_url="https://www.youtube.com/watch?v=ASdvN_XEl_c")
 
     jumpingJacks = Exercise(title="Jumping Jacks",
                             muscle_group="Who knows?",
                             difficulty="1",
                             description="Just flail around. Vigorously.",
-                            video_url="http://www.fillmurray.com/200/300")
+                            video_url="https://www.youtube.com/watch?v=1b98WrRrmUs")
 
     squatJumps = Exercise(title="Squat Jumps",
                           muscle_group="GLUTES",
                           difficulty="2",
                           description='''Bend over, and then don't bend
                                         over. Then do that again.''',
-                          video_url="http://www.fillmurray.com/200/300")
+                          video_url="https://www.youtube.com/watch?v=A-cFYWvaHr0")
 
     situps = Exercise(title="Situps",
                       muscle_group="Abs",
                       difficulty="2",
                       description='''Sit on the ground, lean back,
                                     then sit. up.''',
-                      video_url="http://www.fillmurray.com/200/300")
+                      video_url="https://www.youtube.com/watch?v=jDwoBqPH0jk")
 
     crunches = Exercise(title="Crunches",
                         muscle_group="Abs",
                         difficulty="2",
                         description='''They're like situps,
                                     but this time, CRUNCH IT.''',
-                        video_url="http://www.fillmurray.com/200/300")
+                        video_url="https://www.youtube.com/watch?v=Xyd_fa5zoEU")
 
     lunges = Exercise(title="Lunges",
                       muscle_group='''Quads / Hammies / Gluteous Maximus /
@@ -116,26 +116,26 @@ def seed_exercises():
                       same time, lift the weight straight up to shoulder level.
                       Lower the weight, go back to start and repeat to the
                       other side.''',
-                      video_url="http://www.fillmurray.com/200/300")
+                      video_url="https://www.youtube.com/watch?v=QOVaHwm-Q6U")
 
     benchPress = Exercise(title="Bench Press",
                           muscle_group="Chest / Triceps",
                           difficulty="3",
                           description="Lift things up and put them down.",
-                          video_url="http://www.fillmurray.com/200/300")
+                          video_url="https://www.youtube.com/watch?v=-MAABwVKxok")
 
     latPulldowns = Exercise(title="Lat Pulldowns",
                             muscle_group="Lats",
                             difficulty="2",
                             description="Pull it down and let it go.",
-                            video_url="http://www.fillmurray.com/200/300")
+                            video_url="https://www.youtube.com/watch?v=CAwf7n6Luuc")
 
     dumbBellPress = Exercise(title="Dumbbell Press",
                              muscle_group="Chest / Triceps",
                              difficulty="3",
                              description='''Like bench press, but with
                                         dumbbells.''',
-                             video_url="http://www.fillmurray.com/200/300")
+                             video_url="https://www.youtube.com/watch?v=xphvjGDZeYE")
 
     legExtensions = Exercise(title="Leg Extensions",
                              muscle_group="Quads",
@@ -145,13 +145,13 @@ def seed_exercises():
                              a weight or resistance away from them using their
                              legs. The term leg press machine refers to the
                              apparatus used to perform this exercise.''',
-                             video_url="http://www.fillmurray.com/200/300")
+                             video_url="https://www.youtube.com/watch?v=tTbJBUKnWU8")
 
     bicepCurls = Exercise(title="Bicep Curls",
                           muscle_group="Biceps",
                           difficulty="2",
                           description="Those guns should be illegal.",
-                          video_url="http://www.fillmurray.com/200/300")
+                          video_url="https://www.youtube.com/watch?v=in7PaeYlhrM")
 
     tricepsPushdowns = Exercise(title="Triceps Pushdowns",
                                 muscle_group="Triceps",
@@ -163,7 +163,7 @@ def seed_exercises():
                                 This exercise is an example of the primary
                                 function of the triceps, extension of the
                                 elbow joint.''',
-                                video_url="http://www.fillmurray.com/200/300")
+                                video_url="https://www.youtube.com/watch?v=NtsMXK8rxX0")
 
     tricepsDip = Exercise(title="Tricep Dips",
                           muscle_group="Triceps",
@@ -173,19 +173,19 @@ def seed_exercises():
                           ankles crossed. Lower your body until your elbows
                           reach a 90-degree angle before returning to your
                           starting position.''',
-                          video_url="http://www.fillmurray.com/200/300")
+                          video_url="https://www.youtube.com/watch?v=6kALZikXxLc")
 
     bentOverRow = Exercise(title="Bent Over Row",
                            muscle_group="Shoulders",
                            difficulty="2",
                            description="Bend over and row.",
-                           video_url="http://www.fillmurray.com/200/300")
+                           video_url="https://www.youtube.com/watch?v=HE5IBnWYEq4")
 
     squats = Exercise(title="Squats",
                       muscle_group="Moderate",
                       difficulty="3",
                       description="Bend over.",
-                      video_url="http://www.fillmurray.com/200/300")
+                      video_url="https://www.youtube.com/watch?v=U3HlEF_E9fo")
 
     cleanJerk = Exercise(title="Clean and Jerk",
                          muscle_group="All of them.",
@@ -193,27 +193,27 @@ def seed_exercises():
                          description='''Do you yell at the gym a lot? Do you
                          want to? If you answered 'yes' to either of those
                          questions, then this is the exercise for you!''',
-                         video_url="http://www.fillmurray.com/200/300")
+                         video_url="https://www.youtube.com/watch?v=IcCGLoNqN2U")
 
     latRaise = Exercise(title="Lat Raise",
                         muscle_group="Lats",
                         difficulty="3",
                         description='''Who the hell even knows?''',
-                        video_url="http://www.fillmurray.com/200/300")
+                        video_url="https://www.youtube.com/watch?v=WJm9zA2NY8E")
 
     jogging = Exercise(title="Running",
                        muscle_group="Cardio",
                        difficulty="1",
                        description='''One foot in front of the other,
                                     really fast.''',
-                       video_url="http://www.fillmurray.com/200/300")
+                       video_url="https://www.youtube.com/watch?v=_kGESn8ArrU")
 
     cycling = Exercise(title="Bicycling",
                        muscle_group="Cardio",
                        difficulty="1",
                        description='''An excuse to wear really, really
                                     tight shorts.''',
-                       video_url="http://www.fillmurray.com/200/300")
+                       video_url="https://www.youtube.com/watch?v=4ssLDk1eX9w")
 
     db.session.add(pushups)
     db.session.add(mountainClimbers)

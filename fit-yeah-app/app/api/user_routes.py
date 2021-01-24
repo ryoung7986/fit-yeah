@@ -2,7 +2,9 @@ from flask import Blueprint, jsonify, request
 from flask_login import login_required
 from app.models import db, User, Workout, Workout_Plan, \
     User_Post, User_Stat
+from app.forms import UserStatsForm
 from sqlalchemy import update
+from .auth_routes import validation_errors_to_error_messages
 import json
 
 user_routes = Blueprint('users', __name__)
@@ -113,6 +115,41 @@ def unfollow_user(userId, id):
     user = User.query.get(userId)
     userToUnfollow = User.query.get(id)
     user.following.remove(userToUnfollow)
+    db.session.add(user)
+    db.session.commit()
+    return user.to_dict_full()
+
+
+# upload user stats
+@user_routes.route('/upload-stats', methods=['POST'])
+def upload_stats():
+    form = UserStatsForm()
+    print("HERRO")
+    print(form.data)
+    print("HERRRRRROOOOOO")
+    if form.validate_on_submit():
+        print("HERRO THERE")
+        print(form.data['sets'])
+        stat = User_Stat(
+            user_id=form.data['user_id'],
+            exercise_id=form.data['exercise_id'],
+            sets=form.data['sets'],
+            reps=form.data['reps'],
+            weight_lbs=form.data['weight_lbs'],
+            duration_min=form.data['duration_min'],
+            distance_mi=form.data['distance_mi'],
+        )
+        db.session.add(stat)
+        db.session.commit()
+        return stat.to_dict()
+
+
+# add points to user
+@user_routes.route('/add-points', methods=['PATCH'])
+def add_points():
+    data = json.loads(request.data)
+    user = User.query.get(data['user_id'])
+    user.points_earned += data['pointsToSubmit']
     db.session.add(user)
     db.session.commit()
     return user.to_dict_full()

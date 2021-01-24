@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { addUser, selectUser, selectUserWorkoutPlan } from '../user/userSlice';
+import { addUser, selectUser } from '../user/userSlice';
 import Button from '@material-ui/core/Button';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import UploadForm from '../UploadForm';

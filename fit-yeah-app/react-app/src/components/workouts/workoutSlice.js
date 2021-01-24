@@ -8,6 +8,13 @@ export const getWorkouts = createAsyncThunk(
   }
 )
 
+export const getWorkoutExercises = createAsyncThunk(
+  'workouts/getWorkoutExercises',
+  async (id) => {
+    return fetch(`api/workouts/exercises/${id}`)
+  }
+)
+
 export const workoutSlice = createSlice({
   name: 'workouts',
   initialState: {},
@@ -20,15 +27,8 @@ export const workoutSlice = createSlice({
     }
   },
   extraReducers: {
-    [getWorkouts.pending]: (state, action) => {
-      state.status = 'fetching workouts...'
-    },
     [getWorkouts.fulfilled]: (state, { payload }) => {
       state.workouts = payload;
-      state.status = 'successfully fetched workouts'
-    },
-    [getWorkouts.rejected]: (state, action) => {
-      state.status = 'failed fetching workouts'
     },
   }
 });
@@ -40,5 +40,6 @@ export const {
 
 
 export const selectWorkouts = state => state.workouts.workouts;
+export const selectWorkoutExercises = (state, id) => state.filter(workout => workout.id === id)
 
 export default workoutSlice.reducer;

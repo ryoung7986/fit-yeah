@@ -1,0 +1,27 @@
+.userStats {
+  display:flex;
+  flex-direction: column;
+  margin-top: 30px;
+  background-color: #107D7E ;
+  color: #f0f7f4;
+  padding: 20px;
+  border-radius: 30px;
+  box-shadow: 0px 5px 8px -2px rgba(0, 0, 0, 0.75);
+}
+
+.userStats__header > h2 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.inputs {
+  display: flex;
+  margin-bottom: 15px;
+  color: #f0f7f4;
+  justify-content: space-between;
+}
+
+.inputs > .MuiButton-root {
+  color: #f0f7f4;
+  margin-left: 10px;
+}

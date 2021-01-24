@@ -15,6 +15,7 @@ import UserStats from "./components/stats/UserStats";
 import ProfileComponent from './components/profile/ProfileComponent';
 import CreateWorkout from "./components/workouts/CreateWorkout";
 import WorkoutPlanForm from './components/workouts/WorkoutPlanForm';
+import WorkoutInfoPage from './components/workouts/WorkoutInfoPage';
 import Leaderboard from "./components/leaderboard/Leaderboard";
 import User from "./components/leaderboard/User";
 
@@ -258,7 +259,8 @@ function App() {
                 <Sidebar user={user} />
               </div>
               <div className="body__feed">
-                <UserStats user={user} />
+                {/* <UserStats user={user} /> */}
+                <WorkoutInfoPage />
               </div>
               {/* <div className="body__right">
                 <h1>Follower leaderboard?</h1>
