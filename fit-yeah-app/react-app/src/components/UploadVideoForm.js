@@ -4,21 +4,15 @@ import { selectUserAvatarUrl, selectUser, addUserAvatarUrl } from './user/userSl
 
 
 function UploadForm() {
-  const [image, setImage] = useState(null);
-  const [userAvatarUrl, setUserAvatarUrl] = useState('');
+  const [video, setVideo] = useState(null);
+  const [videoUrl, setVideoUrl] = useState('');
   const user = useSelector(selectUser);
-  const userAvatar = useSelector(selectUserAvatarUrl);
   const userId = user.id
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    imgUrl(userId, userAvatarUrl)
-    console.log(userAvatarUrl)
-  }, [userAvatarUrl])
-
-  const imgUrl = (userId) => {
+  const videoUrl = (userId) => {
     (async () => {
-      const imgUrl = userAvatarUrl
+      const imgUrl = videoUrl
       const response = await fetch(`/api/users/upload-avatar/${userId}`, {
         method: 'POST',
         headers: {
@@ -32,44 +26,41 @@ function UploadForm() {
     })()
   }
 
-  const uploadImg = async (data) => {
+  const uploadVideo = async (data) => {
     console.log('Uploading image...');
     let formData = new FormData();
     formData.append('image', data);
-    formData.append('test', 'stringvaluetest');
     const response = await fetch('/api/aws/upload', {
       method: 'POST',
       body: formData
     })
     const responseData = await response.json();
-    console.log("image upload successful")
-    setUserAvatarUrl(responseData.img_url);
+    console.log("video upload successful");
+    setVideoUrl(responseData.img_url);
     return responseData;
   }
 
-  const imgSubmit = (e) => {
+  const videoSubmit = (e) => {
     e.preventDefault();
-    uploadImg(image);
+    uploadVideo(video);
   }
 
-  const handleImageUpload = (e) => {
-    setImage(e.target.files[0])
+  const handleVideoUpload = (e) => {
+    setVideo(e.target.files[0])
   }
 
   return (
     <div className="modal">
-      <form
-        // enctype="multipart/form-data"
-        onSubmit={imgSubmit}>
+      <form onSubmit={videoSubmit}>
         <h3>
-          Upload image
+          Upload Video
         </h3>
         <div>
           <input
             type="file"
-            name="image"
-            onChange={handleImageUpload}
-            required />
+            name="video"
+            onChange={handleVideoUpload}
+          />
           <button type="submit">
             Upload!
           </button>

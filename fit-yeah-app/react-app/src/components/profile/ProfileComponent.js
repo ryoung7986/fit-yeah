@@ -6,6 +6,7 @@ import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import UploadForm from '../UploadForm';
 import Modal from 'react-modal';
 import UserRank from './UserRank';
+import ProgressBar from './ProgressBar';
 
 import './ProfileComponent.css'
 
@@ -97,11 +98,6 @@ function ProfileComponent() {
           <h1>{`${user.first_name} ${user.last_name}`}</h1>
         </div>
         <div className="profile__rank">
-          {/* {user.rank ? (
-            <p>{user.rank}</p>
-          ) : (
-              <p>Rank: rookie</p>
-            )} */}
           <UserRank user={user} />
         </div>
         <div className="profile__points">
@@ -110,6 +106,9 @@ function ProfileComponent() {
               <h5>{`Points Earned: ${user.points_earned}`}</h5>
             </div>
           ) : <h5>Points earned: 0</h5>}
+        </div>
+        <div className="progress">
+          <ProgressBar />
         </div>
         <div className="profile__userbio">
           {userBio ? (
