@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { selectWorkouts } from './workoutSlice';
-import { selectUser, addWorkoutPlan } from '../user/userSlice';
+import { selectUser, updateUser } from '../user/userSlice';
 import Button from '@material-ui/core/Button';
 import './WorkoutPlanForm.css';
 
@@ -14,9 +15,9 @@ function WorkoutPlanForm() {
   const [sat, setSat] = useState(null);
   const [sun, setSun] = useState(null);
   const workouts = useSelector(selectWorkouts);
-  // const workoutPlan = useSelector(selectUserWorkoutPlan);
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -31,6 +32,7 @@ function WorkoutPlanForm() {
         user_id,
         mon,
         tue,
+        wed,
         thurs,
         fri,
         sat,
@@ -38,7 +40,8 @@ function WorkoutPlanForm() {
       })
     })
     const responseData = await response.json()
-    dispatch(addWorkoutPlan(responseData))
+    dispatch(updateUser(user.id))
+    history.push('/my-profile')
   }
 
   const workoutMap = workouts.map((workout) => {

@@ -73,6 +73,7 @@ def create_workout():
 def new_workout_plan():
     form = WorkoutPlanForm()
     if form.validate_on_submit():
+        user = User.query.get(form.data['user_id'])
         workoutPlan = Workout_Plan(
             user_id=form.data['user_id'],
             mon=form.data['mon'],
@@ -85,7 +86,7 @@ def new_workout_plan():
         )
         db.session.add(workoutPlan)
         db.session.commit()
-        return workoutPlan.to_dict()
+        return user.to_dict_full()
 
 
 # fetch workout plan

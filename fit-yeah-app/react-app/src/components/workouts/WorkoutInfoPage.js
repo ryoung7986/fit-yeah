@@ -23,7 +23,6 @@ function WorkoutInfoPage() {
       </ol>
       <div className="workoutInfo__exercises">
         {workout.exercises.map(exercise => (
-          // <h1>{exercise.title}</h1>
           <ExerciseCard exercise={exercise} />
         ))}
       </div>

@@ -3,16 +3,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import MakePost from '../post/MakePost';
 import Post from '../post/Post';
 import { getPosts, selectPosts } from '../post/postSlice';
-import { selectFollowing } from '../user/userSlice';
+import { selectFollowing, selectUser } from '../user/userSlice';
 import { getComments, selectComments } from '../comment/commentSlice';
 
 import './Feed.css';
 
-function Feed({ user }) {
+function Feed() {
   const dispatch = useDispatch();
   const posts = useSelector(selectPosts);
   const comments = useSelector(selectComments);
   const followingUsers = useSelector(selectFollowing)
+  const user = useSelector(selectUser);
 
   const postOrder = posts.slice().sort((a, b) => {
     return (a.id > b.id) ? -1 : 1

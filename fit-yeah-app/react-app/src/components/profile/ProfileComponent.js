@@ -15,6 +15,7 @@ function ProfileComponent() {
   const [bioIsOpen, setBioIsOpen] = useState(false);
   const [bio, setBio] = useState('');
   const user = useSelector(selectUser);
+  // const userWorkoutPlan = user.workout_plan;
   const userId = user.id;
   const userBio = user.bio;
   const dispatch = useDispatch();
