@@ -1,0 +1,18 @@
+.userCard {
+  display: flex;
+  align-items: center;
+  width: auto;
+}
+
+.userCard__avatar > img {
+  margin-right: 20px;
+  border-radius: 10px;
+}
+
+.userCard__fullName {
+  margin-bottom: 15px;
+}
+
+.userCard__points {
+  margin-bottom: 10px;
+}
