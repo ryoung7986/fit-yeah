@@ -9,43 +9,43 @@ function ProgressBar() {
   let done;
 
 
-  if (userPoints < 100) {
+  if (userPoints < 1000) {
     done = (userPoints / 100) * 100
   }
-  if (userPoints >= 100 && userPoints < 500) {
+  if (userPoints >= 1000 && userPoints < 3000) {
     done = (userPoints / 500) * 100
   }
-  if (userPoints >= 500 && userPoints < 1000) {
+  if (userPoints >= 3000 && userPoints < 6000) {
     done = (userPoints / 1000) * 100
   }
-  if (userPoints >= 1000 && userPoints < 1500) {
+  if (userPoints >= 6000 && userPoints < 10000) {
     done = (userPoints / 1500) * 100
   }
-  if (userPoints >= 1500 && userPoints < 2000) {
+  if (userPoints >= 10000 && userPoints < 15000) {
     done = (userPoints / 2000) * 100
   }
-  if (userPoints >= 2000 && userPoints < 2500) {
+  if (userPoints >= 15000 && userPoints < 21000) {
     done = (userPoints / 2500) * 100
   }
-  if (userPoints >= 2500 && userPoints < 3000) {
+  if (userPoints >= 21000 && userPoints < 28000) {
     done = (userPoints / 3000) * 100
   }
-  if (userPoints >= 3000 && userPoints < 3500) {
+  if (userPoints >= 28000 && userPoints < 36000) {
     done = (userPoints / 3500) * 100
   }
-  if (userPoints >= 3500 && userPoints < 4000) {
+  if (userPoints >= 36000 && userPoints < 45000) {
     done = (userPoints / 4000) * 100
   }
-  if (userPoints >= 4000 && userPoints < 4500) {
+  if (userPoints >= 45000 && userPoints < 55000) {
     done = (userPoints / 4500) * 100
   }
-  if (userPoints >= 4500 && userPoints < 5000) {
+  if (userPoints >= 55000 && userPoints < 66000) {
     done = (userPoints / 5000) * 100
   }
-  if (userPoints >= 5000 && userPoints < 5500) {
+  if (userPoints >= 66000 && userPoints < 78000) {
     done = (userPoints / 5500) * 100
   }
-  if (userPoints >= 5500) {
+  if (userPoints >= 78000) {
     done = 100
   }
 
