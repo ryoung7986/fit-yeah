@@ -8,7 +8,7 @@ function ExerciseCard({ exercise }) {
   return (
     <div className="exerciseCard">
       <div className="videoPlayer">
-        <ReactPlayer url={exercise.video_url} />
+        <ReactPlayer className="react-player" url={exercise.video_url} />
       </div>
       <h2>{exercise.title}</h2>
       <h3>{exercise.muscle_group}</h3>
