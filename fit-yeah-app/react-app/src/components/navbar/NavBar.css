@@ -2,6 +2,7 @@
   display: flex;
   padding: 15px 20px;
   justify-content: space-between;
+  align-items: center;
   position: sticky;
   background-color:#107D7E;
   z-index: 100;
@@ -16,6 +17,7 @@
 
 .navbar__left img {
   height: 60px;
+  cursor: pointer;
 }
 
 .navbar__input {

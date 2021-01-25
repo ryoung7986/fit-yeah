@@ -41,7 +41,6 @@ function App() {
     (async () => {
       const user = await authenticate();
       dispatch(addUser({ user }));
-      console.log(user)
       if (!user.errors) {
         setAuthenticated(true);
         setLoaded(true)

@@ -72,6 +72,7 @@ export const {
 export const selectUser = state => state.user.user;
 export const selectUserBio = state => state.user.user.bio;
 export const selectFollowing = state => state.user.following;
+export const selectFollowers = state => state.user.followers;
 export const selectUserWorkoutPlan = state => state.user.user.workout_plan[0]
 export const selectAllUsers = state => state.user.users
 export const selectUserAvatarUrl = state => state.user.user.avatar_url

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Avatar } from '@material-ui/core';
 import './Comment.css'
 
-function Comment({ userId, content }) {
+function Comment({ userId, content, id }) {
   const [user, setUser] = useState(null);
   const [loaded, setLoaded] = useState(false);
 
@@ -18,7 +18,7 @@ function Comment({ userId, content }) {
   if (!loaded) return null;
 
   return (
-    <div className="comment">
+    <div className="comment" id={id}>
       <Avatar src={user.avatar_url} />
       <div className="comment__top">
         <div className="comment__details">

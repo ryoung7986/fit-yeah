@@ -21,9 +21,6 @@ function MakePost({ user }) {
   const dispatch = useDispatch();
   const modalRef = useRef();
 
-  useEffect(() => {
-    console.log(imgUrl)
-  }, [imgUrl])
 
   const handleSubmit = async (e) => {
     e.preventDefault();

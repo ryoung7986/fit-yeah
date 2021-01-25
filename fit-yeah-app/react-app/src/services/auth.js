@@ -5,7 +5,6 @@ export const authenticate = async () => {
     }
   });
   const responseData = await response.json();
-  console.log(responseData)
   return responseData;
 }
 

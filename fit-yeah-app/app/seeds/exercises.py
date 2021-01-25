@@ -5,42 +5,18 @@ from app.models import db, Exercise
 def seed_exercises():
 
     pushups = Exercise(title="Push Ups",
-                       muscle_group="Chest, Shoulders, Triceps, Abs",
+                       muscle_group="Resistance",
                        difficulty="1",
-                       description='''1. Start in a high plank position
-                                To get into a plank, place hands firmly on the
-                                floor, directly under shoulders. Ground toes
-                                into the floor to stabilize your lower half.
-
-                                Brace core (tighten abs as if preparing to
-                                take a punch), engage glutes and hamstrings,
-                                and flatten your back so your entire body is
-                                neutral and straight.
-
-                                2. Lower your body
-                                Keep back flat and eyes focused about 3 feet
-                                in front of you. Maintain a neutral neck and
-                                lower your body until chest grazes the floor.
-
-                                Don’t let your butt dip or stick out at any
-                                point during the move — your body should stay
-                                in a straight line from head to toe.
-
-                                Draw shoulder blades back and down, keeping
-                                elbows tucked close to your body (don’t “T”
-                                your arms).
-
-                                3. Push back up
-                                Keeping core engaged, exhale as you push back
-                                to starting position. Pro tip: Imagine you’re
-                                screwing your hands into the floor as you push
-                                back up. Repeat for 10–20 reps or as many as
-                                you can do with good form.
-                                ''',
+                       description='''Get down on all fours, placing your
+                                    hands slightly wider than your shoulders.
+                                    Straighten your arms and legs. Lower your
+                                    body until your chest nearly touches the
+                                    floor. Pause, then push yourself back up.
+                                    Repeat.''',
                        video_url="https://www.youtube.com/watch?v=IODxDxX7oi4")
 
     mountainClimbers = Exercise(title="Mountain Climbers",
-                                muscle_group="Abs / Back",
+                                muscle_group="Resistance",
                                 difficulty="1",
                                 description='''The plank (also called a front
                                 hold, hover, or abdominal bridge) is an
@@ -50,7 +26,7 @@ def seed_exercises():
                                 video_url="https://www.youtube.com/watch?v=cnyTQDSE884")
 
     pullups = Exercise(title="Pull-ups",
-                       muscle_group="Shoulders / Back",
+                       muscle_group="Resistance",
                        difficulty="3",
                        description='''Hold a pull-up bar with an overhand grip,
                                     hands shoulder-width apart. Brace your
@@ -60,7 +36,7 @@ def seed_exercises():
                        video_url="https://www.youtube.com/watch?v=3YvfRx31xDE")
 
     planks = Exercise(title="Planks",
-                      muscle_group="Abs, Back",
+                      muscle_group="Resistance",
                       difficulty="1",
                       description='''Plant hands directly under shoulders
                                     (slightly wider than shoulder width) like
@@ -80,7 +56,7 @@ def seed_exercises():
                       video_url="https://www.youtube.com/watch?v=ASdvN_XEl_c")
 
     jumpingJacks = Exercise(title="Jumping Jacks",
-                            muscle_group="Who knows?",
+                            muscle_group="Resistance",
                             difficulty="1",
                             description="Just flail around. Vigorously.",
                             video_url="https://www.youtube.com/watch?v=1b98WrRrmUs")
@@ -93,22 +69,21 @@ def seed_exercises():
                           video_url="https://www.youtube.com/watch?v=A-cFYWvaHr0")
 
     situps = Exercise(title="Situps",
-                      muscle_group="Abs",
+                      muscle_group="Resistance",
                       difficulty="2",
                       description='''Sit on the ground, lean back,
                                     then sit. up.''',
                       video_url="https://www.youtube.com/watch?v=jDwoBqPH0jk")
 
     crunches = Exercise(title="Crunches",
-                        muscle_group="Abs",
-                        difficulty="2",
+                        muscle_group="Resistance",
+                        difficulty="1",
                         description='''They're like situps,
                                     but this time, CRUNCH IT.''',
                         video_url="https://www.youtube.com/watch?v=Xyd_fa5zoEU")
 
     lunges = Exercise(title="Lunges",
-                      muscle_group='''Quads / Hammies / Gluteous Maximus /
-                                    The back-area / abs.''',
+                      muscle_group='''Resistance''',
                       difficulty="2",
                       description='''Lunge to the right, keeping the left leg
                       straight, shifting the hips over the right foot. Make
@@ -119,26 +94,26 @@ def seed_exercises():
                       video_url="https://www.youtube.com/watch?v=QOVaHwm-Q6U")
 
     benchPress = Exercise(title="Bench Press",
-                          muscle_group="Chest / Triceps",
+                          muscle_group="Added Weight",
                           difficulty="3",
                           description="Lift things up and put them down.",
                           video_url="https://www.youtube.com/watch?v=-MAABwVKxok")
 
     latPulldowns = Exercise(title="Lat Pulldowns",
-                            muscle_group="Lats",
+                            muscle_group="Added Weight",
                             difficulty="2",
                             description="Pull it down and let it go.",
                             video_url="https://www.youtube.com/watch?v=CAwf7n6Luuc")
 
     dumbBellPress = Exercise(title="Dumbbell Press",
-                             muscle_group="Chest / Triceps",
+                             muscle_group="Added Weight",
                              difficulty="3",
                              description='''Like bench press, but with
                                         dumbbells.''',
                              video_url="https://www.youtube.com/watch?v=xphvjGDZeYE")
 
     legExtensions = Exercise(title="Leg Extensions",
-                             muscle_group="Quads",
+                             muscle_group="Added Weight",
                              difficulty="2",
                              description='''The leg press is a compound weight
                              training exercise in which the individual pushes
@@ -148,13 +123,13 @@ def seed_exercises():
                              video_url="https://www.youtube.com/watch?v=tTbJBUKnWU8")
 
     bicepCurls = Exercise(title="Bicep Curls",
-                          muscle_group="Biceps",
+                          muscle_group="Added Weight",
                           difficulty="2",
                           description="Those guns should be illegal.",
                           video_url="https://www.youtube.com/watch?v=in7PaeYlhrM")
 
     tricepsPushdowns = Exercise(title="Triceps Pushdowns",
-                                muscle_group="Triceps",
+                                muscle_group="Added Weight",
                                 difficulty="2",
                                 description='''A pushdown is a strength
                                 training exercise used for strengthening the
@@ -166,7 +141,7 @@ def seed_exercises():
                                 video_url="https://www.youtube.com/watch?v=NtsMXK8rxX0")
 
     tricepsDip = Exercise(title="Tricep Dips",
-                          muscle_group="Triceps",
+                          muscle_group="Resistance",
                           difficulty="4",
                           description='''hold your entire body weight up with
                           your arms extended and feet hovering over the floor,
@@ -176,19 +151,19 @@ def seed_exercises():
                           video_url="https://www.youtube.com/watch?v=6kALZikXxLc")
 
     bentOverRow = Exercise(title="Bent Over Row",
-                           muscle_group="Shoulders",
+                           muscle_group="Added Weight",
                            difficulty="2",
                            description="Bend over and row.",
                            video_url="https://www.youtube.com/watch?v=HE5IBnWYEq4")
 
     squats = Exercise(title="Squats",
-                      muscle_group="Moderate",
+                      muscle_group="Added Weight",
                       difficulty="3",
                       description="Bend over.",
                       video_url="https://www.youtube.com/watch?v=U3HlEF_E9fo")
 
     cleanJerk = Exercise(title="Clean and Jerk",
-                         muscle_group="All of them.",
+                         muscle_group="Added Weight",
                          difficulty="5",
                          description='''Do you yell at the gym a lot? Do you
                          want to? If you answered 'yes' to either of those
@@ -196,10 +171,99 @@ def seed_exercises():
                          video_url="https://www.youtube.com/watch?v=IcCGLoNqN2U")
 
     latRaise = Exercise(title="Lat Raise",
-                        muscle_group="Lats",
+                        muscle_group="Added Weight",
                         difficulty="3",
-                        description='''Who the hell even knows?''',
+                        description='''Stand or sit with a dumbbell in each
+                                    hand at your sides. Keep your back
+                                    straight, brace your core, and then slowly
+                                    lift the weights out to the side until
+                                    your arms are parallel with the floor,
+                                    with the elbow slightly bent. Then lower
+                                    them back down, again in measured fashion.
+                                    ''',
                         video_url="https://www.youtube.com/watch?v=WJm9zA2NY8E")
+
+    overheadDumbbellPress = Exercise(title="Overhead Dumbbell Press",
+                                     muscle_group="Added Weight",
+                                     difficulty="3",
+                                     description='''Stand or sit with a
+                                     dumbbell in each hand at your sides. Keep
+                                     your back straight, brace your core, and
+                                     then slowly lift the weights out to the
+                                     side until your arms are parallel with
+                                     the floor, with the elbow slightly bent.
+                                     Then lower them back down, again in
+                                     measured fashion.''',
+                                     video_url="https://www.youtube.com/watch?v=M2rwvNhTOu0")
+
+    dumbbellFlys = Exercise(title="Dumbbell Chest Flys",
+                            muscle_group="Added Weight",
+                            difficulty="3",
+                            description='''Lie on a flat surface, whether it’s
+                                        the floor or a bench. Hold a dumbbell
+                                        in each hand, above you. Your palms
+                                        should be facing each other, but the
+                                        dumbbells shouldn’t be touching. If
+                                        you’re on the floor, then bend at the
+                                        knees so that your feet are flat on
+                                        the floor. Lower the weight slowly by
+                                        opening your arms to either side. Go
+                                        as far as comfortable but don’t worry
+                                        about going too deep. The magic
+                                        happens at the top of the exercise,
+                                        not the bottom.''',
+                            video_url="https://www.youtube.com/watch?v=QENKPHhQVi4")
+
+    cableCrossover = Exercise(title="Cable Crossover",
+                              muscle_group="Added Weight",
+                              difficulty="3",
+                              description='''Lie on a flat surface, whether
+                                            it’s the floor or a bench. Hold a
+                                            dumbbell in each hand, above you.
+                                            Your palms should be facing each
+                                            other, but the dumbbells shouldn’t
+                                            be touching. If you’re on the
+                                            floor, then bend at the knees so
+                                            that your feet are flat on the
+                                            floor. Lower the weight slowly by
+                                            opening your arms to either side.
+                                            Go as far as comfortable but don’t
+                                            worry about going too deep. The
+                                            magic happens at the top of the
+                                            exercise, not the bottom.''',
+                              video_url="https://www.youtube.com/watch?v=taI4XduLpTk")
+
+    burpees = Exercise(title="Burpees",
+                       muscle_group="Resistance",
+                       difficulty="2",
+                       description='''Start by standing upright with your feet
+                       shoulder-width apart and your arms down at your sides.
+                       With your hands out in front of you, start to squat
+                       down. When your hands reach the ground, pop your legs
+                       straight back into a pushup position. Jump your feet up
+                       to your palms by hinging at the waist. Get your feet as
+                       close to your hands as you can get, landing them
+                       outside your hands if necessary. Stand up straight,
+                       bringing your arms above your head and jump. This is
+                       one rep. Complete 3 sets of 10 reps as a beginner.''',
+                       video_url="https://www.youtube.com/watch?v=qLBImHhCXSw")
+
+    skullCrushers = Exercise(title="Skull Crushers",
+                             muscle_group="Added Weight",
+                             difficulty="2",
+                             description='''Start by standing upright with
+                             your feet shoulder-width apart and your arms down
+                             at your sides. With your hands out in front of
+                             you, start to squat down. When your hands reach
+                             the ground, pop your legs straight back into a
+                             pushup position. Jump your feet up to your palms
+                             by hinging at the waist. Get your feet as close
+                             to your hands as you can get, landing them
+                             outside your hands if necessary. Stand up
+                             straight, bringing your arms above your head and
+                             jump. This is one rep. Complete 3 sets of 10 reps
+                             as a beginner.''',
+                             video_url="https://www.youtube.com/watch?v=VP9Qp72zZ_c")
 
     jogging = Exercise(title="Running",
                        muscle_group="Cardio",
@@ -234,6 +298,14 @@ def seed_exercises():
     db.session.add(bentOverRow)
     db.session.add(squats)
     db.session.add(latRaise)
+    db.session.add(jogging)
+    db.session.add(cycling)
+    db.session.add(skullCrushers)
+    db.session.add(burpees)
+    db.session.add(cableCrossover)
+    db.session.add(dumbbellFlys)
+    db.session.add(overheadDumbbellPress)
+    db.session.add(cleanJerk)
 
     db.session.commit()
 

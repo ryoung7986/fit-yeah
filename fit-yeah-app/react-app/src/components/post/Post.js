@@ -49,10 +49,13 @@ function Post({ image, video, timestamp, content, postId, postComments, postUser
 
   const renderPostComments = postComments.map((comment) => {
     return (
-      <Comment
-        userId={comment.user_id}
-        content={comment.content}
-      />
+      <div className="comment" id={comment.id} >
+        <Comment
+          id={comment.id}
+          userId={comment.user_id}
+          content={comment.content}
+        />
+      </div>
     )
   })
 
@@ -61,7 +64,7 @@ function Post({ image, video, timestamp, content, postId, postComments, postUser
   }, [render])
 
   return (
-    <div className='post'>
+    <div className='post' id={postId}>
       <div className='post__top'>
         <Avatar src={postUser && `${postUser.avatar_url}`} className='post__avatar' />
         <div className="post__top--info">
