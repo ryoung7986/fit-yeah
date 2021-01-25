@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
 import Button from '@material-ui/core/Button';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
@@ -27,6 +28,7 @@ function UserDropdown({ userName, setAuthenticated }) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
+  const history = useHistory();
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -36,9 +38,13 @@ function UserDropdown({ userName, setAuthenticated }) {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
     }
-
     setOpen(false);
   };
+
+  const getProfile = () => {
+    history.push('/my-profile');
+    setOpen(false);
+  }
 
   function handleListKeyDown(event) {
     if (event.key === 'Tab') {
@@ -53,7 +59,6 @@ function UserDropdown({ userName, setAuthenticated }) {
     if (prevOpen.current === true && open === false) {
       anchorRef.current.focus();
     }
-
     prevOpen.current = open;
   }, [open]);
 
@@ -75,8 +80,7 @@ function UserDropdown({ userName, setAuthenticated }) {
             <Paper>
               <ClickAwayListener onClickAway={handleClose}>
                 <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                  <MenuItem onClick={handleClose}>My Profile</MenuItem>
-                  <MenuItem onClick={handleClose}>My Progress</MenuItem>
+                  <MenuItem onClick={getProfile}>My Profile</MenuItem>
                   <MenuItem onClick={handleClose}>
                     <LogoutButton setAuthenticated={setAuthenticated} />
                   </MenuItem>
