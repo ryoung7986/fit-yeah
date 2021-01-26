@@ -49,7 +49,7 @@ function Post({ image, video, timestamp, content, postId, postComments, postUser
 
   const renderPostComments = postComments.map((comment) => {
     return (
-      <div className="comment" id={comment.id} >
+      <div id={comment.id} >
         <Comment
           id={comment.id}
           userId={comment.user_id}

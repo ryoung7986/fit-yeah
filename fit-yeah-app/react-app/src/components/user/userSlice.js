@@ -41,35 +41,38 @@ export const userSlice = createSlice({
     users: {},
     followers: null,
     following: null,
+    searchUsersResults: []
   },
   reducers: {
     addUser: (state, action) => {
-      state.user = action.payload.user;
+      state.user = action.payload.user
     },
     addUserAvatarUrl: (state, action) => {
-      state.user.avatar_url = action.payload;
+      state.user.avatar_url = action.payload
     },
     addWorkoutPlan: (state, action) => {
-      console.log(action.payload);
-      state.user.workout_plan = action.payload;
+      state.user.workout_plan = action.payload
     },
     addFollowers: (state, action) => {
-      state.followers = action.payload.followers;
+      state.followers = action.payload.followers
     },
     addFollowing: (state, action) => {
-      state.following = action.payload.following;
+      state.following = action.payload.following
     },
+    searchUsersResults: (state, action) => {
+      console.log(action.payload)
+      state.searchUsersResults = action.payload
+    }
   },
   extraReducers: {
     [addAllUsersToState.fulfilled]: (state, { payload }) => {
-      state.users = payload.users;
+      state.users = payload.users
     },
     [followUser.fulfilled]: (state, { payload }) => {
       state.user = payload.user
     },
     [updateUser.fulfilled]: (state, { payload }) => {
       state.user = payload
-      console.log(payload)
     }
   }
 });
@@ -80,6 +83,7 @@ export const {
   addFollowing,
   addUserAvatarUrl,
   addWorkoutPlan,
+  searchUsersResults,
 } = userSlice.actions;
 
 
@@ -87,8 +91,8 @@ export const selectUser = state => state.user.user;
 export const selectUserBio = state => state.user.user.bio;
 export const selectFollowing = state => state.user.following;
 export const selectFollowers = state => state.user.followers;
-// export const selectUserWorkoutPlan = state => state.user.user.workout_plan[0]
-export const selectAllUsers = state => state.user.users
-export const selectUserAvatarUrl = state => state.user.user.avatar_url
+export const selectAllUsers = state => state.user.users;
+export const selectUserAvatarUrl = state => state.user.user.avatar_url;
+export const selectUsersSearchResults = state => state.user.searchUsersResults;
 
 export default userSlice.reducer;

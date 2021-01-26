@@ -17,6 +17,7 @@ import WorkoutPlanForm from './components/workouts/WorkoutPlanForm';
 import WorkoutInfoPage from './components/workouts/WorkoutInfoPage';
 import Leaderboard from "./components/leaderboard/Leaderboard";
 import User from "./components/leaderboard/User";
+import SearchUsersResults from './components/navbar/SearchUsersResults';
 
 import { authenticate } from "./services/auth";
 import { useDispatch, useSelector } from 'react-redux';
@@ -173,9 +174,20 @@ function App() {
               <div className="body__feed">
                 <Leaderboard user={user} />
               </div>
-              {/* <div className="body__right">
-                <h1>Your current rank</h1>
-              </div> */}
+            </div>
+          </div>
+        </ProtectedRoute>
+
+        <ProtectedRoute path="/user-search" exact={true} authenticated={authenticated}>
+          <div className="app">
+            <NavBar setAuthenticated={setAuthenticated} />
+            <div className="app__body">
+              <div className="body__sidebar">
+                <Sidebar user={user} />
+              </div>
+              <div className="body__feed">
+                <SearchUsersResults />
+              </div>
             </div>
           </div>
         </ProtectedRoute>
@@ -190,9 +202,6 @@ function App() {
               <div className="body__feed">
                 <User />
               </div>
-              {/* <div className="body__right">
-                <h1>Your current rank</h1>
-              </div> */}
             </div>
           </div>
         </ProtectedRoute>
@@ -208,9 +217,6 @@ function App() {
                 {/* <FollowersList user={user} /> */}
                 <FollowingList user={user} />
               </div>
-              {/* <div className="body__right">
-                <h1>Follower leaderboard?</h1>
-              </div> */}
             </div>
           </div>
         </ProtectedRoute>
@@ -225,9 +231,6 @@ function App() {
               <div className="body__feed">
                 <WorkoutsList user={user} />
               </div>
-              {/* <div className="body__right">
-                <h1>Follower leaderboard?</h1>
-              </div> */}
             </div>
           </div>
         </ProtectedRoute>
@@ -242,9 +245,6 @@ function App() {
               <div className="body__feed">
                 <UserStats user={user} />
               </div>
-              {/* <div className="body__right">
-                <h1>Follower leaderboard?</h1>
-              </div> */}
             </div>
           </div>
         </ProtectedRoute>
@@ -257,12 +257,8 @@ function App() {
                 <Sidebar user={user} />
               </div>
               <div className="body__feed">
-                {/* <UserStats user={user} /> */}
                 <WorkoutInfoPage />
               </div>
-              {/* <div className="body__right">
-                <h1>Follower leaderboard?</h1>
-              </div> */}
             </div>
           </div>
         </ProtectedRoute>
@@ -277,9 +273,6 @@ function App() {
               <div className="body__feed">
                 <WorkoutPlanForm user={user} />
               </div>
-              {/* <div className="body__right">
-                <h1>Follower leaderboard?</h1>
-              </div> */}
             </div>
           </div>
         </ProtectedRoute>

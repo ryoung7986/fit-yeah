@@ -9,7 +9,7 @@ import EventAvailableIcon from '@material-ui/icons/EventAvailable';
 import AssessmentOutlinedIcon from '@material-ui/icons/AssessmentOutlined';
 import { Avatar } from '@material-ui/core';
 import UserDropdown from './UserDropdown';
-import SearchBar from './SearchBar';
+import SearchUsers from './SearchUsers';
 
 import './NavBar.css';
 
@@ -26,7 +26,7 @@ const NavBar = ({ setAuthenticated }) => {
               onClick={() => history.push('/')}
               src="https://fit-yeah.s3.amazonaws.com/FY-Logo-3.png"
               alt="" />
-            <SearchBar />
+            <SearchUsers />
           </div>
           <div className="navbar__middle">
             <div className="navbar__option" activeclassname="navbar__option--active">
