@@ -18,6 +18,7 @@ import WorkoutInfoPage from './components/workouts/WorkoutInfoPage';
 import Leaderboard from "./components/leaderboard/Leaderboard";
 import User from "./components/leaderboard/User";
 import SearchUsersResults from './components/navbar/SearchUsersResults';
+import SearchWorkoutsResults from './components/workouts/SearchWorkoutsResults';
 
 import { authenticate } from "./services/auth";
 import { useDispatch, useSelector } from 'react-redux';
@@ -187,6 +188,20 @@ function App() {
               </div>
               <div className="body__feed">
                 <SearchUsersResults />
+              </div>
+            </div>
+          </div>
+        </ProtectedRoute>
+
+        <ProtectedRoute path="/workout-search" exact={true} authenticated={authenticated}>
+          <div className="app">
+            <NavBar setAuthenticated={setAuthenticated} />
+            <div className="app__body">
+              <div className="body__sidebar">
+                <Sidebar user={user} />
+              </div>
+              <div className="body__feed">
+                <SearchWorkoutsResults />
               </div>
             </div>
           </div>

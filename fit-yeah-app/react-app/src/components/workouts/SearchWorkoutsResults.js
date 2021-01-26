@@ -1,13 +1,12 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { selectWorkouts } from './workoutSlice';
+import { selectWorkoutSearchResults } from './workoutSlice';
 import Workout from './Workout';
 import SearchWorkouts from './SearchWorkouts';
-import './WorkoutsList.css'
 
-function WorkoutsList() {
-  const workouts = useSelector(selectWorkouts);
+function SearchWorkoutsResults() {
+  const workoutSearchResults = useSelector(selectWorkoutSearchResults);
 
   return (
     <div className="workoutsList">
@@ -15,7 +14,7 @@ function WorkoutsList() {
         <SearchWorkouts />
       </div>
       <div>
-        {workouts && workouts.slice().reverse().map((workout) => (
+        {workoutSearchResults && workoutSearchResults.map((workout) => (
           <NavLink
             style={{ textDecoration: 'none' }}
             to={{
@@ -30,4 +29,4 @@ function WorkoutsList() {
   )
 }
 
-export default WorkoutsList
+export default SearchWorkoutsResults

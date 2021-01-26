@@ -5,7 +5,7 @@ import { selectAllUsers, searchUsersResults } from '../user/userSlice';
 import SearchIcon from '@material-ui/icons/Search';
 import './SearchUsers.css';
 
-function SearchBar() {
+function SearchUsers() {
   const allUsers = useSelector(selectAllUsers);
   const [input, setInput] = useState('')
   const dispatch = useDispatch();
@@ -20,7 +20,7 @@ function SearchBar() {
     let results = allUsers.filter(user => {
       return user.first_name.toLowerCase().includes(input.toLowerCase()) ||
         user.last_name.toLowerCase().includes(input.toLowerCase()) ||
-        user.username.toLowerCase().includes(input.toLocaleLowerCase())
+        user.username.toLowerCase().includes(input.toLowerCase())
     })
     dispatch(searchUsersResults(results))
     setInput('')
@@ -39,4 +39,4 @@ function SearchBar() {
   )
 }
 
-export default SearchBar
+export default SearchUsers

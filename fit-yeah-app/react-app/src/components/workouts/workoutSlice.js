@@ -17,13 +17,19 @@ export const getWorkoutExercises = createAsyncThunk(
 
 export const workoutSlice = createSlice({
   name: 'workouts',
-  initialState: {},
+  initialState: {
+    searchWorkoutsResults: []
+  },
   reducers: {
     addWorkouts: (state, action) => {
       state.workouts = action.payload['workouts'];
     },
     addWorkoutPlan: (state, action) => {
       console.log(action.payload['workout_plan'])
+    },
+    searchWorkoutsResults: (state, action) => {
+      console.log(action.payload)
+      state.searchWorkoutsResults = action.payload
     }
   },
   extraReducers: {
@@ -35,11 +41,13 @@ export const workoutSlice = createSlice({
 
 export const {
   addWorkouts,
-  addWorkoutPlan
+  addWorkoutPlan,
+  searchWorkoutsResults
 } = workoutSlice.actions;
 
 
 export const selectWorkouts = state => state.workouts.workouts;
 export const selectWorkoutExercises = (state, id) => state.filter(workout => workout.id === id)
+export const selectWorkoutSearchResults = state => state.workouts.searchWorkoutsResults
 
 export default workoutSlice.reducer;

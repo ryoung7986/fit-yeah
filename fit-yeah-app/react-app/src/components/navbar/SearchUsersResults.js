@@ -7,7 +7,6 @@ import './SearchUsersResults.css';
 
 function SearchUsersResults() {
   const searchResults = useSelector(selectUsersSearchResults);
-  console.log(searchResults)
 
   return (
     <div className="usersSearchResults">

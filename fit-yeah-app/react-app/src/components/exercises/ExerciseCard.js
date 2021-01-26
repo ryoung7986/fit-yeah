@@ -3,8 +3,6 @@ import ReactPlayer from 'react-player';
 import './ExerciseCard.css';
 
 function ExerciseCard({ exercise }) {
-  console.log("Hello?")
-  console.log(exercise)
   return (
     <div className="exerciseCard">
       <div className="videoPlayer">
