@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import WorkoutDropdown from './WorkoutDropdown';
 import { selectUser } from '../user/userSlice';
 import { useSelector } from 'react-redux';
+import Button from '@material-ui/core/Button';
 import './CreateWorkout.css'
 
 function CreateWorkout() {
@@ -66,8 +67,8 @@ function CreateWorkout() {
       {step === 0 && (
         <div className="create-workout">
           <form onSubmit={onSubmit} className="create-workout__form">
-            <div className="create-workout__form--div">
-              <label>Title</label>
+            <div className="create-workout__form--title">
+              <h2>Title</h2>
               <input
                 className="create-workout__form--input"
                 type="text"
@@ -76,7 +77,7 @@ function CreateWorkout() {
                 value={title}
               ></input>
             </div>
-            <div className="create-workout__form--div">
+            {/* <div className="create-workout__form--div">
               <label>Subtitle</label>
               <input
                 className="create-workout__form--input"
@@ -85,9 +86,9 @@ function CreateWorkout() {
                 onChange={updateSubtitle}
                 value={subtitle}
               ></input>
-            </div>
-            <div className="create-workout__form--div">
-              <label>Description</label>
+            </div> */}
+            <div className="create-workout__form--description">
+              <h2>Description</h2>
               <input
                 className="create-workout__form--input"
                 type="text"
@@ -96,13 +97,19 @@ function CreateWorkout() {
                 value={description}
               ></input>
             </div>
-            <button type="submit">Create Workout</button>
+            <div className="create-workout__button">
+              <Button
+                variant="contained"
+                type="submit">Create Workout</Button>
+            </div>
           </form>
         </div>
       )}
       {step === 1 && (
         <div className="workout-dropdown">
-          <h1>Add Exercises</h1>
+          <div className="workout-dropdown__title">
+            <h1>Add Exercises</h1>
+          </div>
           <WorkoutDropdown title="select exercise" items={exercises} workoutId={workoutId} setStep={setStep} />
         </div>
       )}

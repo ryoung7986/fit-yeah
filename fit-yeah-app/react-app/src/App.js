@@ -20,6 +20,8 @@ import User from "./components/leaderboard/User";
 import SearchUsersResults from './components/navbar/SearchUsersResults';
 import SearchWorkoutsResults from './components/workouts/SearchWorkoutsResults';
 
+import WorkoutDropdown from './components/workouts/WorkoutDropdown';
+
 import { authenticate } from "./services/auth";
 import { useDispatch, useSelector } from 'react-redux';
 import { addUser, addFollowing, addFollowers, addAllUsersToState, selectUser } from './components/user/userSlice';

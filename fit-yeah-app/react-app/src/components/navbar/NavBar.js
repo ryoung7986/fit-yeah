@@ -57,7 +57,7 @@ const NavBar = ({ setAuthenticated }) => {
           </div>
           <div className="navbar__right">
             <div className="navbar__info">
-              <Avatar src={user.avatar_url} fontSize="large" style={{ width: '80px', height: '80px' }} />
+              <Avatar src={user.avatar_url} fontSize="large" style={{ width: '60px', height: '60px' }} />
               <UserDropdown setAuthenticated={setAuthenticated} className="userDropdown" userName={user.first_name} />
             </div>
           </div>

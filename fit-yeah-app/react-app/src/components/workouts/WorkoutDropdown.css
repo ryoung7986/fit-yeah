@@ -1,10 +1,21 @@
 .dd-wrapper {
-  border: 1px solid black;
-  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color:#107D7E;
+  padding: 50px;
+  color: #f0f7f4;
+  border-radius: 30px;
+  box-shadow: 0px 5px 8px -2px rgba(0, 0, 0, 0.75);
 }
 
 .dd-wrapper:hover {
   cursor: pointer;
+}
+
+.dd-wrapper > .MuiButton-root {
+  color: #107D7E;
+  padding:10px;
 }
 
 .dd-header {
@@ -12,6 +23,17 @@
   padding: 30px;
 }
 
-.dd-header__title {
-  margin-right: 30px;
+.dd-list__item {
+  list-style-type: none;
+  margin-bottom: 5px;
+}
+
+.dd-list__item > .MuiButton-root {
+  color: #f0f7f4;
+}
+
+.dd-list__container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
 }

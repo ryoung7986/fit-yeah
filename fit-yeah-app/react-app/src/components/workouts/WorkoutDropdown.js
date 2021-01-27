@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectUser } from '../user/userSlice';
 import { getPosts } from '../post/postSlice';
 import { addWorkouts } from './workoutSlice';
+import Button from '@material-ui/core/Button';
 import './WorkoutDropdown.css';
 
 function WorkoutDropdown({ title, items, workoutId, setStep }) {
@@ -64,7 +65,8 @@ function WorkoutDropdown({ title, items, workoutId, setStep }) {
 
   return (
     <div className="dd-wrapper">
-      <div
+      <Button
+        variant="contained"
         tabIndex={0}
         className="dd-header"
         role="button"
@@ -74,24 +76,21 @@ function WorkoutDropdown({ title, items, workoutId, setStep }) {
         <div className="dd-header__title">
           <p className="dd-header__title--bold">{title}</p>
         </div>
-        <div className="dd-header__action">
-          <p>{open ? 'Close' : 'Open'}</p>
-        </div>
-      </div>
+      </Button>
       {open && (
-        <>
+        <div className="dd-list__container">
           <ul className="dd-list">
             {items.map((item) => (
               <li key={item.id} className="dd-list__item">
-                <button type="button" onClick={() => handleOnClick(item)}>
+                <Button variant="outlined" type="button" onClick={() => handleOnClick(item)}>
                   <span>{item.title}</span>
-                  <span>{isItemInSelection(item) && '   (Selected)'}</span>
-                </button>
+                  <span>{isItemInSelection(item) && ' --  (Selected)'}</span>
+                </Button>
               </li>
             ))}
           </ul>
-          <button onClick={onSubmit}>Submit your exercises</button>
-        </>
+          <Button variant="contained" onClick={onSubmit}>Submit your exercises</Button>
+        </div>
       )}
     </div>
   )

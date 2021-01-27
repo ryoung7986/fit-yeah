@@ -1,25 +1,57 @@
 .create-workout {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
   margin-top: 30px;
+  background-color: #107D7E;
+  padding: 30px;
+  border-radius: 30px;
+  box-shadow: 0px 5px 8px -2px rgba(0, 0, 0, 0.75);
 }
 
 .create-workout__form {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
-.create-workout__form--div {
+.create-workout__form--title {
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
+  color: #f0f7f4;
+  width: 100%;
 }
 
-.create-workout__form--div > input {
+.create-workout__form--description {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  color: #f0f7f4;
+}
+
+.create-workout__form--description > input {
   margin-left: 20px;
 }
 
-.workout-dropdown {
+.workout-dropdown__title {
   display: flex;
+  justify-content: center;
+  background-color: #107D7E;
+  color: #f0f7f4;
+  padding: 20px;
+  border-radius: 30px;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  box-shadow: 0px 5px 8px -2px rgba(0, 0, 0, 0.75);
+}
+
+.create-workout__button {
+  display: flex;
+  align-items: center;
+  justify-items: center;
+}
+
+.create-workout__button > .MuiButton-root {
+  margin-top: 20px;
+  color: #107D7E;
 }
