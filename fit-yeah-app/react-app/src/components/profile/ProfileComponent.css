@@ -110,3 +110,7 @@
 .ReactModal__Overlay--before-close{
   opacity: 0;
 }
+
+.profile__userbio {
+  margin-bottom: 20px;
+}

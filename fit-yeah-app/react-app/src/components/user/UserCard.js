@@ -13,8 +13,10 @@ function UserCard({ user }) {
       <div className="userCard__left">
         <div className="userCard__avatar">
           <img
-            src='http://www.fillmurray.com/140/100'
-            alt=''
+            src={user.avatar_url}
+            width="200"
+            height="200"
+            alt='User has no profile image yet.'
             className="userCard__avatar--image" />
         </div>
       </div>
@@ -42,11 +44,6 @@ function UserCard({ user }) {
         </div>
       </div>
     </div >
-    // <div className="userCard">
-    //   <h2>{user.username}</h2>
-    //   <h4>{`${user.first_name} ${user.last_name}`}</h4>
-    //   <h6>{`Points earned: ${user.points_earned}`}</h6>
-    // </div>
   );
 }
 export default UserCard;
