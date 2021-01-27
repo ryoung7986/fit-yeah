@@ -229,7 +229,6 @@ function App() {
                 <Sidebar user={user} />
               </div>
               <div className="body__feed">
-                {/* <FollowersList user={user} /> */}
                 <FollowingList user={user} />
               </div>
             </div>

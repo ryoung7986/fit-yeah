@@ -29,6 +29,19 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
     }
   };
 
+  const demoUser = async (e) => {
+    e.preventDefault();
+
+    const user = await login('demo@aa.io', 'password');
+    if (!user.errors) {
+      localStorage.setItem('user', JSON.stringify(user))
+      setAuthenticated(true);
+      dispatch(addUser({ user: user }));
+    } else {
+      setErrors(user.errors);
+    }
+  };
+
   const updateEmail = (e) => {
     setEmail(e.target.value);
   };
@@ -87,6 +100,14 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
             Sign Up
           </Button>
         </NavLink>
+      </div>
+      <div className="demo-user__button">
+        <Button
+          onClick={demoUser}
+          variant="outlined"
+          className="signup__button">
+          Demo User
+        </Button>
       </div>
     </div>
   );

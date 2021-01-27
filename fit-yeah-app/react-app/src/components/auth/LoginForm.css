@@ -56,3 +56,11 @@
 .signup__navlink {
   text-decoration: none;
 }
+
+.demo-user__button {
+  margin-top: 15px;
+}
+
+.demo-user__button > .MuiButton-root {
+  color: #f0f7f4;
+}
