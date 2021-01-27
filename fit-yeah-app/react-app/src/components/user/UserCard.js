@@ -1,6 +1,5 @@
 import React from "react";
 import UserRank from '../profile/UserRank';
-import ProgressBar from '../profile/ProgressBar';
 import './UserCard.css';
 
 function UserCard({ user }) {

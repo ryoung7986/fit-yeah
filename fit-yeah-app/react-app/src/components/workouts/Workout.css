@@ -19,7 +19,7 @@
   width: 100%
 }
 
-.workout__title > h3 {
+.workout__title > h2 {
   color: #f0f7f4;
 }
 
@@ -34,6 +34,6 @@
   width: 100%;
 }
 
-.workout__description > h6 {
+.workout__description > h4 {
   color: #f0f7f4;
 }

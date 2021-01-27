@@ -5,11 +5,11 @@ function Workout({ workout }) {
   return (
     <div className="workout">
       <div className="workout__title">
-        <h3>{workout.title}</h3>
+        <h2>{workout.title}</h2>
         <h5>{workout.subtitle}</h5>
       </div>
       <div className="workout__description">
-        <h6>{workout.description}</h6>
+        <h4>{workout.description}</h4>
       </div>
     </div>
   )

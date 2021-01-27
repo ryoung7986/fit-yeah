@@ -14,14 +14,10 @@ import UserStats from "./components/stats/UserStats";
 import ProfileComponent from './components/profile/ProfileComponent';
 import CreateWorkout from "./components/workouts/CreateWorkout";
 import WorkoutPlanForm from './components/workouts/WorkoutPlanForm';
-import WorkoutInfoPage from './components/workouts/WorkoutInfoPage';
 import Leaderboard from "./components/leaderboard/Leaderboard";
 import User from "./components/leaderboard/User";
 import SearchUsersResults from './components/navbar/SearchUsersResults';
 import SearchWorkoutsResults from './components/workouts/SearchWorkoutsResults';
-
-import WorkoutDropdown from './components/workouts/WorkoutDropdown';
-
 import { authenticate } from "./services/auth";
 import { useDispatch, useSelector } from 'react-redux';
 import { addUser, addFollowing, addFollowers, addAllUsersToState, selectUser } from './components/user/userSlice';
@@ -273,7 +269,7 @@ function App() {
                 <Sidebar user={user} />
               </div>
               <div className="body__feed">
-                <WorkoutInfoPage />
+                <h1>Workout Plan</h1>
               </div>
             </div>
           </div>

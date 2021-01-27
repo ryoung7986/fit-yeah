@@ -48,12 +48,6 @@ function CreateWorkout() {
     setDescription(e.target.value);
   };
 
-  // const dropdownOptions = async () => {
-  //   const response = await fetch('/api/exercises');
-  //   const responseData = await response.json();
-  //   setExercises(responseData.exercises)
-  // }
-
   useEffect(() => {
     (async () => {
       const response = await fetch('/api/exercises');
@@ -77,16 +71,6 @@ function CreateWorkout() {
                 value={title}
               ></input>
             </div>
-            {/* <div className="create-workout__form--div">
-              <label>Subtitle</label>
-              <input
-                className="create-workout__form--input"
-                type="text"
-                name="subtitle"
-                onChange={updateSubtitle}
-                value={subtitle}
-              ></input>
-            </div> */}
             <div className="create-workout__form--description">
               <h2>Description</h2>
               <input
