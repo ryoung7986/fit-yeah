@@ -1,9 +1,9 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import moment from 'moment';
 import { selectWorkouts } from '../workouts/workoutSlice';
-import { selectUser } from '../user/userSlice';
+import { selectUser, deleteUserPlan } from '../user/userSlice';
 import Button from '@material-ui/core/Button';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import './MyInfoBar.css'
@@ -13,7 +13,12 @@ function MyInfoBar() {
   const workoutPlan = user ? user.workout_plan[0] : null;
   const workouts = useSelector(selectWorkouts);
   const today = moment().format('dddd');
+  const dispatch = useDispatch();
 
+
+  const deletePlan = () => {
+    dispatch(deleteUserPlan(user.id))
+  }
 
   const mon = workoutPlan && workouts.filter((workout) => {
     return workout.id === workoutPlan['mon']
@@ -164,6 +169,11 @@ function MyInfoBar() {
               {sun[0] ? sun[0].title : <p>Day off</p>}
             </div>
           </NavLink>
+          <div className="delete__plan">
+            <Button variant="contained" onClick={deletePlan}>
+              Delete your plan
+            </Button>
+          </div>
         </div>}
     </div>
   )

@@ -16,14 +16,16 @@ function WorkoutsList() {
       </div>
       <div>
         {workouts && workouts.slice().reverse().map((workout) => (
-          <NavLink
-            style={{ textDecoration: 'none' }}
-            to={{
-              pathname: '/my-workout-plan',
-              state: { workout: { workout } }
-            }}>
-            <Workout workout={workout} />
-          </NavLink>
+          workout.id !== 1 ? (
+            <NavLink
+              style={{ textDecoration: 'none' }}
+              to={{
+                pathname: '/my-workout-plan',
+                state: { workout: { workout } }
+              }}>
+              <Workout workout={workout} />
+            </NavLink>
+          ) : null
         ))}
       </div>
     </div>

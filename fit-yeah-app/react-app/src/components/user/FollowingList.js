@@ -15,14 +15,11 @@ function FollowingList() {
   const userId = stateUser.id
   const userFollowing = useSelector(selectFollowing);
 
-  console.log(userFollowing);
-
   useEffect(() => {
     async function fetchData() {
       const response = await fetch(`/api/users/${userId}/following`);
       const responseData = await response.json();
       setFollowing(responseData.following);
-      console.log('followers', responseData.following)
     }
     fetchData();
   }, []);

@@ -23,6 +23,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addUser, addFollowing, addFollowers, addAllUsersToState, selectUser } from './components/user/userSlice';
 import { addExercises } from './components/exercises/exerciseSlice';
 import { addWorkouts } from './components/workouts/workoutSlice';
+import WorkoutInfoPage from "./components/workouts/WorkoutInfoPage";
 
 import './App.css';
 
@@ -269,7 +270,7 @@ function App() {
                 <Sidebar user={user} />
               </div>
               <div className="body__feed">
-                <h1>Workout Plan</h1>
+                <WorkoutInfoPage />
               </div>
             </div>
           </div>

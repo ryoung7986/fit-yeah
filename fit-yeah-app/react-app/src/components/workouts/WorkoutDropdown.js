@@ -13,8 +13,6 @@ function WorkoutDropdown({ title, items, workoutId, setStep }) {
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
 
-  console.log(user);
-
   const toggle = () => setOpen(!open);
 
   function handleOnClick(item) {

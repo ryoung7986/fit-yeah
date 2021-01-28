@@ -74,15 +74,16 @@ def new_workout_plan():
     form = WorkoutPlanForm()
     if form.validate_on_submit():
         user = User.query.get(form.data['user_id'])
+
         workoutPlan = Workout_Plan(
             user_id=form.data['user_id'],
-            mon=form.data['mon'],
-            tue=form.data['tue'],
-            wed=form.data['wed'],
-            thurs=form.data['thurs'],
-            fri=form.data['fri'],
-            sat=form.data['sat'],
-            sun=form.data['sun'],
+            mon=form.data['mon'] if not None else '',
+            tue=form.data['tue'] if not None else '',
+            wed=form.data['wed'] if not None else '',
+            thurs=form.data['thurs'] if not None else '',
+            fri=form.data['fri'] if not None else '',
+            sat=form.data['sat'] if not None else '',
+            sun=form.data['sun'] if not None else '',
         )
         db.session.add(workoutPlan)
         db.session.commit()

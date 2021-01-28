@@ -7,13 +7,13 @@ import Button from '@material-ui/core/Button';
 import './WorkoutPlanForm.css';
 
 function WorkoutPlanForm() {
-  const [mon, setMon] = useState(null);
-  const [tue, setTue] = useState(null);
-  const [wed, setWed] = useState(null);
-  const [thurs, setThurs] = useState(null);
-  const [fri, setFri] = useState(null);
-  const [sat, setSat] = useState(null);
-  const [sun, setSun] = useState(null);
+  const [mon, setMon] = useState(1);
+  const [tue, setTue] = useState(1);
+  const [wed, setWed] = useState(1);
+  const [thurs, setThurs] = useState(1);
+  const [fri, setFri] = useState(1);
+  const [sat, setSat] = useState(1);
+  const [sun, setSun] = useState(1);
   const workouts = useSelector(selectWorkouts);
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
@@ -22,7 +22,6 @@ function WorkoutPlanForm() {
   const onSubmit = async (e) => {
     e.preventDefault();
     const user_id = user.id
-    console.log(user_id)
     const response = await fetch('/api/workouts/workout-plan/new', {
       method: 'POST',
       headers: {
@@ -62,49 +61,42 @@ function WorkoutPlanForm() {
           <div className="input">
             <label for="monday">Monday</label>
             <select value={mon} onChange={(e) => setMon(e.target.value)}>
-              <option>Skip</option>
               {workoutMap}
             </select>
           </div>
           <div className="input">
             <label for="tuesday">Tuesday</label>
             <select value={tue} onChange={(e) => setTue(e.target.value)}>
-              <option>Skip</option>
               {workoutMap}
             </select>
           </div>
           <div className="input">
             <label for="wednesday">Wednesday</label>
             <select value={wed} onChange={(e) => setWed(e.target.value)}>
-              <option>Skip</option>
               {workoutMap}
             </select>
           </div>
           <div className="input">
             <label for="thursday">Thursday</label>
             <select value={thurs} onChange={(e) => setThurs(e.target.value)}>
-              <option>Skip</option>
               {workoutMap}
             </select>
           </div>
           <div className="input">
             <label for="friday">Friday</label>
             <select value={fri} onChange={(e) => setFri(e.target.value)}>
-              <option>Skip</option>
               {workoutMap}
             </select>
           </div>
           <div className="input">
             <label for="saturday">Saturday</label>
             <select value={sat} onChange={(e) => setSat(e.target.value)}>
-              <option>Skip</option>
               {workoutMap}
             </select>
           </div>
           <div className="input">
             <label for="sunday">Sunday</label>
             <select value={sun} onChange={(e) => setSun(e.target.value)}>
-              <option>Skip</option>
               {workoutMap}
             </select>
           </div>

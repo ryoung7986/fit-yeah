@@ -4,13 +4,13 @@ from app.models import db, Workout
 
 def seed_workouts():
 
-    demo1 = Workout(user_id=1,
-                    title="Cardio Bun Blast",
-                    subtitle="Burn Those BUNS",
-                    description="Let's tighten up those BUNS",
+    dayOff = Workout(user_id=1,
+                    title="Day Off",
+                    subtitle="Take the day off. You deserve it!",
+                    description="Sit on the couch. Eat potato chips. Question your life choices!",
                     likes=2000)
 
-    db.session.add(demo1)
+    db.session.add(dayOff)
     db.session.commit()
 
 

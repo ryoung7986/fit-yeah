@@ -279,6 +279,13 @@ def seed_exercises():
                                     tight shorts.''',
                        video_url="https://www.youtube.com/watch?v=4ssLDk1eX9w")
 
+    dayOff = Exercise(id=28,
+                      title="Day Off",
+                      muscle_group="none",
+                      difficulty=0,
+                      description="Take a day off, you deserve it!",
+                      video_url="https://giphy.com/gifs/southparkgifs-l0HlPtbGpcnqa0fja")
+
     db.session.add(pushups)
     db.session.add(mountainClimbers)
     db.session.add(pullups)
@@ -306,6 +313,7 @@ def seed_exercises():
     db.session.add(dumbbellFlys)
     db.session.add(overheadDumbbellPress)
     db.session.add(cleanJerk)
+    db.session.add(dayOff)
 
     db.session.commit()
 

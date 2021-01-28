@@ -34,6 +34,16 @@ export const followUser = createAsyncThunk(
   }
 )
 
+export const deleteUserPlan = createAsyncThunk(
+  'user/deleteUserPlan',
+  async (userId) => {
+    const response = await fetch(`api/users/delete-plan/${userId}`, {
+      method: 'DELETE'
+    })
+    return await response.json()
+  }
+)
+
 export const userSlice = createSlice({
   name: 'user',
   initialState: {
@@ -72,6 +82,9 @@ export const userSlice = createSlice({
       state.user = payload.user
     },
     [updateUser.fulfilled]: (state, { payload }) => {
+      state.user = payload
+    },
+    [deleteUserPlan.fulfilled]: (state, { payload }) => {
       state.user = payload
     }
   }

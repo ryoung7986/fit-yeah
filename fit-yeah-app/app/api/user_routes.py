@@ -153,3 +153,13 @@ def add_points():
     db.session.add(user)
     db.session.commit()
     return user.to_dict_full()
+
+
+# delete user plan
+@user_routes.route('/delete-plan/<int:userId>', methods=['DELETE'])
+def delete_plan(userId):
+    user = User.query.get(userId)
+    workoutPlan = Workout_Plan.query.filter(Workout_Plan.user_id == user.id).first()
+    db.session.delete(workoutPlan)
+    db.session.commit()
+    return user.to_dict_full()
