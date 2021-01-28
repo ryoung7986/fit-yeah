@@ -11,17 +11,28 @@ function UserStats() {
   const idx = Object.keys(location.state.workout);
   const workout = location.state.workout[idx][0];
 
+  console.log(workout.id)
+
   return (
     <div className="userStats">
-      <div className="userStats__header">
-        <h1>{workout.title}</h1>
-        <h2>Log your stats!</h2>
-      </div>
-      <div className="userStats__logStats">
-        {workout.exercises.map(exercise => (
-          <LogStats exercise={exercise} userId={user.id} />
-        ))}
-      </div >
+      {workout.id === 1 ? (
+        <div className="gif">
+          <h1>Day off</h1>
+        </div>
+      ) : (
+          <>
+            <div className="userStats__header">
+              <h1>{workout.title}</h1>
+              <h2>Log your stats!</h2>
+            </div>
+            <div className="userStats__logStats">
+              {workout.exercises.map(exercise => (
+                <LogStats exercise={exercise} userId={user.id} />
+              ))}
+            </div >
+          </>
+        )
+      }
     </div >
   )
 }

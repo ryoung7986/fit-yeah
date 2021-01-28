@@ -161,7 +161,7 @@ function MyInfoBar() {
             style={{ textDecoration: 'none' }}
             to={{
               pathname: '/my-stats',
-              state: { workout: { tue } }
+              state: { workout: { sun } }
             }}
           >
             <div>
