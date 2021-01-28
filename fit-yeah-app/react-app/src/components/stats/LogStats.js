@@ -7,36 +7,68 @@ import './LogStats.css';
 function LogStats({ exercise, userId }) {
   const [sets, setSets] = useState(null);
   const [reps, setReps] = useState(null);
+  const [weight, setWeight] = useState(null);
+  const [duration, setDuration] = useState(null);
   const [step, setStep] = useState(0);
   const [pointsEarned, setPointsEarned] = useState(0);
   const dispatch = useDispatch();
 
-  const onSubmit = async (e) => {
+  // const onSubmit = async (e) => {
+  //   e.preventDefault();
+  //   const hiddenValue = document.getElementById('id');
+  //   const exercise_id = parseInt(hiddenValue.value);
+  //   const user_id = userId;
+  //   const pointsToSubmit = sets * reps * exercise.difficulty;
+  //   const response = await fetch(`/api/users/upload-stats`, {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify({
+  //       sets,
+  //       reps,
+  //       user_id,
+  //       exercise_id,
+  //     })
+  //   })
+  //   await response.json();
+  //   const postUserPoints = await fetch(`/api/users/add-points`, {
+  //     method: 'PATCH',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify({
+  //       pointsToSubmit,
+  //       user_id
+  //     })
+  //   })
+  //   const newUser = await postUserPoints.json();
+  //   dispatch(addUser({ user: newUser }))
+  //   setPointsEarned(pointsToSubmit)
+  //   setStep(1);
+  // }
+
+  const onSubmitTemp = async (e) => {
     e.preventDefault();
-    const hiddenValue = document.getElementById('id');
-    const exercise_id = parseInt(hiddenValue.value);
     const user_id = userId;
-    const pointsToSubmit = sets * reps * exercise.difficulty;
-    const response = await fetch(`/api/users/upload-stats`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        sets,
-        reps,
-        user_id,
-        exercise_id,
-      })
-    })
-    await response.json();
+
+    let pointsToSubmit;
+    if (weight !== null) {
+      pointsToSubmit = (sets * reps) * (exercise.difficulty * .8) + weight
+    } else if (duration !== null) {
+      pointsToSubmit = duration * 3
+    } else {
+      pointsToSubmit = sets * reps * exercise.difficulty
+    }
+    console.log(parseInt(pointsToSubmit))
+
     const postUserPoints = await fetch(`/api/users/add-points`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        pointsToSubmit,
+        pointsToSubmit: Math.floor(parseInt(pointsToSubmit)),
         user_id
       })
     })
@@ -54,31 +86,87 @@ function LogStats({ exercise, userId }) {
     setReps(e.target.value);
   }
 
+  const updateWeight = (e) => {
+    setWeight(e.target.value);
+  }
+
+  const updateDuration = (e) => {
+    setDuration(e.target.value);
+  }
+
   return (
     <div className="logStats">
       {step === 0 ? (
-        <form className="userStats__form" onSubmit={onSubmit}>
+        <form className="userStats__form" onSubmit={onSubmitTemp}>
           <div className="create-workout__form--div">
             <label><h3>{exercise.title}</h3></label>
             <div className="inputs">
-              <div className="navbar__input">
-                <input
-                  className="create-workout__form--input"
-                  type="text"
-                  name="sets"
-                  value={sets}
-                  onChange={updateSets}
-                  placeholder="Sets" />
-              </div>
-              <div className="navbar__input">
-                <input
-                  className="create-workout__form--input"
-                  type="text"
-                  name="reps"
-                  value={reps}
-                  onChange={updateReps}
-                  placeholder="Reps" />
-              </div>
+              {exercise.muscle_group === "Resistance" && (
+                <>
+                  <div className="navbar__input">
+                    <input
+                      className="create-workout__form--input"
+                      type="text"
+                      name="sets"
+                      value={sets}
+                      onChange={updateSets}
+                      placeholder="Sets" />
+                  </div>
+                  <div className="navbar__input">
+                    <input
+                      className="create-workout__form--input"
+                      type="text"
+                      name="reps"
+                      value={reps}
+                      onChange={updateReps}
+                      placeholder="Reps" />
+                  </div>
+                </>
+              )}
+              {exercise.muscle_group === "Added Weight" && (
+                <>
+                  <div className="navbar__input">
+                    <input
+                      className="create-workout__form--input"
+                      type="text"
+                      name="sets"
+                      value={sets}
+                      onChange={updateSets}
+                      placeholder="Sets" />
+                  </div>
+                  <div className="navbar__input">
+                    <input
+                      className="create-workout__form--input"
+                      type="text"
+                      name="reps"
+                      value={reps}
+                      onChange={updateReps}
+                      placeholder="Reps" />
+                  </div>
+                  <div className="navbar__input">
+                    <input
+                      className="create-workout__form--input"
+                      type="text"
+                      name="reps"
+                      value={weight}
+                      onChange={updateWeight}
+                      placeholder="Weight" />
+                  </div>
+                </>
+              )}
+              {exercise.muscle_group === "Cardio" && (
+                <>
+                  <div className="navbar__input">
+                    <input
+                      className="create-workout__form--input"
+                      type="text"
+                      name="duration"
+                      value={duration}
+                      onChange={updateDuration}
+                      placeholder="Duration (in minutes)" />
+                  </div>
+                </>
+              )}
               <div className="navbar__input--hidden">
                 <input
                   type="hidden"
@@ -97,7 +185,7 @@ function LogStats({ exercise, userId }) {
         </form>
       ) :
         <div className="pointsEarned">
-          <h3>{`You earned ${pointsEarned} points!`}</h3>
+          <h3>{`You earned ${Math.floor(pointsEarned)} points!`}</h3>
         </div>
       }
 
