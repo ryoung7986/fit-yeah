@@ -18,7 +18,8 @@ export const getWorkoutExercises = createAsyncThunk(
 export const workoutSlice = createSlice({
   name: 'workouts',
   initialState: {
-    searchWorkoutsResults: []
+    searchWorkoutsResults: [],
+    userWorkoutPlan: []
   },
   reducers: {
     addWorkouts: (state, action) => {

@@ -7,9 +7,11 @@ import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import FitnessCenterIcon from '@material-ui/icons/FitnessCenter';
 import EventAvailableIcon from '@material-ui/icons/EventAvailable';
 import AssessmentOutlinedIcon from '@material-ui/icons/AssessmentOutlined';
+import TrendingUpOutlinedIcon from '@material-ui/icons/TrendingUpOutlined';
 import { Avatar } from '@material-ui/core';
 import UserDropdown from './UserDropdown';
 import SearchUsers from './SearchUsers';
+import SidebarOption from '../sidebar/SidebarOption';
 
 import './NavBar.css';
 
@@ -40,8 +42,8 @@ const NavBar = ({ setAuthenticated }) => {
               </NavLink>
             </div>
             <div className="navbar__option" activeclassname="navbar__option--active">
-              <NavLink to="/my-stats" exact={true}>
-                <AssessmentOutlinedIcon fontSize="large" />
+              <NavLink to='/leaderboard' exact={true} className='navlink'>
+                <TrendingUpOutlinedIcon fontSize="large" />
               </NavLink>
             </div>
             <div className="navbar__option" activeclassname="navbar__option--active">
@@ -49,11 +51,11 @@ const NavBar = ({ setAuthenticated }) => {
                 <FitnessCenterIcon fontSize="large" />
               </NavLink>
             </div>
-            <div className="navbar__option" activeclassname="navbar__option--active">
+            {/* <div className="navbar__option" activeclassname="navbar__option--active">
               <NavLink to="/my-workout-plan" exact={true}>
                 <EventAvailableIcon fontSize="large" />
               </NavLink>
-            </div>
+            </div> */}
           </div>
           <div className="navbar__right">
             <div className="navbar__info">

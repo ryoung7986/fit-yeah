@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import moment from 'moment';
@@ -12,6 +12,7 @@ function MyInfoBar() {
   const user = useSelector(selectUser);
   const workoutPlan = user ? user.workout_plan[0] : null;
   const workouts = useSelector(selectWorkouts);
+  const [userPlan, setUserPlan] = useState([])
   const today = moment().format('dddd');
   const dispatch = useDispatch();
 
@@ -47,6 +48,10 @@ function MyInfoBar() {
   const sun = workoutPlan && workouts.filter((workout) => {
     return workout.id === workoutPlan['sun']
   })
+
+  // useEffect(() => {
+  //   const userWorkoutPlan =
+  // }, [workoutPlan])
 
   return (
     <div className="infobar">
