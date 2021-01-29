@@ -24,7 +24,6 @@ import { addUser, addFollowing, addFollowers, addAllUsersToState, selectUser } f
 import { addExercises } from './components/exercises/exerciseSlice';
 import { addWorkouts } from './components/workouts/workoutSlice';
 import WorkoutInfoPage from "./components/workouts/WorkoutInfoPage";
-import UserWorkoutPlan from "./components/workouts/UserWorkoutPlan";
 
 import './App.css';
 

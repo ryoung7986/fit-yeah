@@ -5,8 +5,6 @@ import './UserCard.css';
 function UserCard({ user }) {
   const userBio = user.bio;
 
-  console.log(user);
-
   return (
     <div className="userCard">
       <div className="userCard__left">
@@ -15,7 +13,7 @@ function UserCard({ user }) {
             src={user.avatar_url}
             width="200"
             height="200"
-            alt='User has no profile image yet.'
+            alt=''
             className="userCard__avatar--image" />
         </div>
       </div>

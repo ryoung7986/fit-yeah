@@ -7,7 +7,6 @@ import './CreateWorkout.css'
 
 function CreateWorkout() {
   const [title, setTitle] = useState("");
-  const [subtitle, setSubtitle] = useState("");
   const [description, setDescription] = useState("");
   const [exercises, setExercises] = useState("");
   const [workoutId, setWorkoutId] = useState("");
@@ -27,7 +26,6 @@ function CreateWorkout() {
       body: JSON.stringify({
         user_id,
         title,
-        subtitle,
         description,
       })
     })
@@ -38,10 +36,6 @@ function CreateWorkout() {
 
   const updateTitle = (e) => {
     setTitle(e.target.value);
-  };
-
-  const updateSubtitle = (e) => {
-    setSubtitle(e.target.value);
   };
 
   const updateDescription = (e) => {

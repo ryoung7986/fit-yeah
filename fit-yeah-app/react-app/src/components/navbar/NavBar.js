@@ -5,13 +5,10 @@ import { selectUser } from '../user/userSlice';
 import HomeIcon from '@material-ui/icons/Home';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import FitnessCenterIcon from '@material-ui/icons/FitnessCenter';
-import EventAvailableIcon from '@material-ui/icons/EventAvailable';
-import AssessmentOutlinedIcon from '@material-ui/icons/AssessmentOutlined';
 import TrendingUpOutlinedIcon from '@material-ui/icons/TrendingUpOutlined';
 import { Avatar } from '@material-ui/core';
 import UserDropdown from './UserDropdown';
 import SearchUsers from './SearchUsers';
-import SidebarOption from '../sidebar/SidebarOption';
 
 import './NavBar.css';
 

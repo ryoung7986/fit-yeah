@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from 'react-redux';
-import { selectUser, selectFollowing } from './userSlice';
+import { selectUser } from './userSlice';
 import { useDispatch } from 'react-redux';
 import { addFollowing } from './userSlice';
 import UserCard from './UserCard';
@@ -13,7 +13,6 @@ function FollowingList() {
   const [following, setFollowing] = useState([]);
   const stateUser = useSelector(selectUser);
   const userId = stateUser.id
-  const userFollowing = useSelector(selectFollowing);
 
   useEffect(() => {
     async function fetchData() {

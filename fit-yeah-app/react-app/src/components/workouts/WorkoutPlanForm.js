@@ -41,6 +41,7 @@ function WorkoutPlanForm() {
     const responseData = await response.json()
     dispatch(updateUser(user.id))
     history.push('/my-profile')
+    return responseData
   }
 
   const workoutMap = workouts.map((workout) => {
