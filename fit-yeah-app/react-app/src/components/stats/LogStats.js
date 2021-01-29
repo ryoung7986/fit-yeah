@@ -54,7 +54,9 @@ function LogStats({ exercise, userId }) {
 
     let pointsToSubmit;
     if (weight !== null) {
-      pointsToSubmit = (sets * reps) * (exercise.difficulty * .8) + weight
+      const lbs = parseInt(weight);
+      const diff = sets * reps
+      pointsToSubmit = diff + lbs
     } else if (duration !== null) {
       pointsToSubmit = duration * 3
     } else {
