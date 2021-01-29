@@ -271,7 +271,7 @@ function App() {
                 <Sidebar user={user} />
               </div>
               <div className="body__feed">
-                <UserWorkoutPlan />
+                <WorkoutInfoPage />
               </div>
             </div>
           </div>
