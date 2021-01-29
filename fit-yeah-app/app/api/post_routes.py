@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, request
 from flask_login import login_required
 from app.forms import PostForm
 from app.models import db, User, Workout, Workout_Plan, \
-    User_Post, User_Stat
+    User_Post, User_Stat, Comment
 from .auth_routes import validation_errors_to_error_messages
 import json
 
@@ -66,3 +66,17 @@ def new_post():
         db.session.commit()
         return post.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}
+
+
+# delete post by id
+@post_routes.route('/delete/<int:postId>')
+def delete_post(postId):
+    post = User_Post.query.get(postId)
+    # likes = post.liked_by
+    comments = Comment.query.filter(Comment.post_id == postId).delete()
+    # print(comments)
+    # db.session.delete(comments)
+    # db.session.delete(likes)
+    db.session.delete(post)
+    db.session.commit()
+    return {"posts": [post.to_dict() for post in User_Post.query.all()]}

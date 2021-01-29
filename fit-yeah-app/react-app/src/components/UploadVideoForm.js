@@ -5,6 +5,7 @@ const UploadVideoForm = forwardRef((props, ref) => {
   const [video, setVideo] = useState(null);
   const [videoUrl, setVideoUrl] = useState('');
   const [mimeType, setMimeType] = useState('');
+  const [uploaded, setUploaded] = useState('');
 
   useImperativeHandle(ref, () => {
     return {
@@ -25,6 +26,7 @@ const UploadVideoForm = forwardRef((props, ref) => {
     const responseData = await response.json();
     console.log("video upload successful");
     setVideoUrl(responseData.video_url);
+    setUploaded(true);
     return responseData;
   }
 
@@ -50,9 +52,11 @@ const UploadVideoForm = forwardRef((props, ref) => {
             name="image"
             onChange={handleVideoUpload}
           />
-          <button type="submit">
-            Upload!
-          </button>
+          {uploaded ?
+            <h1>Uploaded!</h1> :
+            <button type="submit">
+              Upload!
+            </button>}
         </div>
       </form>
     </div>

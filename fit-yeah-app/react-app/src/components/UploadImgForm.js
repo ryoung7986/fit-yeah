@@ -53,8 +53,7 @@ const UploadForm = forwardRef((props, ref) => {
             <h1>Uploaded!</h1> :
             <button type="submit">
               Upload!
-            </button>
-          }
+            </button>}
         </div>
       </form>
     </div>

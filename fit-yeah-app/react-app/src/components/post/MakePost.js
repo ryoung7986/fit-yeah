@@ -158,12 +158,11 @@ function MakePost({ user }) {
           )}
         </div>
       </div>
-      {modalRef.current ?
+      {videoUrl || imgUrl ?
         <div className="makePost__mediaAdded">
           <PermMediaIcon />
           <p>Media added</p>
         </div> : null}
-
     </>
   )
 }

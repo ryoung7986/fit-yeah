@@ -8,6 +8,14 @@ export const getPosts = createAsyncThunk(
   }
 )
 
+export const deletePost = createAsyncThunk(
+  'posts/deletePost',
+  async (id) => {
+    const response = await fetch(`api/posts/delete/${id}`)
+    return await response.json()
+  }
+)
+
 const postSlice = createSlice({
   name: 'posts',
   initialState: {
@@ -26,6 +34,10 @@ const postSlice = createSlice({
     [getPosts.rejected]: (state, action) => {
       state.status = 'failed loading posts'
     },
+    [deletePost.fulfilled]: (state, { payload }) => {
+      state.list = payload.posts.reverse()
+      state.status = 'successfully deleted post'
+    }
   },
 })
 

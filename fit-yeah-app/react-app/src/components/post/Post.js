@@ -1,22 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Avatar } from '@material-ui/core';
 import ThumbUpOutlinedIcon from '@material-ui/icons/ThumbUpOutlined';
 import ChatBubbleOutlineOutlinedIcon from '@material-ui/icons/ChatBubbleOutlineOutlined';
+import DeleteIcon from '@material-ui/icons/Delete';
+import Button from '@material-ui/core/Button';
 import { selectUser } from '../user/userSlice';
-import { useSelector } from 'react-redux';
-import { useState, useEffect } from 'react';
+import { deletePost } from './postSlice';
 import MakeComment from '../comment/MakeComment';
 import Comment from '../comment/Comment';
 import ReactPlayer from 'react-player';
 
 import './Post.css';
 
-function Post({ image, video, timestamp, content, postId, postComments, postUser }) {
+function Post({ image, video, timestamp, content, postId, postComments, postUser, postUserId }) {
   const [likes, setLikes] = useState(0);
   const [render, setRender] = useState(0);
   const [makeComment, setMakeComment] = useState(false);
   const user = useSelector(selectUser);
   const userId = user.id;
+  const dispatch = useDispatch();
 
   const submitLike = async (e) => {
     e.preventDefault();
@@ -29,6 +32,10 @@ function Post({ image, video, timestamp, content, postId, postComments, postUser
     })
     setRender(render => render + 1)
     return await response.json()
+  }
+
+  const deleteUserPost = () => {
+    dispatch(deletePost(postId))
   }
 
   const getLikes = () => {
@@ -71,6 +78,12 @@ function Post({ image, video, timestamp, content, postId, postComments, postUser
           <h3>{postUser && `${postUser.first_name} ${postUser.last_name}`}</h3>
           <p>{timestamp}</p>
         </div>
+        {postUserId === user.id ? (
+          <div className="post__top--deletePost">
+            <Button variant="contained" onClick={deleteUserPost}>
+              <DeleteIcon style={{ color: "#107D7E" }} />
+            </Button>
+          </div>) : null}
       </div>
       <div className="post__bottom">
         <p>{content}</p>

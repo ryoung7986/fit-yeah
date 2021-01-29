@@ -44,7 +44,7 @@ function Feed() {
     return (
       <div key={post.id}>
         <Post
-          id={post.id}
+          key={post.id}
           postUser={user.id === post.owner_id ?
             user : getPostUser(post.owner_id)}
           profilePic={user.avatar_url ?
@@ -55,6 +55,7 @@ function Feed() {
           timestamp={post.createdAt}
           postId={post.id}
           postComments={postComments}
+          postUserId={post.owner_id}
         />
       </div>
     )
