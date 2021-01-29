@@ -9,7 +9,6 @@ def seed_users():
     demo1 = User(first_name='Demo',
                  last_name='User',
                  username='Demo',
-                 avatar_url="https://fit-yeah.s3.amazonaws.com/3.jpg",
                  email='demo@aa.io',
                  points_earned=100,
                  password='password')
