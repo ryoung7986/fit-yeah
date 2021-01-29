@@ -49,7 +49,7 @@ function Post({ image, video, timestamp, content, postId, postComments, postUser
 
   const renderPostComments = postComments.map((comment) => {
     return (
-      <div id={comment.id} >
+      <div key={comment.id} >
         <Comment
           id={comment.id}
           userId={comment.user_id}
@@ -80,7 +80,11 @@ function Post({ image, video, timestamp, content, postId, postComments, postUser
           <img src={image} alt='' />}
         {video &&
           <div className="post__mediaPlayer">
-            <ReactPlayer controls url={video} />
+            <ReactPlayer
+              width="100%"
+              maxHeight="100px"
+              controls
+              url={video} />
           </div>}
       </div>
       <div className="post__likes">

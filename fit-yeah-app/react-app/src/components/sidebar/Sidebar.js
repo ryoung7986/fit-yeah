@@ -16,7 +16,7 @@ function Sidebar() {
         <SidebarOption Icon={PersonOutlineOutlinedIcon} title='Your Profile' />
       </NavLink>
       <NavLink to='/followers' exact={true} className='navlink'>
-        <SidebarOption Icon={PeopleAltIcon} title='Your Followers' />
+        <SidebarOption Icon={PeopleAltIcon} title='Following' />
       </NavLink>
       <NavLink to='/leaderboard' exact={true} className='navlink'>
         <SidebarOption Icon={TrendingUpOutlinedIcon} title='Leaderboard' />

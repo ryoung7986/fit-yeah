@@ -34,14 +34,16 @@ function MakePost({ user }) {
     if (videoUrl !== '') {
       formData.append('video_url', videoUrl)
     }
-    for (let value of formData.values()) {
-      console.log(value)
-    }
+    // for (let value of formData.values()) {
+    //   console.log(value)
+    // }
     const response = await fetch('api/posts/new', {
       method: 'POST',
       body: formData
     })
     setDescription('')
+    setImgUrl('')
+    setVideoUrl('')
     setTrigger(trigger => trigger + 1)
     return await response.json()
   }

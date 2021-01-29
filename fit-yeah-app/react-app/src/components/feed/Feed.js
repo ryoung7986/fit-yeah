@@ -44,6 +44,7 @@ function Feed() {
     return (
       <div key={post.id}>
         <Post
+          id={post.id}
           postUser={user.id === post.owner_id ?
             user : getPostUser(post.owner_id)}
           profilePic={user.avatar_url ?
@@ -62,9 +63,9 @@ function Feed() {
   return (
     <div className="feed">
       <MakePost user={user} first_name={user} />
-      <div className="feed__post">
-        {postOrder && usersPosts}
-      </div>
+      {/* <div className="feed__post"> */}
+      {postOrder && usersPosts}
+      {/* </div> */}
     </div >
   )
 }
