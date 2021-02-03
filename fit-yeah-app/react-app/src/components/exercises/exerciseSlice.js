@@ -3,15 +3,18 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 export const getExercises = createAsyncThunk(
   'exercises/getExercises',
   async () => {
-    console.log("FUCK")
-    return fetch(`/api/exercises`)
-      .then((res) => res.json())
+    const response = await fetch('/api/exercises');
+    const responseData = await response.json();
+    console.log(responseData);
+    return responseData.exercises
   }
 )
 
 export const exerciseSlice = createSlice({
   name: 'exercises',
-  initialState: {},
+  initialState: {
+    exercises: [],
+  },
   reducers: {
     addExercises: (state, action) => {
       state.exercises = action.payload['exercises']
@@ -22,8 +25,8 @@ export const exerciseSlice = createSlice({
       state.status = 'fetching workouts...'
     },
     [getExercises.fulfilled]: (state, action) => {
-      console.log(action)
-      state = action.payload;
+      console.log(action.payload)
+      state.exercises = action.payload;
       state.status = 'successfully fetched workouts'
     },
     [getExercises.rejected]: (state, action) => {
@@ -37,6 +40,6 @@ export const {
 } = exerciseSlice.actions;
 
 
-export const selectExercises = state => state.exercises;
+export const selectExercises = state => state.exercises.exercises;
 
 export default exerciseSlice.reducer;

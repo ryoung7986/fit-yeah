@@ -21,7 +21,7 @@ import SearchWorkoutsResults from './components/workouts/SearchWorkoutsResults';
 import { authenticate } from "./services/auth";
 import { useDispatch, useSelector } from 'react-redux';
 import { addUser, addFollowing, addFollowers, addAllUsersToState, selectUser } from './components/user/userSlice';
-import { addExercises } from './components/exercises/exerciseSlice';
+import { getExercises, addExercises, selectExercises } from './components/exercises/exerciseSlice';
 import { addWorkouts } from './components/workouts/workoutSlice';
 import WorkoutInfoPage from "./components/workouts/WorkoutInfoPage";
 
@@ -32,7 +32,7 @@ function App() {
   const [loaded, setLoaded] = useState(false);
   const [followers, setFollowers] = useState([]);
   const [following, setFollowing] = useState([]);
-  const [exercises, setExercises] = useState({});
+  const exercises = useSelector(selectExercises);
   const [workouts, setWorkouts] = useState([]);
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
@@ -51,11 +51,7 @@ function App() {
 
   useEffect(() => {
     user &&
-      (async () => {
-        const response = await fetch('/api/exercises')
-        const responseData = await response.json()
-        await setExercises(responseData.exercises)
-      })()
+      dispatch(getExercises())
   }, [user, dispatch]);
 
   useEffect(() => {
