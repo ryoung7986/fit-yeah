@@ -1,55 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectUser, addUserAvatarUrl } from './user/userSlice';
+import { selectUser, uploadUserAvatar } from './user/userSlice';
 
 
 function UploadForm() {
   const [image, setImage] = useState(null);
-  const [userAvatarUrl, setUserAvatarUrl] = useState('');
   const user = useSelector(selectUser);
-  // const userAvatar = useSelector(selectUserAvatarUrl);
-  const userId = user.id
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    imgUrl(userId, userAvatarUrl)
-    console.log(userAvatarUrl)
-  }, [userAvatarUrl])
-
-  const imgUrl = (userId) => {
-    (async () => {
-      const imgUrl = userAvatarUrl
-      const response = await fetch(`/api/users/upload-avatar/${userId}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ imgUrl })
-      })
-      const responseData = await response.json();
-      const url = responseData.avatar_url
-      dispatch(addUserAvatarUrl(url))
-    })()
-  }
-
-  const uploadImg = async (data) => {
-    console.log('Uploading image...');
-    let formData = new FormData();
-    formData.append('image', data);
-    formData.append('test', 'stringvaluetest');
-    const response = await fetch('/api/aws/upload', {
-      method: 'POST',
-      body: formData
-    })
-    const responseData = await response.json();
-    console.log("image upload successful")
-    setUserAvatarUrl(responseData.img_url);
-    return responseData;
-  }
 
   const imgSubmit = (e) => {
     e.preventDefault();
-    uploadImg(image);
+    const userId = user.id
+    console.log(typeof userId)
+    dispatch(uploadUserAvatar(image, userId));
   }
 
   const handleImageUpload = (e) => {
@@ -59,7 +22,6 @@ function UploadForm() {
   return (
     <div className="modal">
       <form
-        // enctype="multipart/form-data"
         onSubmit={imgSubmit}>
         <h3>
           Upload image

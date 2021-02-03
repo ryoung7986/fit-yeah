@@ -52,6 +52,24 @@ export const followUser = createAsyncThunk(
   }
 )
 
+export const uploadUserAvatar = createAsyncThunk(
+  'user/uploadUserAvatar',
+  async (data, userId) => {
+    console.log(userId)
+    console.log('Uploading image...');
+    let formData = new FormData();
+    formData.append('image', data);
+    const response = await fetch('/api/aws/upload', {
+      method: 'POST',
+      body: formData
+    })
+    const responseData = await response.json();
+    console.log("image upload successful")
+    console.log("uploading user avatar URL...")
+    return responseData
+  }
+)
+
 export const deleteUserPlan = createAsyncThunk(
   'user/deleteUserPlan',
   async (userId) => {
@@ -74,9 +92,6 @@ export const userSlice = createSlice({
   reducers: {
     addUser: (state, action) => {
       state.user = action.payload.user
-    },
-    addUserAvatarUrl: (state, action) => {
-      state.user.avatar_url = action.payload
     },
     addWorkoutPlan: (state, action) => {
       state.user.workout_plan = action.payload
@@ -110,6 +125,9 @@ export const userSlice = createSlice({
     },
     [getFollowing.fulfilled]: (state, { payload }) => {
       state.following = payload
+    },
+    [uploadUserAvatar.fulfilled]: (state, { payload }) => {
+      state.user.avatar_url = payload.img_url
     }
   }
 });
