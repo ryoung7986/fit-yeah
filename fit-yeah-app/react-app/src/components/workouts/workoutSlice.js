@@ -3,8 +3,9 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 export const getWorkouts = createAsyncThunk(
   'workouts/getWorkouts',
   async () => {
-    return fetch(`/api/workouts`)
-      .then((res) => res.json())
+    const response = await fetch('/api/workouts')
+    const responseData = await response.json()
+    return responseData.workouts
   }
 )
 
@@ -19,7 +20,8 @@ export const workoutSlice = createSlice({
   name: 'workouts',
   initialState: {
     searchWorkoutsResults: [],
-    userWorkoutPlan: []
+    userWorkoutPlan: [],
+    workouts: [],
   },
   reducers: {
     addWorkouts: (state, action) => {

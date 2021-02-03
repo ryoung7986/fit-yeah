@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
 import LoginForm from "./components/auth/LoginForm";
 import SignUpForm from "./components/auth/SignUpForm";
 import NavBar from "./components/navbar/NavBar";
@@ -19,21 +20,22 @@ import User from "./components/leaderboard/User";
 import SearchUsersResults from './components/navbar/SearchUsersResults';
 import SearchWorkoutsResults from './components/workouts/SearchWorkoutsResults';
 import { authenticate } from "./services/auth";
-import { useDispatch, useSelector } from 'react-redux';
-import { addUser, addFollowing, addFollowers, addAllUsersToState, selectUser } from './components/user/userSlice';
-import { getExercises, addExercises, selectExercises } from './components/exercises/exerciseSlice';
-import { addWorkouts } from './components/workouts/workoutSlice';
 import WorkoutInfoPage from "./components/workouts/WorkoutInfoPage";
+import { getExercises } from './components/exercises/exerciseSlice';
+import { getWorkouts } from './components/workouts/workoutSlice';
+import {
+  addUser,
+  getFollowers,
+  getFollowing,
+  addAllUsersToState,
+  selectUser
+} from './components/user/userSlice';
 
 import './App.css';
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
   const [loaded, setLoaded] = useState(false);
-  const [followers, setFollowers] = useState([]);
-  const [following, setFollowing] = useState([]);
-  const exercises = useSelector(selectExercises);
-  const [workouts, setWorkouts] = useState([]);
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
 
@@ -50,35 +52,18 @@ function App() {
   }, [dispatch]);
 
   useEffect(() => {
-    user &&
-      dispatch(getExercises())
+    dispatch(getExercises())
+    dispatch(getWorkouts())
   }, [user, dispatch]);
 
   useEffect(() => {
     user &&
-      (async () => {
-        const response = await fetch('/api/workouts')
-        const responseData = await response.json()
-        await setWorkouts(responseData.workouts)
-      })()
+      dispatch(getFollowers(user.id))
   }, [user, dispatch]);
 
   useEffect(() => {
     user &&
-      (async () => {
-        const response = await fetch(`/api/users/${user.id}/followers`);
-        const responseData = await response.json();
-        await setFollowers(responseData.followers);
-      })()
-  }, [user, dispatch]);
-
-  useEffect(() => {
-    user &&
-      (async function fetchData() {
-        const response = await fetch(`/api/users/${user.id}/following`);
-        const responseData = await response.json();
-        await setFollowing(responseData.following);
-      })()
+      dispatch(getFollowing(user.id))
   }, [user, dispatch]);
 
   useEffect(() => {
@@ -88,22 +73,6 @@ function App() {
   useEffect(() => {
     setLoaded(true)
   }, [user, dispatch]);
-
-  useEffect(() => {
-    dispatch(addFollowers({ followers: followers }))
-  }, [followers, dispatch])
-
-  useEffect(() => {
-    dispatch(addFollowing({ following: following }))
-  }, [following, dispatch])
-
-  useEffect(() => {
-    dispatch(addExercises({ exercises: exercises }))
-  }, [exercises, dispatch])
-
-  useEffect(() => {
-    dispatch(addWorkouts({ workouts: workouts }))
-  }, [workouts, dispatch])
 
 
   if (!loaded && !user) {

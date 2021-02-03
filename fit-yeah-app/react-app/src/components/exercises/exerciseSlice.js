@@ -5,7 +5,6 @@ export const getExercises = createAsyncThunk(
   async () => {
     const response = await fetch('/api/exercises');
     const responseData = await response.json();
-    console.log(responseData);
     return responseData.exercises
   }
 )
@@ -25,7 +24,6 @@ export const exerciseSlice = createSlice({
       state.status = 'fetching workouts...'
     },
     [getExercises.fulfilled]: (state, action) => {
-      console.log(action.payload)
       state.exercises = action.payload;
       state.status = 'successfully fetched workouts'
     },
