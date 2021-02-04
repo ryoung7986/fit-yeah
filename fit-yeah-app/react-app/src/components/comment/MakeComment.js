@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectUser } from '../user/userSlice';
-import { getComments } from '../comment/commentSlice';
+import { getComments, postComment, selectComments } from '../comment/commentSlice';
 import { Avatar } from '@material-ui/core';
 import './MakeComment.css';
 
@@ -9,26 +9,14 @@ function MakeComment({ postId }) {
   const [content, setContent] = useState('');
   const commentForm = useRef(null);
   const user = useSelector(selectUser);
-  // const comments = useSelector(selectComments);
   const userId = user.id;
   const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let formData = new FormData();
-    formData.append('content', content);
-    formData.append('user_id', userId)
-    formData.append('post_id', postId);
-    for (let value of formData.values()) {
-      console.log(value)
-    }
-    const response = await fetch('api/comments/new', {
-      method: 'POST',
-      body: formData
-    })
-    setContent('')
+    dispatch(postComment({ content, userId, postId }))
     dispatch(getComments(postId))
-    return await response.json()
+    setContent('')
   }
 
 

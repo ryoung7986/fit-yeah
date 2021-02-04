@@ -130,7 +130,6 @@ export const userSlice = createSlice({
       state.followers = payload.followers
     },
     [getFollowing.fulfilled]: (state, { payload }) => {
-      console.log(payload)
       state.following = payload.following
     },
     [uploadUserAvatar.fulfilled]: (state, { payload }) => {

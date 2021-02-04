@@ -6,26 +6,10 @@ import { useDispatch } from 'react-redux';
 import { addFollowers, getFollowers, selectFollowers } from './userSlice';
 
 function FollowersList() {
-  const dispatch = useDispatch();
-  const [followers, setFollowers] = useState([]);
+  const followers = useSelector(selectFollowers)
   const user = useSelector(selectUser);
   const userId = user.id
-
-  const helloThere = useSelector(selectFollowers)
-  console.log(helloThere)
-
-  // useEffect(() => {
-  //   (async () => {
-  //     const response = await fetch(`/api/users/${userId}/followers`);
-  //     const responseData = await response.json();
-  //     await setFollowers(responseData.followers);
-  //     console.log('followers', responseData.followers)
-  //   })()
-  // }, []);
-
-  // useEffect(() => {
-  //   dispatch(addFollowers({ followers: followers }))
-  // }, [followers])
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getFollowers(userId))

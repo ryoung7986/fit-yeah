@@ -8,6 +8,22 @@ export const getComments = createAsyncThunk(
   }
 )
 
+export const postComment = createAsyncThunk(
+  'comments/postComment',
+  async (data) => {
+    const { content, userId, postId } = data
+    let formData = new FormData();
+    formData.append('content', content);
+    formData.append('user_id', userId)
+    formData.append('post_id', postId);
+    const response = await fetch('api/comments/new', {
+      method: 'POST',
+      body: formData
+    })
+    return await response.json()
+  }
+)
+
 const commentSlice = createSlice({
   name: "comments",
   initialState: {
@@ -15,19 +31,15 @@ const commentSlice = createSlice({
     status: null,
   },
   extraReducers: {
-    [getComments.pending]: (state, action) => {
-      state.status = 'loading comments...'
+    [getComments.fulfilled]: (state, { payload }) => {
+      state.post_comments.push(...payload.comments)
     },
-    [getComments.fulfilled]: (state, action) => {
-      // console.log(action.payload.comments)
-      state.post_comments.push(...action.payload.comments)
-    },
-    [getComments.rejected]: (state, action) => {
-      state.status = 'failed loading comments'
-    },
+    [postComment.fulfilled]: (state, { payload }) => {
+      state.post_comments.push(payload)
+    }
   },
 })
 
 export const selectComments = (state) => state.comments;
-// export const selectComments = (state, id) => state.comments.post_comments['comments_post_6'];
+
 export default commentSlice.reducer
