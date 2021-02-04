@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { getPosts } from '../post/postSlice';
+import { getPosts, makePost } from '../post/postSlice';
 import { Avatar } from '@material-ui/core';
 import VideocamIcon from '@material-ui/icons/Videocam';
 import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
@@ -14,7 +14,6 @@ function MakePost({ user }) {
   const [imgUploadDisplay, setImgUploadDisplay] = useState(false);
   const [videoUploadDisplay, setVideoUploadDisplay] = useState(false);
   const [description, setDescription] = useState('');
-  const [trigger, setTrigger] = useState(0);
   const [imgUrl, setImgUrl] = useState('');
   const [videoUrl, setVideoUrl] = useState('');
   const form = useRef(null);
@@ -34,23 +33,12 @@ function MakePost({ user }) {
     if (videoUrl !== '') {
       formData.append('video_url', videoUrl)
     }
-    // for (let value of formData.values()) {
-    //   console.log(value)
-    // }
-    const response = await fetch('api/posts/new', {
-      method: 'POST',
-      body: formData
-    })
+    const id = user.id
+    dispatch(makePost({ formData, id }))
     setDescription('')
     setImgUrl('')
     setVideoUrl('')
-    setTrigger(trigger => trigger + 1)
-    return await response.json()
   }
-
-  useEffect(() => {
-    dispatch(getPosts(user.id))
-  }, [trigger, dispatch, user.id])
 
   useEffect(() => {
     setImgUploadDisplay(false);
