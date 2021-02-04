@@ -3,29 +3,20 @@ import { NavLink } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import { selectUser } from './userSlice';
 import { useDispatch } from 'react-redux';
-import { addFollowing } from './userSlice';
+import { addFollowing, getFollowing, selectFollowing } from './userSlice';
 import UserCard from './UserCard';
 
 import './FollowingList.css';
 
 function FollowingList() {
+  const following = useSelector(selectFollowing);
+  const user = useSelector(selectUser);
+  const userId = user.id
   const dispatch = useDispatch();
-  const [following, setFollowing] = useState([]);
-  const stateUser = useSelector(selectUser);
-  const userId = stateUser.id
 
   useEffect(() => {
-    async function fetchData() {
-      const response = await fetch(`/api/users/${userId}/following`);
-      const responseData = await response.json();
-      setFollowing(responseData.following);
-    }
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    dispatch(addFollowing({ following: following }))
-  }, [following])
+    dispatch(getFollowing(userId))
+  }, [userId])
 
   const userComponents = following.map((user) => {
     return (

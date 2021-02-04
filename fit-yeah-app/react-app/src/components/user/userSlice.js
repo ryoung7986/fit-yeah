@@ -12,8 +12,7 @@ export const getFollowers = createAsyncThunk(
   'user/getFollowers',
   async (userId) => {
     const response = await fetch(`/api/users/${userId}/followers`);
-    const responseData = await response.json();
-    return responseData.followers
+    return await response.json();
   }
 )
 
@@ -21,8 +20,7 @@ export const getFollowing = createAsyncThunk(
   'user/getFollowing',
   async (userId) => {
     const response = await fetch(`/api/users/${userId}/following`);
-    const responseData = await response.json();
-    return responseData.following
+    return await response.json();
   }
 )
 
@@ -129,13 +127,13 @@ export const userSlice = createSlice({
       state.user = payload
     },
     [getFollowers.fulfilled]: (state, { payload }) => {
-      state.followers = payload
+      state.followers = payload.followers
     },
     [getFollowing.fulfilled]: (state, { payload }) => {
-      state.following = payload
+      console.log(payload)
+      state.following = payload.following
     },
     [uploadUserAvatar.fulfilled]: (state, { payload }) => {
-      console.log(payload);
       state.user.avatar_url = payload
     }
   }

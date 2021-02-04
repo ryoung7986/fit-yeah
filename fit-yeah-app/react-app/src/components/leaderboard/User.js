@@ -24,9 +24,6 @@ function User() {
     return person.id
   })
 
-  console.log(followingIds.includes(currUserId))
-
-
   const submitFollow = async (e) => {
     e.preventDefault();
     const response = await fetch(`/api/users/follow/${userId}/${id}`, {

@@ -124,11 +124,8 @@ def unfollow_user(userId, id):
 @user_routes.route('/upload-stats', methods=['POST'])
 def upload_stats():
     form = UserStatsForm()
-    print("HERRO")
     print(form.data)
-    print("HERRRRRROOOOOO")
     if form.validate_on_submit():
-        print("HERRO THERE")
         print(form.data['sets'])
         stat = User_Stat(
             user_id=form.data['user_id'],
