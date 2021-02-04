@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { addUser, selectUser } from '../user/userSlice';
+import { selectUser, updateUserBio } from '../user/userSlice';
 import Button from '@material-ui/core/Button';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import UploadForm from '../UploadForm';
@@ -15,7 +15,6 @@ function ProfileComponent() {
   const [bioIsOpen, setBioIsOpen] = useState(false);
   const [bio, setBio] = useState('');
   const user = useSelector(selectUser);
-  // const userWorkoutPlan = user.workout_plan;
   const userId = user.id;
   const userBio = user.bio;
   const dispatch = useDispatch();
@@ -27,15 +26,7 @@ function ProfileComponent() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch(`/api/users/upload-bio/${userId}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ bio })
-    })
-    const responseData = await response.json();
-    dispatch(addUser(responseData))
+    dispatch(updateUserBio({ userId, bio }))
   }
 
   return (
@@ -45,11 +36,19 @@ function ProfileComponent() {
           <div className="profile__avatar">
             {user.avatar_url ? (
               <div className="profile__avatar--div">
-                <img src={user.avatar_url} alt='' className="profile__avatar--image" />
+                <img
+                  src={user.avatar_url}
+                  alt=''
+                  className="profile__avatar--image"
+                />
               </div>
             ) : (
                 <div className="profile__avatar--noimage">
-                  <img src='http://www.fillmurray.com/140/200' alt='' className="profile__avatar--image" />
+                  <img
+                    src='http://www.fillmurray.com/140/200'
+                    alt=''
+                    className="profile__avatar--image"
+                  />
                   <Button
                     variant="contained"
                     style={{ textTransform: 'none' }}
@@ -127,7 +126,10 @@ function ProfileComponent() {
                 </Button>
               )}
               {bioIsOpen && (
-                <form className="bioInput" onSubmit={onSubmit}>
+                <form
+                  className="bioInput"
+                  onSubmit={onSubmit}
+                >
                   <input
                     className="userBio__input"
                     name="userBio"

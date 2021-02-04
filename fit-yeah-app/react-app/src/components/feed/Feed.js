@@ -64,9 +64,7 @@ function Feed() {
   return (
     <div className="feed">
       <MakePost user={user} first_name={user} />
-      {/* <div className="feed__post"> */}
       {postOrder && usersPosts}
-      {/* </div> */}
     </div >
   )
 }

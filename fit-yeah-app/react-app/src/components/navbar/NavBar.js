@@ -48,11 +48,6 @@ const NavBar = ({ setAuthenticated }) => {
                 <FitnessCenterIcon fontSize="large" />
               </NavLink>
             </div>
-            {/* <div className="navbar__option" activeclassname="navbar__option--active">
-              <NavLink to="/my-workout-plan" exact={true}>
-                <EventAvailableIcon fontSize="large" />
-              </NavLink>
-            </div> */}
           </div>
           <div className="navbar__right">
             <div className="navbar__info">

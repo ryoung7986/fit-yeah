@@ -1,10 +1,25 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 export const updateUser = createAsyncThunk(
-  'user/getUser',
+  'users/getUser',
   async (id) => {
     const response = await fetch(`/api/users/${id}`)
     return await response.json()
+  }
+)
+
+export const updateUserBio = createAsyncThunk(
+  'users/updateUserBio',
+  async (data) => {
+    const { userId, bio } = data;
+    const response = await fetch(`/api/users/upload-bio/${userId}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ bio })
+    })
+    return await response.json();
   }
 )
 
@@ -17,10 +32,38 @@ export const getFollowers = createAsyncThunk(
 )
 
 export const getFollowing = createAsyncThunk(
-  'user/getFollowing',
+  'users/getFollowing',
   async (userId) => {
     const response = await fetch(`/api/users/${userId}/following`);
     return await response.json();
+  }
+)
+
+export const submitFollow = createAsyncThunk(
+  'users/submitFollow',
+  async (data) => {
+    const { userId, id } = data;
+    const response = await fetch(`/api/users/follow/${userId}/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+    return await response.json()
+  }
+)
+
+export const submitUnfollow = createAsyncThunk(
+  'users/submitUnfollow',
+  async (data) => {
+    const { userId, id } = data;
+    const response = await fetch(`/api/users/unfollow/${userId}/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+    return await response.json()
   }
 )
 
@@ -134,6 +177,15 @@ export const userSlice = createSlice({
     },
     [uploadUserAvatar.fulfilled]: (state, { payload }) => {
       state.user.avatar_url = payload
+    },
+    [submitFollow.fulfilled]: (state, { payload }) => {
+      state.user = payload
+    },
+    [submitUnfollow.fulfilled]: (state, { payload }) => {
+      state.user = payload
+    },
+    [updateUserBio.fulfilled]: (state, { payload }) => {
+      state.user = payload.user
     }
   }
 });

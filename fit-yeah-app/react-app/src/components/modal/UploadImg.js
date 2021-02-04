@@ -5,7 +5,6 @@ import Modal from 'react-modal';
 function UploadImg() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
-
   return (
     <Modal
       isOpen={modalIsOpen}

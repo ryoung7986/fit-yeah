@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectAllUsers, selectUser, addUser } from '../user/userSlice';
+import { selectAllUsers, selectUser, submitFollow, submitUnfollow } from '../user/userSlice';
 import Button from '@material-ui/core/Button';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import PersonAddDisabledIcon from '@material-ui/icons/PersonAddDisabled';
@@ -10,44 +10,19 @@ import '../profile/ProfileComponent.css';
 
 function User() {
   const { id } = useParams();
+  const user = useSelector(selectUser);
+  const following = user.following;
+  const userId = user.id;
   const allUsers = useSelector(selectAllUsers);
   const allUsersMap = allUsers.filter((user) => {
     return (user.id.toString() === id.toString())
   })
-  const user = useSelector(selectUser);
-  const following = user.following;
-  const userId = user.id;
   const currUser = allUsersMap[0];
   const currUserId = parseInt(currUser.id);
   const dispatch = useDispatch();
   const followingIds = following.map((person) => {
     return person.id
   })
-
-  const submitFollow = async (e) => {
-    e.preventDefault();
-    const response = await fetch(`/api/users/follow/${userId}/${id}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-    })
-    const responseData = await response.json()
-    dispatch(addUser({ user: responseData }))
-  }
-
-  const submitUnfollow = async (e) => {
-    e.preventDefault();
-    const response = await fetch(`/api/users/unfollow/${userId}/${id}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-    })
-    const responseData = await response.json()
-    console.log(responseData)
-    dispatch(addUser({ user: responseData }))
-  }
 
   return (
     <div>
@@ -57,11 +32,19 @@ function User() {
             <div className="profile__avatar">
               {currUser.avatar_url ? (
                 <div className="profile__avatar--div">
-                  <img src={currUser.avatar_url} alt='' className="profile__avatar--image" />
+                  <img
+                    src={currUser.avatar_url}
+                    alt=''
+                    className="profile__avatar--image"
+                  />
                 </div>
               ) : (
                   <div className="profile__avatar--noimage">
-                    <img src='http://www.fillmurray.com/140/200' alt='' className="profile__avatar--image" />
+                    <img
+                      src='http://www.fillmurray.com/140/200'
+                      alt=''
+                      className="profile__avatar--image"
+                    />
                   </div>
                 )}
             </div>
@@ -100,7 +83,7 @@ function User() {
                 variant="contained"
                 style={{ textTransform: 'none' }}
                 startIcon={<PersonAddIcon />}
-                onClick={submitFollow}>
+                onClick={() => dispatch(submitFollow({ userId, id }))}>
                 {`follow ${currUser.first_name}`}
               </Button>
             ) : (
@@ -108,7 +91,7 @@ function User() {
                   variant="contained"
                   style={{ textTransform: 'none' }}
                   startIcon={<PersonAddDisabledIcon />}
-                  onClick={submitUnfollow}>
+                  onClick={() => dispatch(submitUnfollow({ userId, id }))}>
                   {`unfollow ${currUser.first_name}`}
                 </Button>
               )

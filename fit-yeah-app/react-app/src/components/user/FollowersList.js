@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import { selectUser } from './userSlice';
 import { useDispatch } from 'react-redux';
-import { addFollowers, getFollowers, selectFollowers } from './userSlice';
+import { getFollowers, selectFollowers } from './userSlice';
 
 function FollowersList() {
   const followers = useSelector(selectFollowers)
