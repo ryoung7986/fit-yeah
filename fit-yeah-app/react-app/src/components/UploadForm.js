@@ -11,8 +11,8 @@ function UploadForm() {
   const imgSubmit = (e) => {
     e.preventDefault();
     const userId = user.id
-    console.log(typeof userId)
-    dispatch(uploadUserAvatar(image, userId));
+    console.log(userId)
+    dispatch(uploadUserAvatar({ image, userId }));
   }
 
   const handleImageUpload = (e) => {

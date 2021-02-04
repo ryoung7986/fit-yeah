@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-
 export const updateUser = createAsyncThunk(
   'user/getUser',
   async (id) => {
@@ -54,19 +53,28 @@ export const followUser = createAsyncThunk(
 
 export const uploadUserAvatar = createAsyncThunk(
   'user/uploadUserAvatar',
-  async (data, userId) => {
-    console.log(userId)
+  async (data) => {
+    const { image, userId } = data;
     console.log('Uploading image...');
     let formData = new FormData();
-    formData.append('image', data);
+    formData.append('image', image);
     const response = await fetch('/api/aws/upload', {
       method: 'POST',
       body: formData
     })
     const responseData = await response.json();
+    const imgUrl = responseData.img_url
     console.log("image upload successful")
     console.log("uploading user avatar URL...")
-    return responseData
+    const avatarResponse = await fetch(`/api/users/upload-avatar/${userId}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ imgUrl })
+    })
+    const avatarResponseData = await avatarResponse.json();
+    return avatarResponseData.avatar_url
   }
 )
 
@@ -127,7 +135,8 @@ export const userSlice = createSlice({
       state.following = payload
     },
     [uploadUserAvatar.fulfilled]: (state, { payload }) => {
-      state.user.avatar_url = payload.img_url
+      console.log(payload);
+      state.user.avatar_url = payload
     }
   }
 });
@@ -136,7 +145,6 @@ export const {
   addUser,
   addFollowers,
   addFollowing,
-  addUserAvatarUrl,
   addWorkoutPlan,
   searchUsersResults,
 } = userSlice.actions;
