@@ -35,7 +35,7 @@ def post_like(id, postId):
     post.liked_by.append(user)
     db.session.add(post)
     db.session.commit()
-    return post.to_dict_full()
+    return user.to_dict_full()
 
 
 # fetch user following

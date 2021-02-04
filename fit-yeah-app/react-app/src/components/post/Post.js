@@ -5,8 +5,8 @@ import ThumbUpOutlinedIcon from '@material-ui/icons/ThumbUpOutlined';
 import ChatBubbleOutlineOutlinedIcon from '@material-ui/icons/ChatBubbleOutlineOutlined';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button';
-import { selectUser } from '../user/userSlice';
-import { deletePost } from './postSlice';
+import { selectUser, submitLike } from '../user/userSlice';
+import { deletePost, getLikes, selectNumPostLikes } from './postSlice';
 import MakeComment from '../comment/MakeComment';
 import Comment from '../comment/Comment';
 import ReactPlayer from 'react-player';
@@ -21,17 +21,14 @@ function Post({ image, video, timestamp, content, postId, postComments, postUser
   const userId = user.id;
   const dispatch = useDispatch();
 
-  const submitLike = async (e) => {
+
+  useEffect(() => {
+    getLikes()
+  }, [user])
+
+  const onSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch(`/api/users/${userId}/${postId}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ userId, postId })
-    })
-    setRender(render => render + 1)
-    return await response.json()
+    dispatch(submitLike({ userId, postId }))
   }
 
   const deleteUserPost = () => {
@@ -65,10 +62,6 @@ function Post({ image, video, timestamp, content, postId, postComments, postUser
       </div>
     )
   })
-
-  useEffect(() => {
-    getLikes()
-  }, [render])
 
   return (
     <div className='post' id={postId}>
@@ -105,7 +98,7 @@ function Post({ image, video, timestamp, content, postId, postComments, postUser
         {/* <p>{numComments ? numComments : null}</p> */}
       </div>
       <div className="post__options">
-        <div onClick={submitLike} className="post__option">
+        <div onClick={onSubmit} className="post__option">
           <ThumbUpOutlinedIcon />
           <h3>Like</h3>
         </div>

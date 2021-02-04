@@ -22,6 +22,14 @@ export const makePost = createAsyncThunk(
   }
 )
 
+export const getLikes = createAsyncThunk(
+  'posts/getLikes',
+  async (postId) => {
+    const response = await fetch(`/api/posts/${postId}/likes`);
+    return await response.json();
+  }
+)
+
 export const deletePost = createAsyncThunk(
   'posts/deletePost',
   async (id) => {
@@ -35,6 +43,7 @@ const postSlice = createSlice({
   initialState: {
     list: [],
     post_users: [],
+    post_likes: null,
     status: null,
   },
   extraReducers: {
@@ -49,9 +58,13 @@ const postSlice = createSlice({
     [makePost.fulfilled]: (state, { payload }) => {
       state.list = payload.posts.reverse()
     },
+    [getLikes.fulfilled]: (state, { payload }) => {
+      state.post_likes = payload
+    }
   },
 })
 
 export const selectPosts = state => state.posts.list;
+export const selectNumPostLikes = state => state.posts.post_likes;
 
 export default postSlice.reducer;

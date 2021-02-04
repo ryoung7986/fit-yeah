@@ -67,6 +67,21 @@ export const submitUnfollow = createAsyncThunk(
   }
 )
 
+export const submitLike = createAsyncThunk(
+  'users/submitLike',
+  async (data) => {
+    const { userId, postId } = data;
+    const response = await fetch(`/api/users/${userId}/${postId}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ userId, postId })
+    })
+    return await response.json();
+  }
+)
+
 export const addAllUsersToState = createAsyncThunk(
   'user/addAllUsersToState',
   async () => {
@@ -186,7 +201,10 @@ export const userSlice = createSlice({
     },
     [updateUserBio.fulfilled]: (state, { payload }) => {
       state.user = payload.user
-    }
+    },
+    [submitLike.fulfilled]: (state, { payload }) => {
+      state.user = payload
+    },
   }
 });
 
