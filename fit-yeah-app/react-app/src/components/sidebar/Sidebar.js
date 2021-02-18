@@ -5,7 +5,6 @@ import PersonOutlineOutlinedIcon from '@material-ui/icons/PersonOutlineOutlined'
 import FitnessCenterOutlinedIcon from '@material-ui/icons/FitnessCenterOutlined';
 import TrendingUpOutlinedIcon from '@material-ui/icons/TrendingUpOutlined';
 import WhatshotIcon from '@material-ui/icons/Whatshot';
-// import EqualizerIcon from '@material-ui/icons/Equalizer';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import './Sidebar.css';
 

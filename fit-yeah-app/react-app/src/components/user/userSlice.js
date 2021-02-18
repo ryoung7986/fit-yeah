@@ -82,6 +82,24 @@ export const submitLike = createAsyncThunk(
   }
 )
 
+export const postUserPoints = createAsyncThunk(
+  'users/postUserPoints',
+  async (data) => {
+    const { pointsToSubmit, user_id } = data;
+    const response = await fetch(`/api/users/add-points`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        pointsToSubmit: Math.floor(parseInt(pointsToSubmit)),
+        user_id
+      })
+    })
+    return await response.json()
+  }
+)
+
 export const addAllUsersToState = createAsyncThunk(
   'user/addAllUsersToState',
   async () => {
@@ -205,6 +223,9 @@ export const userSlice = createSlice({
     [submitLike.fulfilled]: (state, { payload }) => {
       state.user = payload
     },
+    [postUserPoints.fulfilled]: (state, { payload }) => {
+      state.user = payload
+    }
   }
 });
 

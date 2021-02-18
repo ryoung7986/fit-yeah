@@ -6,7 +6,7 @@ import ChatBubbleOutlineOutlinedIcon from '@material-ui/icons/ChatBubbleOutlineO
 import DeleteIcon from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button';
 import { selectUser, submitLike } from '../user/userSlice';
-import { deletePost, getLikes, selectNumPostLikes } from './postSlice';
+import { deletePost } from './postSlice';
 import MakeComment from '../comment/MakeComment';
 import Comment from '../comment/Comment';
 import ReactPlayer from 'react-player';
@@ -15,7 +15,6 @@ import './Post.css';
 
 function Post({ image, video, timestamp, content, postId, postComments, postUser, postUserId }) {
   const [likes, setLikes] = useState(0);
-  const [render, setRender] = useState(0);
   const [makeComment, setMakeComment] = useState(false);
   const user = useSelector(selectUser);
   const userId = user.id;
@@ -23,7 +22,7 @@ function Post({ image, video, timestamp, content, postId, postComments, postUser
 
 
   useEffect(() => {
-    getLikes()
+    getNumLikes()
   }, [user])
 
   const onSubmit = async (e) => {
@@ -35,7 +34,7 @@ function Post({ image, video, timestamp, content, postId, postComments, postUser
     dispatch(deletePost(postId))
   }
 
-  const getLikes = () => {
+  const getNumLikes = () => {
     (async () => {
       const response = await fetch(`/api/posts/${postId}/likes`);
       const responseData = await response.json();

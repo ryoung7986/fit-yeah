@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addUser } from '../user/userSlice';
+import { postUserPoints } from '../user/userSlice';
 import Button from '@material-ui/core/Button';
 import './LogStats.css';
 
@@ -13,40 +13,6 @@ function LogStats({ exercise, userId }) {
   const [pointsEarned, setPointsEarned] = useState(0);
   const dispatch = useDispatch();
 
-  // const onSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const hiddenValue = document.getElementById('id');
-  //   const exercise_id = parseInt(hiddenValue.value);
-  //   const user_id = userId;
-  //   const pointsToSubmit = sets * reps * exercise.difficulty;
-  //   const response = await fetch(`/api/users/upload-stats`, {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify({
-  //       sets,
-  //       reps,
-  //       user_id,
-  //       exercise_id,
-  //     })
-  //   })
-  //   await response.json();
-  //   const postUserPoints = await fetch(`/api/users/add-points`, {
-  //     method: 'PATCH',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify({
-  //       pointsToSubmit,
-  //       user_id
-  //     })
-  //   })
-  //   const newUser = await postUserPoints.json();
-  //   dispatch(addUser({ user: newUser }))
-  //   setPointsEarned(pointsToSubmit)
-  //   setStep(1);
-  // }
 
   const onSubmitTemp = async (e) => {
     e.preventDefault();
@@ -62,20 +28,8 @@ function LogStats({ exercise, userId }) {
     } else {
       pointsToSubmit = sets * reps * exercise.difficulty
     }
-    console.log(parseInt(pointsToSubmit))
 
-    const postUserPoints = await fetch(`/api/users/add-points`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        pointsToSubmit: Math.floor(parseInt(pointsToSubmit)),
-        user_id
-      })
-    })
-    const newUser = await postUserPoints.json();
-    dispatch(addUser({ user: newUser }))
+    dispatch(postUserPoints({ pointsToSubmit, user_id }))
     setPointsEarned(pointsToSubmit)
     setStep(1);
   }

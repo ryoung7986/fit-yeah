@@ -11,8 +11,6 @@ function UserStats() {
   const idx = Object.keys(location.state.workout);
   const workout = location.state.workout[idx][0];
 
-  console.log(workout.id)
-
   return (
     <div className="userStats">
       {workout.id === 1 ? (
